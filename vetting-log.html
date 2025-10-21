@@ -7,7 +7,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <!-- DataTables CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css">
   <style>
     html { scroll-behavior: smooth; }
     body {
@@ -81,6 +81,8 @@
 
     table.dataTable th, table.dataTable td {
       padding: 12px 15px;
+      white-space: normal;
+      word-wrap: break-word;
     }
 
     table.dataTable tbody tr:nth-child(even) {
@@ -89,6 +91,40 @@
 
     table.dataTable tbody tr:hover {
       background-color: #eef7f2;
+    }
+
+    /* Collapsible Section Styling */
+    .collapsible-section {
+      background-color: #f0f5f3;
+      border-radius: 8px;
+      margin: 1rem 0;
+      overflow: hidden;
+    }
+
+    .collapsible-header {
+      cursor: pointer;
+      font-weight: 600;
+      color: #0a3d62;
+      padding: 0.8rem 1rem;
+      background-color: #eaf4ee;
+      border-bottom: 1px solid #d3e4da;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .collapsible-content {
+      display: none;
+      padding: 1rem;
+      background-color: #fff;
+    }
+
+    .arrow {
+      transition: transform 0.3s ease;
+    }
+
+    .arrow.open {
+      transform: rotate(90deg);
     }
 
     /* Footer */
@@ -116,23 +152,25 @@
     <h2>Non-Toxic Product Vetting Log</h2>
     <p style="text-align:center; max-width:700px; margin:0 auto 1.5rem;">
       This is a living database of products I’ve personally vetted or am actively researching — from cookware and cleaning to pet wellness and home goods.  
-      You can <strong>search</strong>, <strong>sort</strong>, or <strong>filter</strong> any column below.  
+      Approved items are shown below, while <strong>Rejected</strong> and <strong>Under Review</strong> products can be expanded in collapsible sections.  
     </p>
 
-    <table id="vettingTable" class="display nowrap" style="width:100%">
+    <table id="approvedTable" class="display" style="width:100%">
       <thead></thead>
       <tbody></tbody>
     </table>
+
+    <div id="collapsibleContainer"></div>
   </main>
 
   <footer>
     Created with <span>💚</span> by Brandy — <span>Human Reset Project</span>
   </footer>
 
-  <!-- jQuery + DataTables + PapaParse -->
+  <!-- jQuery + DataTables + FixedHeader + PapaParse -->
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
   <script>
@@ -140,37 +178,32 @@
       const response = await fetch('Non_Toxic_Product_Vetting_Log.csv');
       const csvText = await response.text();
 
-      // Parse with PapaParse (handles commas, quotes, newlines)
-      const parsed = Papa.parse(csvText, {
-        header: true,
-        skipEmptyLines: true
-      });
-
+      // Parse CSV
+      const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
       const data = parsed.data;
       const headers = parsed.meta.fields;
 
-      // Build table headers
-      const thead = document.querySelector('#vettingTable thead');
-      const tbody = document.querySelector('#vettingTable tbody');
-      let headerRow = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
-      thead.innerHTML = headerRow;
+      // Separate data by status
+      const approved = data.filter(row => row.Status?.toLowerCase().includes('approved'));
+      const underReview = data.filter(row => row.Status?.toLowerCase().includes('review'));
+      const rejected = data.filter(row => row.Status?.toLowerCase().includes('reject'));
 
-      // Build table rows with clickable links
-      let bodyRows = data.map(row => {
-        return '<tr>' + headers.map(h => {
-          const cell = row[h] ? row[h].trim() : '';
-          if (h.toLowerCase().includes('link') && cell.startsWith('http')) {
-            return `<td><a href="${cell}" target="_blank" rel="noopener">View Product 🔗</a></td>`;
-          }
-          return `<td>${cell}</td>`;
-        }).join('') + '</tr>';
-      }).join('');
+      // --- Build Approved Table ---
+      const thead = document.querySelector('#approvedTable thead');
+      const tbody = document.querySelector('#approvedTable tbody');
+      thead.innerHTML = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
 
-      tbody.innerHTML = bodyRows;
+      const makeRow = row => '<tr>' + headers.map(h => {
+        const cell = row[h] ? row[h].trim() : '';
+        if (h.toLowerCase().includes('link') && cell.startsWith('http')) {
+          return `<td><a href="${cell}" target="_blank" rel="noopener">View Product 🔗</a></td>`;
+        }
+        return `<td>${cell}</td>`;
+      }).join('') + '</tr>';
 
-      // Initialize DataTable
-      $('#vettingTable').DataTable({
-        responsive: true,
+      tbody.innerHTML = approved.map(makeRow).join('');
+
+      const table = $('#approvedTable').DataTable({
         pageLength: 25,
         order: [],
         language: {
@@ -178,6 +211,56 @@
           lengthMenu: "Show _MENU_ entries per page"
         }
       });
+      new $.fn.dataTable.FixedHeader(table);
+
+      // --- Build Collapsible Sections for Rejected & Under Review ---
+      const container = document.getElementById('collapsibleContainer');
+      const categories = {};
+
+      [...underReview, ...rejected].forEach(row => {
+        const category = row.Category || 'Other';
+        if (!categories[category]) categories[category] = [];
+        categories[category].push(row);
+      });
+
+      for (const [category, rows] of Object.entries(categories)) {
+        const section = document.createElement('div');
+        section.className = 'collapsible-section';
+
+        const header = document.createElement('div');
+        header.className = 'collapsible-header';
+        header.innerHTML = `<span>📂 ${category} — ${rows.length} other option${rows.length > 1 ? 's' : ''}</span><span class="arrow">▶</span>`;
+
+        const content = document.createElement('div');
+        content.className = 'collapsible-content';
+
+        const innerTable = document.createElement('table');
+        innerTable.className = 'display';
+        innerTable.style.width = '100%';
+        innerTable.innerHTML = `
+          <thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+          <tbody>${rows.map(makeRow).join('')}</tbody>
+        `;
+        content.appendChild(innerTable);
+
+        section.appendChild(header);
+        section.appendChild(content);
+        container.appendChild(section);
+
+        $(innerTable).DataTable({
+          paging: false,
+          searching: false,
+          info: false,
+          order: [],
+        });
+
+        header.addEventListener('click', () => {
+          const arrow = header.querySelector('.arrow');
+          const visible = content.style.display === 'block';
+          content.style.display = visible ? 'none' : 'block';
+          arrow.classList.toggle('open', !visible);
+        });
+      }
     }
 
     loadCSV();
