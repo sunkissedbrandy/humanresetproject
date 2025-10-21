@@ -66,7 +66,7 @@
       margin-bottom: 1rem;
     }
 
-    /* Table styling */
+    /* DataTable styling */
     table.dataTable {
       border-collapse: collapse;
       width: 100%;
@@ -93,169 +93,10 @@
       background-color: #eef7f2;
     }
 
-    /* Collapsible rows */
-    .toggle {
-      cursor: pointer;
-      color: #0a3d62;
-      font-weight: 600;
-      text-align: left;
-      background-color: #eaf4ee;
-      padding: 0.8rem;
-      border-radius: 8px;
-      margin: 1rem 0 0.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: background-color 0.3s ease;
+    /* Rejected nested rows */
+    tr.child-row {
+      background-color: #f1f1f1 !important;
     }
 
-    .toggle:hover {
-      background-color: #d8ede2;
-    }
-
-    .toggle span.arrow {
-      transition: transform 0.3s ease;
-    }
-
-    .toggle.open span.arrow {
-      transform: rotate(90deg);
-    }
-
-    .rejected-table {
-      display: none;
-      margin-bottom: 2rem;
-    }
-
-    /* Footer */
-    footer {
-      text-align: center;
-      background: #eaf4ee;
-      padding: 1rem;
-      font-size: 0.9rem;
-      color: #444;
-      margin-top: 2rem;
-    }
-    footer span { color: #0a3d62; }
-  </style>
-</head>
-<body>
-  <header>
-    <h1>🧾 Human Reset Project — Vetting Log</h1>
-    <nav>
-      <a href="index.html">🏡 Home</a>
-      <a href="#top">Back to Top</a>
-    </nav>
-  </header>
-
-  <main>
-    <h2>Non-Toxic Product Vetting Log</h2>
-    <p style="text-align:center; max-width:700px; margin:0 auto 1.5rem;">
-      This living log tracks everything I’ve personally vetted — from cookware to pet products.  
-      Approved items are shown below. Click “<strong>See What Didn’t Make the Cut</strong>” to view products that didn’t align with my standards.
-    </p>
-
-    <table id="mainTable" class="display" style="width:100%">
-      <thead></thead>
-      <tbody></tbody>
-    </table>
-  </main>
-
-  <footer>
-    Created with <span>💚</span> by Brandy — <span>Human Reset Project</span>
-  </footer>
-
-  <!-- jQuery + DataTables + FixedHeader + PapaParse -->
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
-
-  <script>
-    async function loadCSV() {
-      const response = await fetch('Non_Toxic_Product_Vetting_Log.csv');
-      const csvText = await response.text();
-
-      // Parse with PapaParse
-      const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
-      const data = parsed.data;
-      const headers = parsed.meta.fields;
-
-      // Group data by Category
-      const categories = {};
-      data.forEach(row => {
-        const category = row.Category || 'Other';
-        if (!categories[category]) categories[category] = [];
-        categories[category].push(row);
-      });
-
-      // Build table
-      const thead = document.querySelector('#mainTable thead');
-      const tbody = document.querySelector('#mainTable tbody');
-      thead.innerHTML = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
-
-      const makeRow = (row, isChild = false) => {
-        return `<tr class="${isChild ? 'child-row' : ''}">` +
-          headers.map(h => {
-            const cell = row[h] ? row[h].trim() : '';
-            if (h.toLowerCase().includes('link') && cell.startsWith('http')) {
-              return `<td><a href="${cell}" target="_blank" rel="noopener">View Product 🔗</a></td>`;
-            }
-            return `<td>${cell}</td>`;
-          }).join('') + '</tr>';
-      };
-
-      Object.entries(categories).forEach(([category, rows]) => {
-        const approved = rows.filter(r => r.Status?.toLowerCase().includes('approved'));
-        const rejected = rows.filter(r => r.Status?.toLowerCase().includes('reject'));
-
-        if (approved.length > 0) {
-          tbody.innerHTML += makeRow(approved[0]);
-
-          if (rejected.length > 0) {
-            // Add collapsible toggle row
-            const toggleRow = document.createElement('tr');
-            const td = document.createElement('td');
-            td.colSpan = headers.length;
-            td.innerHTML = `
-              <div class="toggle">
-                <span>📂 ${category} — See What Didn't Make the Cut</span>
-                <span class="arrow">▶</span>
-              </div>
-              <div class="rejected-table">
-                <table class="display inner-table" style="width:100%">
-                  <thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
-                  <tbody>${rejected.map(r => makeRow(r, true)).join('')}</tbody>
-                </table>
-              </div>
-            `;
-            toggleRow.appendChild(td);
-            tbody.appendChild(toggleRow);
-          }
-        }
-      });
-
-      // Initialize DataTable for main
-      const table = $('#mainTable').DataTable({
-        pageLength: 25,
-        order: [],
-        language: {
-          search: "🔍 Search:",
-          lengthMenu: "Show _MENU_ entries per page"
-        }
-      });
-      new $.fn.dataTable.FixedHeader(table);
-
-      // Add toggle functionality
-      $(document).on('click', '.toggle', function() {
-        const section = $(this).next('.rejected-table');
-        const arrow = $(this).find('.arrow');
-        section.slideToggle(250);
-        $(this).toggleClass('open');
-        arrow.toggleClass('open');
-      });
-    }
-
-    loadCSV();
-  </script>
-</body>
-</html>
+    tr.child-row td {
+      border-top: 1
