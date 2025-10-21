@@ -6,89 +6,184 @@
   <title>Brandy's Trusted Wellness Picks</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
+    html {
+      scroll-behavior: smooth;
+    }
     body {
       font-family: 'Inter', sans-serif;
       background: #f4f4f4;
       color: #222;
-      padding: 2rem;
+      padding: 0;
+      margin: 0;
       line-height: 1.6;
     }
-    h1, h2, h3 {
+
+    /* --- Sticky Header --- */
+    header {
+      position: sticky;
+      top: 0;
+      background: #ffffffcc;
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      text-align: center;
+      padding: 1rem 0.5rem;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin: 0.5rem 0;
       color: #0a3d62;
     }
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
+
+    nav {
+      margin-top: 0.5rem;
     }
+
+    nav a {
+      color: #0a3d62;
+      margin: 0 10px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    /* --- Main Content --- */
+    main {
+      padding: 2rem 1rem 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .section {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 10px;
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 2rem;
+    }
+
     h2 {
-      margin-top: 2rem;
+      margin-top: 0;
       font-size: 1.5rem;
+      color: #0a3d62;
     }
+
     ul {
       padding-left: 1.5rem;
     }
+
     li {
       margin-bottom: 0.8rem;
     }
+
     a {
       color: #0a3d62;
       text-decoration: underline;
     }
+
     .emoji {
       font-size: 1.2rem;
+    }
+
+    /* --- Footer --- */
+    footer {
+      text-align: center;
+      background: #eaf4ee;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
+    footer span {
+      color: #0a3d62;
     }
   </style>
 </head>
 <body>
-  <h1><span class="emoji">🌿</span> Brandy’s Trusted Wellness Picks</h1>
-  <p>Welcome to my carefully curated collection of clean living recommendations—based on years of trial, error, and a relentless quest to live as toxin-free, grounded, and naturally well as possible. These are the people, products, tools, and ideas that have helped me reset my body and mind—and I hope they help you too. <span class="emoji">💚</span></p>
+  <header>
+    <h1><span class="emoji">🌿</span> Brandy’s Trusted Wellness Picks</h1>
+    <nav>
+      <a href="#clean-eating">Clean Eating</a>
+      <a href="#pet-wellness">Pet Wellness</a>
+      <a href="#cleaning">Cleaning</a>
+      <a href="#home-goods">Home Goods</a>
+      <a href="#oral-health">Oral Health</a>
+      <a href="#clean-clothing">Clothing</a>
+      <a href="#documentaries">Docs</a>
+    </nav>
+  </header>
 
-  <h2><span class="emoji">🥗</span> Clean Eating</h2>
-  <ul>
-    <li><strong>Live Spring Water</strong> or <strong>Mountain Valley Spring Water</strong> — I drink mountain spring water delivered in glass from local sources.</li>
-  </ul>
+  <main>
+    <section id="intro" class="section">
+      <p>Welcome to my carefully curated collection of clean living recommendations—based on years of trial, error, and a relentless quest to live as toxin-free, grounded, and naturally well as possible. These are the people, products, tools, and ideas that have helped me reset my body and mind—and I hope they help you too. <span class="emoji">💚</span></p>
+    </section>
 
-  <h2><span class="emoji">🐾</span> Pet Wellness</h2>
-  <ul>
-    <li><strong>OC Raw Rabbit & Produce (dog formula)</strong> — Despite the label, it's perfectly cat-safe. I use it as the base of their diet.</li>
-    <li><strong>Green Juju Rabbit Bites & Trainers</strong> — Single-ingredient, freeze-dried raw rabbit. My cats “go feral” for these.</li>
-    <li><strong>SmallBatch Pets Bone Broth</strong> — Clean, nourishing topper. I rotate flavors to support digestion and hydration.</li>
-    <li><strong>Bones & Co. Goat Milk</strong> — Fermented, raw, and made with clean ingredients. Another great hydration booster.</li>
-    <li><strong>Lemon & Lavender Rabbit Fur Toys</strong> — Ethically sourced, non-toxic, handmade. My cats’ absolute favorite toys.</li>
-    <li><strong>Paws Evolution</strong> (run by Aleksandra Topic) — My trusted local shop. Aleks tests and vets everything herself.</li>
-    <li><strong>Article coming soon:</strong> Marketing has completely disrupted how we feed our babies—and it’s making them sick. I’ll share what I’ve uncovered and how to feed for species-appropriate wellness.</li>
-  </ul>
+    <section id="clean-eating" class="section">
+      <h2><span class="emoji">🥗</span> Clean Eating</h2>
+      <ul>
+        <li><strong>Live Spring Water</strong> or <strong>Mountain Valley Spring Water</strong> — I drink mountain spring water delivered in glass from local sources.</li>
+      </ul>
+    </section>
 
-  <h2><span class="emoji">🧼</span> Cleaning</h2>
-  <ul>
-    <li><strong>Branch Basics</strong> — Safe, plant-based, and minimalist. I use: Dishwasher Tablets, Laundry Detergent, and Multi-purpose Cleaner.</li>
-  </ul>
+    <section id="pet-wellness" class="section">
+      <h2><span class="emoji">🐾</span> Pet Wellness</h2>
+      <ul>
+        <li><strong>OC Raw Rabbit & Produce (dog formula)</strong> — Despite the label, it's perfectly cat-safe. I use it as the base of their diet.</li>
+        <li><strong>Green Juju Rabbit Bites & Trainers</strong> — Single-ingredient, freeze-dried raw rabbit. My cats “go feral” for these.</li>
+        <li><strong>SmallBatch Pets Bone Broth</strong> — Clean, nourishing topper. I rotate flavors to support digestion and hydration.</li>
+        <li><strong>Bones & Co. Goat Milk</strong> — Fermented, raw, and made with clean ingredients. Another great hydration booster.</li>
+        <li><strong>Lemon & Lavender Rabbit Fur Toys</strong> — Ethically sourced, non-toxic, handmade. My cats’ absolute favorite toys.</li>
+        <li><strong>Paws Evolution</strong> (run by Aleksandra Topic) — My trusted local shop. Aleks tests and vets everything herself.</li>
+        <li><strong>Article coming soon:</strong> Marketing has completely disrupted how we feed our babies—and it’s making them sick. I’ll share what I’ve uncovered and how to feed for species-appropriate wellness.</li>
+      </ul>
+    </section>
 
-  <h2><span class="emoji">🏡</span> Home Goods</h2>
-  <ul>
-    <li><strong>Ratio Eight Coffee Maker</strong> — All-metal and glass water path (no plastic), sleek aesthetic, and perfect pour-over taste. Healthy <em>and</em> more beautiful than anything else I researched.</li>
-  </ul>
+    <section id="cleaning" class="section">
+      <h2><span class="emoji">🧼</span> Cleaning</h2>
+      <ul>
+        <li><strong>Branch Basics</strong> — Safe, plant-based, and minimalist. I use: Dishwasher Tablets, Laundry Detergent, and Multi-purpose Cleaner.</li>
+      </ul>
+    </section>
 
-  <h2><span class="emoji">🦷</span> Oral Health</h2>
-  <ul>
-    <li><strong>Simply O3 Ozone Pulling Solution</strong> — Ozonated oil blend to support oral detox and gum health. <a href="https://www.simplyo3.com/products/ozone-pulling-solution" target="_blank">Buy Here</a></li>
-    <li><strong>Dental Lace Vegan Floss</strong> — Plant-based, refillable, plastic-free floss housed in a glass vial. <a href="https://www.dentallace.com/collections/plant-based-vegan-floss/products/dental-lace-vegan-refills" target="_blank">Buy Here</a></li>
-  </ul>
+    <section id="home-goods" class="section">
+      <h2><span class="emoji">🏡</span> Home Goods</h2>
+      <ul>
+        <li><strong>Ratio Eight Coffee Maker</strong> — All-metal and glass water path (no plastic), sleek aesthetic, and perfect pour-over taste. Healthy <em>and</em> more beautiful than anything else I researched.</li>
+      </ul>
+    </section>
 
-  <h2><span class="emoji">👕</span> Clean Clothing</h2>
-  <ul>
-    <li><strong>Faherty</strong> — Organic cotton, linen, hemp and other natural fibers for women and men. Beachy, breathable, and thoughtfully made. <a href="https://fahertybrand.com/pages/about" target="_blank">fahertybrand.com</a></li>
-    <li><strong>Paka</strong> — Traceable alpaca fiber clothing and underwear. Fair Trade Certified. Comfy, sustainable, and rooted in Andean tradition. <a href="https://www.pakaapparel.com/pages/our-story" target="_blank">pakaapparel.com</a></li>
-  </ul>
+    <section id="oral-health" class="section">
+      <h2><span class="emoji">🦷</span> Oral Health</h2>
+      <ul>
+        <li><strong>Simply O3 Ozone Pulling Solution</strong> — Ozonated oil blend to support oral detox and gum health. <a href="https://www.simplyo3.com/products/ozone-pulling-solution" target="_blank">Buy Here</a></li>
+        <li><strong>Dental Lace Vegan Floss</strong> — Plant-based, refillable, plastic-free floss housed in a glass vial. <a href="https://www.dentallace.com/collections/plant-based-vegan-floss/products/dental-lace-vegan-refills" target="_blank">Buy Here</a></li>
+      </ul>
+    </section>
 
-  <h2><span class="emoji">🎬</span> Documentaries That Changed Me</h2>
-  <ul>
-    <li><strong>Kiss the Ground</strong> — Soil health, regenerative farming, and the path to planetary healing.</li>
-    <li><strong>What the Health</strong> — Provocative content if you’re exploring plant-based health.</li>
-  </ul>
+    <section id="clean-clothing" class="section">
+      <h2><span class="emoji">👕</span> Clean Clothing</h2>
+      <ul>
+        <li><strong>Faherty</strong> — Organic cotton, linen, hemp and other natural fibers for women and men. Beachy, breathable, and thoughtfully made. <a href="https://fahertybrand.com/pages/about" target="_blank">fahertybrand.com</a></li>
+        <li><strong>Paka</strong> — Traceable alpaca fiber clothing and underwear. Fair Trade Certified. Comfy, sustainable, and rooted in Andean tradition. <a href="https://www.pakaapparel.com/pages/our-story" target="_blank">pakaapparel.com</a></li>
+      </ul>
+    </section>
 
-  <p><strong>Note:</strong> This list is always evolving. Everything here is something I personally use or have vetted through research and trusted experts.</p>
+    <section id="documentaries" class="section">
+      <h2><span class="emoji">🎬</span> Documentaries That Changed Me</h2>
+      <ul>
+        <li><strong>Kiss the Ground</strong> — Soil health, regenerative farming, and the path to planetary healing.</li>
+        <li><strong>What the Health</strong> — Provocative content if you’re exploring plant-based health.</li>
+      </ul>
+      <p><strong>Note:</strong> This list is always evolving. Everything here is something I personally use or have vetted through research and trusted experts.</p>
+    </section>
+  </main>
+
+  <footer>
+    Created with <span>💚</span> by Brandy — <span>Human Reset Project</span>
+  </footer>
 </body>
 </html>
-
-
