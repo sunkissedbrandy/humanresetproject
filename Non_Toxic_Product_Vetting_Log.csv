@@ -1,0 +1,10 @@
+Main Category,Category,Status,Product / Model,Materials & Build,Toxin Notes / Certifications,Reason for Decision,Price Range,Made In,Link
+Kitchen Appliances,Coffee Maker,✅ Approved,Ratio Eight,Stainless steel + glass water path,"Plastic-free, Prop 65 safe","Pure flavor, durable, non-toxic design",$599 (refurb),USA,https://ratiocoffee.com/products/ratio-eight
+Kitchen Appliances,Coffee Maker,❌ Rejected,SMEG Drip Coffee Maker,Plastic internal tubing + silicone seals,Prop 65 warning (lead & phthalates),Failed safety criteria (plastic contact with hot water),$229 ,China / Italy assembly,
+Kitchen Appliances,Rice Cooker,✅ Approved,Cuchen IH Dual Pressure CRP-TWK0640WUS,Stainless inner pot (PFAS-free),No PTFE/PFAS/lead,Non-toxic precision cooking,$350 ,Korea,https://cuchenusamall.com/products/6-cup-ih-dual-pressure-rice-cooker-crh-twk0640wus-copy
+Kitchen Appliances,Rice Cooker,❌ Rejected,Zojirushi Neuro Fuzzy,Non-stick PTFE inner pot,Contains Teflon coating (PFAS concern),Excellent performance but not non-toxic,$189 ,Japan,
+Home Environment,Air Purifier,⚙️ Under Review,TBD (Austin Air vs AirDoctor vs Smart Air),Activated carbon + HEPA,Checking ozone output & filter composition,Pending test results,$350–$700,,
+Pet Care,Cat Bowls,✅ Approved,Basis Products Stainless Steel Cat Bowls,Solid 18/8 stainless steel,No coatings or plastic base,"Non-toxic, dishwasher-safe, durable",$20–$30,USA,https://basisproducts.com
+Kitchen Appliances,Food Processor,⚙️ Under Review,Magimix 4200XL or 5200XL,"BPA-free Tritan bowl, metal blade",Checking BPA/BPS migration data,Top choice for durability + minimal plastic contact,$350–$450,France,https://www.magimix.us
+Kitchen & Tableware,"Dinnerware (Plates, Bowls, Cups)",✅ Approved,East Fork Pottery,"Stoneware, lead-free glaze",Meets CA Prop 65 & FDA leach tests,"Artisan, durable, non-toxic glazes",$20–$60 per piece,USA,https://eastfork.com
+Kitchen & Tableware,Dinnerware (Alternative Option),⚙️ Under Review,Haand Ceramics,Handmade porcelain,Awaiting lab test confirmation,"Small-batch USA maker, no heavy metals detected in spot tests",$25–$75,USA,https://haand.us
