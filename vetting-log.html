@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Human Reset Project — Vetting Log</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.dataTables.min.css">
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      color: #222;
+    }
+
+    /* Header + Nav */
+    header {
+      position: sticky;
+      top: 0;
+      background: #ffffffcc;
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      text-align: center;
+      padding: 1rem 0.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    header h1 {
+      color: #0a3d62;
+      font-size: 1.8rem;
+      margin: 0.5rem 0;
+    }
+
+    nav a {
+      margin: 0 10px;
+      color: #0a3d62;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    nav a:hover { text-decoration: underline; }
+
+    main {
+      max-width: 1000px;
+      margin: 2rem auto;
+      background: #fff;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+
+    h2 {
+      text-align: center;
+      color: #0a3d62;
+      margin-bottom: 1rem;
+    }
+
+    /* DataTable styling */
+    table.dataTable {
+      border-collapse: collapse;
+      width: 100%;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    table.dataTable thead {
+      background-color: #eaf4ee;
+      color: #0a3d62;
+    }
+
+    table.dataTable th, table.dataTable td {
+      padding: 12px 15px;
+    }
+
+    table.dataTable tbody tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    table.dataTable tbody tr:hover {
+      background-color: #eef7f2;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      background: #eaf4ee;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 2rem;
+    }
+    footer span { color: #0a3d62; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧾 Human Reset Project — Vetting Log</h1>
+    <nav>
+      <a href="index.html">🏡 Home</a>
+      <a href="#top">Back to Top</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Non-Toxic Product Vetting Log</h2>
+    <p style="text-align:center; max-width:700px; margin:0 auto 1.5rem;">
+      This is a living database of products I’ve personally vetted or am actively researching — from cookware and cleaning to pet wellness and home goods.  
+      You can <strong>search</strong>, <strong>sort</strong>, or <strong>filter</strong> any column below.  
+    </p>
+
+    <table id="vettingTable" class="display nowrap" style="width:100%">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <footer>
+    Created with <span>💚</span> by Brandy — <span>Human Reset Project</span>
+  </footer>
+
+  <!-- jQuery + DataTables JS -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+
+  <script>
+    // Load CSV and convert to table
+    async function loadCSV() {
+      const response = await fetch('Non_Toxic_Product_Vetting_Log.csv');
+      const csvText = await response.text();
+      const rows = csvText.trim().split('\n').map(r => r.split(','));
+      const headers = rows.shift();
+
+      // Build table headers dynamically
+      const thead = document.querySelector('#vettingTable thead');
+      const tbody = document.querySelector('#vettingTable tbody');
+      let headerRow = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+      thead.innerHTML = headerRow;
+
+      // Build table body
+      let bodyRows = rows.map(r => '<tr>' + r.map(c => `<td>${c}</td>`).join('') + '</tr>').join('');
+      tbody.innerHTML = bodyRows;
+
+      // Initialize DataTable
+      $('#vettingTable').DataTable({
+        responsive: true,
+        pageLength: 25,
+        order: [],
+        language: {
+          search: "🔍 Search:",
+          lengthMenu: "Show _MENU_ entries per page"
+        }
+      });
+    }
+    loadCSV();
+  </script>
+</body>
+</html>
