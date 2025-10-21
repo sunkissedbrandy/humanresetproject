@@ -164,7 +164,7 @@
   <script>
     async function loadCSV() {
       // ✅ Absolute path fix for GitHub Pages
-      const response = await fetch('https://sunkissedbrandy.github.io/humanresetproject/Non_Toxic_Product_Vetting_Log.csv');
+      const response = await fetch('https://raw.githubusercontent.com/sunkissedbrandy/humanresetproject/main/Non_Toxic_Product_Vetting_Log.csv');
       const csvText = await response.text();
 
       const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
