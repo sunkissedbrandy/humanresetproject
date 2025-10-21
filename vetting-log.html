@@ -18,7 +18,6 @@
       color: #222;
     }
 
-    /* Header + Nav */
     header {
       position: sticky;
       top: 0;
@@ -66,7 +65,6 @@
       margin-bottom: 1rem;
     }
 
-    /* DataTable styling */
     table.dataTable {
       border-collapse: collapse;
       width: 100%;
@@ -93,10 +91,162 @@
       background-color: #eef7f2;
     }
 
-    /* Rejected nested rows */
     tr.child-row {
       background-color: #f1f1f1 !important;
     }
 
     tr.child-row td {
-      border-top: 1
+      border-top: 1px solid #ddd;
+    }
+
+    td.details-control {
+      cursor: pointer;
+      text-align: center;
+      color: #0a3d62;
+      font-weight: bold;
+      width: 30px;
+    }
+
+    td.details-control::before {
+      content: '▶';
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    tr.shown td.details-control::before {
+      transform: rotate(90deg);
+    }
+
+    footer {
+      text-align: center;
+      background: #eaf4ee;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 2rem;
+    }
+
+    footer span { color: #0a3d62; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧾 Human Reset Project — Vetting Log</h1>
+    <nav>
+      <a href="index.html">🏡 Home</a>
+      <a href="#top">Back to Top</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Non-Toxic Product Vetting Log</h2>
+    <p style="text-align:center; max-width:700px; margin:0 auto 1.5rem;">
+      This living log tracks everything I’ve personally vetted — from cookware to pet products.  
+      Approved items are shown below. Click the little arrow <strong>(▶)</strong> beside each product to  
+      <em>“See What Didn’t Make the Cut.”</em>
+    </p>
+
+    <table id="mainTable" class="display" style="width:100%">
+      <thead></thead>
+      <tbody></tbody>
+    </table>
+  </main>
+
+  <footer>
+    Created with <span>💚</span> by Brandy — <span>Human Reset Project</span>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
+  <script>
+    async function loadCSV() {
+      // ✅ Absolute path fix for GitHub Pages
+      const response = await fetch('https://sunkissedbrandy.github.io/humanresetproject/Non_Toxic_Product_Vetting_Log.csv');
+      const csvText = await response.text();
+
+      const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
+      const data = parsed.data;
+      const headers = parsed.meta.fields.filter(h => h.toLowerCase() !== 'link');
+
+      const categories = {};
+      data.forEach(row => {
+        const cat = row.Category || 'Other';
+        if (!categories[cat]) categories[cat] = [];
+        categories[cat].push(row);
+      });
+
+      const approvedRows = [];
+      Object.entries(categories).forEach(([cat, rows]) => {
+        const approved = rows.find(r => r.Status?.toLowerCase().includes('approved'));
+        if (approved) approvedRows.push(approved);
+      });
+
+      const thead = document.querySelector('#mainTable thead');
+      const tbody = document.querySelector('#mainTable tbody');
+      thead.innerHTML = '<tr><th></th>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+
+      const makeRow = row => {
+        return `<tr>` +
+          `<td class="details-control"></td>` +
+          headers.map(h => {
+            let cell = row[h] ? row[h].trim() : '';
+            if (h.toLowerCase().includes('product') && row.Link && row.Link.startsWith('http')) {
+              cell = `<a href="${row.Link}" target="_blank" rel="noopener">${cell}</a>`;
+            }
+            return `<td>${cell}</td>`;
+          }).join('') + '</tr>';
+      };
+
+      tbody.innerHTML = approvedRows.map(makeRow).join('');
+
+      const table = $('#mainTable').DataTable({
+        pageLength: 25,
+        order: [],
+        language: {
+          search: "🔍 Search:",
+          lengthMenu: "Show _MENU_ entries per page"
+        }
+      });
+      new $.fn.dataTable.FixedHeader(table);
+
+      $('#mainTable tbody').on('click', 'td.details-control', function () {
+        const tr = $(this).closest('tr');
+        const row = table.row(tr);
+        const category = tr.find('td').eq(1).text();
+        const rejectedRows = (categories[category] || []).filter(r => r.Status?.toLowerCase().includes('reject'));
+
+        if (row.child.isShown()) {
+          row.child.hide();
+          tr.removeClass('shown');
+        } else {
+          if (rejectedRows.length === 0) return;
+          const childTable = `
+            <table style="width:95%; margin:0.5rem auto; border-radius:8px;">
+              <thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
+              <tbody>
+                ${rejectedRows.map(r => `
+                  <tr class="child-row">
+                    ${headers.map(h => {
+                      let cell = r[h] ? r[h].trim() : '';
+                      if (h.toLowerCase().includes('product') && r.Link && r.Link.startsWith('http')) {
+                        cell = `<a href="${r.Link}" target="_blank" rel="noopener">${cell}</a>`;
+                      }
+                      return `<td>${cell}</td>`;
+                    }).join('')}
+                  </tr>`).join('')}
+              </tbody>
+            </table>
+          `;
+          row.child(childTable).show();
+          tr.addClass('shown');
+        }
+      });
+    }
+
+    loadCSV();
+  </script>
+</body>
+</html>
