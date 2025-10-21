@@ -129,19 +129,58 @@
     Created with <span>💚</span> by Brandy — <span>Human Reset Project</span>
   </footer>
 
-  <!-- jQuery + DataTables JS -->
+  <!-- jQuery + DataTables + PapaParse -->
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
   <script>
-    // Load CSV and convert to table
     async function loadCSV() {
       const response = await fetch('Non_Toxic_Product_Vetting_Log.csv');
       const csvText = await response.text();
 
-      // Parse CSV with support for quoted values and Windows/Mac line endings
-      function parseCSV(text) {
-        const rows = [];
-        let currentRow = [];
-        let currentCell = ''
+      // Parse with PapaParse (handles commas, quotes, newlines)
+      const parsed = Papa.parse(csvText, {
+        header: true,
+        skipEmptyLines: true
+      });
+
+      const data = parsed.data;
+      const headers = parsed.meta.fields;
+
+      // Build table headers
+      const thead = document.querySelector('#vettingTable thead');
+      const tbody = document.querySelector('#vettingTable tbody');
+      let headerRow = '<tr>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
+      thead.innerHTML = headerRow;
+
+      // Build table rows with clickable links
+      let bodyRows = data.map(row => {
+        return '<tr>' + headers.map(h => {
+          const cell = row[h] ? row[h].trim() : '';
+          if (h.toLowerCase().includes('link') && cell.startsWith('http')) {
+            return `<td><a href="${cell}" target="_blank" rel="noopener">View Product 🔗</a></td>`;
+          }
+          return `<td>${cell}</td>`;
+        }).join('') + '</tr>';
+      }).join('');
+
+      tbody.innerHTML = bodyRows;
+
+      // Initialize DataTable
+      $('#vettingTable').DataTable({
+        responsive: true,
+        pageLength: 25,
+        order: [],
+        language: {
+          search: "🔍 Search:",
+          lengthMenu: "Show _MENU_ entries per page"
+        }
+      });
+    }
+
+    loadCSV();
+  </script>
+</body>
+</html>
