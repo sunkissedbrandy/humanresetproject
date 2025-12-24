@@ -4,18 +4,23 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Human Reset Project — Vetting Log</title>
+
+  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
   <!-- DataTables CSS -->
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css">
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css" />
+
   <style>
     html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #f4f4f4;
+      background: #f4f4f4;
+      color: #222;
       margin: 0;
       padding: 0;
-      color: #222;
+      line-height: 1.6;
     }
 
     header {
@@ -30,91 +35,138 @@
     }
 
     header h1 {
-      color: #0a3d62;
       font-size: 1.8rem;
       margin: 0.5rem 0;
+      color: #0a3d62;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav {
+      margin-top: 0.5rem;
     }
 
     nav a {
-      margin: 0 10px;
       color: #0a3d62;
+      margin: 0 10px;
       font-weight: 600;
       text-decoration: none;
       padding: 4px 8px;
       border-radius: 6px;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
-
     nav a:hover {
       background-color: #eaf4ee;
       color: #063b4d;
     }
 
     main {
-      max-width: 1000px;
-      margin: 2rem auto;
+      padding: 2rem 1rem 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
       background: #fff;
-      padding: 2rem;
+      padding: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      margin-bottom: 1.5rem;
     }
 
-    h2 {
+    .title {
       text-align: center;
+      margin: 0;
       color: #0a3d62;
-      margin-bottom: 1rem;
+      font-size: 1.7rem;
     }
 
-    table.dataTable {
-      border-collapse: collapse;
-      width: 100%;
-      border-radius: 10px;
-      overflow: hidden;
+    .subtitle {
+      text-align: center;
+      margin: 0.75rem auto 0;
+      max-width: 720px;
     }
 
-    table.dataTable thead {
-      background-color: #eaf4ee;
+    .subtitle em { font-style: italic; }
+
+    /* Controls row (dropdown) */
+    .controls {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 10px;
+      margin: 1rem 0 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .controls label {
+      font-weight: 600;
       color: #0a3d62;
     }
 
-    table.dataTable th, table.dataTable td {
-      padding: 12px 15px;
-      white-space: normal;
-      word-wrap: break-word;
+    select {
+      font-family: 'Inter', sans-serif;
+      padding: 6px 10px;
+      border-radius: 8px;
+      border: 1px solid #cfd8dc;
+      background: #fff;
+      color: #222;
+      font-weight: 600;
     }
 
-    table.dataTable tbody tr:nth-child(even) {
-      background-color: #f9f9f9;
+    /* DataTables tweaks */
+    table.dataTable thead th {
+      background: #eaf4ee !important;
+      color: #0a3d62 !important;
+      font-weight: 700;
     }
 
-    table.dataTable tbody tr:hover {
-      background-color: #eef7f2;
-    }
-
-    tr.child-row {
-      background-color: #f1f1f1 !important;
-    }
-
-    tr.child-row td {
-      border-top: 1px solid #ddd;
-    }
-
+    /* Row expand arrow column */
     td.details-control {
       cursor: pointer;
+      width: 26px;
       text-align: center;
+      font-weight: 800;
       color: #0a3d62;
-      font-weight: bold;
-      width: 30px;
+      user-select: none;
     }
 
-    td.details-control::before {
-      content: '▶';
-      transition: transform 0.3s ease;
-      display: inline-block;
+    tr.no-children td.details-control {
+      color: #c0c7cc;
+      cursor: default;
     }
 
-    tr.shown td.details-control::before {
-      transform: rotate(90deg);
+    /* Rejections child content */
+    .child-wrap {
+      background: #f7f7f7;
+      border-left: 4px solid #c0c7cc;
+      padding: 12px 14px;
+      border-radius: 8px;
+    }
+
+    .child-title {
+      margin: 0 0 10px;
+      color: #555;
+      font-weight: 700;
+    }
+
+    .child-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.95rem;
+    }
+
+    .child-table th,
+    .child-table td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid #e0e0e0;
+      vertical-align: top;
+    }
+
+    .muted {
+      color: #666;
     }
 
     footer {
@@ -126,11 +178,11 @@
       margin-top: 2rem;
     }
 
-    footer span { color: #0a3d62; }
+    a { color: #0a3d62; }
   </style>
 </head>
 <body>
-  <header>
+  <header id="top">
     <h1>🧾 Human Reset Project — Vetting Log</h1>
     <nav>
       <a href="index.html">🏡 Home</a>
@@ -139,114 +191,258 @@
   </header>
 
   <main>
-    <h2>Non-Toxic Product Vetting Log</h2>
-    <p style="text-align:center; max-width:700px; margin:0 auto 1.5rem;">
-      This living log tracks everything I’ve personally vetted — from cookware to pet products.  
-      Approved items are shown below. Click the little arrow <strong>(▶)</strong> beside each product to  
-      <em>“See What Didn’t Make the Cut.”</em>
-    </p>
+    <div class="card">
+      <h2 class="title">Non-Toxic Product Vetting Log</h2>
+      <p class="subtitle">
+        This living log tracks everything I’ve personally vetted — from cookware to pet products.<br />
+        Approved items are shown below. Click the little arrow (▶) beside each product to
+        <em>“See What Didn’t Make the Cut.”</em>
+      </p>
+    </div>
 
-    <table id="mainTable" class="display" style="width:100%">
-      <thead></thead>
-      <tbody></tbody>
-    </table>
+    <div class="card">
+      <div class="controls">
+        <label for="categoryFilter">Filter by Main Category:</label>
+        <select id="categoryFilter">
+          <option value="__ALL__">All</option>
+        </select>
+      </div>
+
+      <table id="vettingTable" class="display" style="width:100%">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
   </main>
 
   <footer>
-    Created with <span>💚</span> by Brandy — <span>Human Reset Project</span>
+    Created with 💚 by Brandy — Human Reset Project
   </footer>
 
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <!-- JS -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
+
+  <!-- PapaParse (correct CSV parsing, handles commas inside quotes) -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
   <script>
-    async function loadCSV() {
-      // ✅ Absolute path fix for GitHub Pages
-      const response = await fetch('https://raw.githubusercontent.com/sunkissedbrandy/humanresetproject/main/Non_Toxic_Product_Vetting_Log.csv');
-      const csvText = await response.text();
+    // Columns we will display in the main (Approved) table
+    const DISPLAY_COLUMNS = [
+      "Main Category",
+      "Category",
+      "Status",
+      "Product / Model",
+      "Materials & Build",
+      "Toxin Notes / Certifications",
+      "Reason for Decision",
+      "Price Range",
+      "Made In"
+    ];
 
-      const parsed = Papa.parse(csvText, { header: true, skipEmptyLines: true });
-      const data = parsed.data;
-      const headers = parsed.meta.fields.filter(h => h.toLowerCase() !== 'link');
+    // Columns we show inside the "Didn't Make the Cut" expandable area
+    const CHILD_COLUMNS = [
+      "Status",
+      "Product / Model",
+      "Materials & Build",
+      "Toxin Notes / Certifications",
+      "Reason for Decision",
+      "Price Range",
+      "Made In"
+    ];
 
-      const categories = {};
-      data.forEach(row => {
-        const cat = row.Category || 'Other';
-        if (!categories[cat]) categories[cat] = [];
-        categories[cat].push(row);
-      });
-
-      const approvedRows = [];
-      Object.entries(categories).forEach(([cat, rows]) => {
-        const approved = rows.find(r => r.Status?.toLowerCase().includes('approved'));
-        if (approved) approvedRows.push(approved);
-      });
-
-      const thead = document.querySelector('#mainTable thead');
-      const tbody = document.querySelector('#mainTable tbody');
-      thead.innerHTML = '<tr><th></th>' + headers.map(h => `<th>${h}</th>`).join('') + '</tr>';
-
-      const makeRow = row => {
-        return `<tr>` +
-          `<td class="details-control"></td>` +
-          headers.map(h => {
-            let cell = row[h] ? row[h].trim() : '';
-            if (h.toLowerCase().includes('product') && row.Link && row.Link.startsWith('http')) {
-              cell = `<a href="${row.Link}" target="_blank" rel="noopener">${cell}</a>`;
-            }
-            return `<td>${cell}</td>`;
-          }).join('') + '</tr>';
-      };
-
-      tbody.innerHTML = approvedRows.map(makeRow).join('');
-
-      const table = $('#mainTable').DataTable({
-        pageLength: 25,
-        order: [],
-        language: {
-          search: "🔍 Search:",
-          lengthMenu: "Show _MENU_ entries per page"
-        }
-      });
-      new $.fn.dataTable.FixedHeader(table);
-
-      $('#mainTable tbody').on('click', 'td.details-control', function () {
-        const tr = $(this).closest('tr');
-        const row = table.row(tr);
-        const category = tr.find('td').eq(1).text();
-        const rejectedRows = (categories[category] || []).filter(r => r.Status?.toLowerCase().includes('reject'));
-
-        if (row.child.isShown()) {
-          row.child.hide();
-          tr.removeClass('shown');
-        } else {
-          if (rejectedRows.length === 0) return;
-          const childTable = `
-            <table style="width:95%; margin:0.5rem auto; border-radius:8px;">
-              <thead><tr>${headers.map(h => `<th>${h}</th>`).join('')}</tr></thead>
-              <tbody>
-                ${rejectedRows.map(r => `
-                  <tr class="child-row">
-                    ${headers.map(h => {
-                      let cell = r[h] ? r[h].trim() : '';
-                      if (h.toLowerCase().includes('product') && r.Link && r.Link.startsWith('http')) {
-                        cell = `<a href="${r.Link}" target="_blank" rel="noopener">${cell}</a>`;
-                      }
-                      return `<td>${cell}</td>`;
-                    }).join('')}
-                  </tr>`).join('')}
-              </tbody>
-            </table>
-          `;
-          row.child(childTable).show();
-          tr.addClass('shown');
-        }
-      });
+    function escapeHtml(str) {
+      return String(str ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
     }
 
-    loadCSV();
+    function asLink(text, url) {
+      const safeText = escapeHtml(text);
+      const safeUrl = escapeHtml(url);
+      if (!url) return safeText;
+      return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeText}</a>`;
+    }
+
+    function formatChildRows(childRows) {
+      let html = `<div class="child-wrap">
+        <div class="child-title">See What Didn’t Make the Cut</div>
+        <table class="child-table">
+          <thead><tr>${CHILD_COLUMNS.map(c => `<th>${escapeHtml(c)}</th>`).join("")}</tr></thead>
+          <tbody>
+      `;
+
+      childRows.forEach(r => {
+        html += "<tr>";
+        CHILD_COLUMNS.forEach(col => {
+          let val = r[col] ?? "";
+          if (col === "Product / Model") {
+            val = asLink(val, r["Link"]);
+          } else {
+            val = escapeHtml(val);
+          }
+          html += `<td class="muted">${val}</td>`;
+        });
+        html += "</tr>";
+      });
+
+      html += "</tbody></table></div>";
+      return html;
+    }
+
+    // Load CSV and build parent (approved) rows with expandable children (rejected)
+    Papa.parse("Non_Toxic_Product_Vetting_Log.csv", {
+      download: true,
+      header: true,
+      skipEmptyLines: true,
+      complete: function(results) {
+        const all = results.data || [];
+
+        // Normalize + remove Under Review completely (per your decision)
+        const rows = all
+          .map(r => {
+            // Trim keys we care about
+            const cleaned = {};
+            Object.keys(r).forEach(k => cleaned[k.trim()] = (r[k] ?? "").trim());
+            return cleaned;
+          })
+          .filter(r => (r["Status"] || "").toLowerCase() !== "under review");
+
+        // Split approved vs rejected
+        const approved = rows.filter(r => (r["Status"] || "").toLowerCase() === "approved");
+        const rejected = rows.filter(r => (r["Status"] || "").toLowerCase() === "rejected");
+
+        // Group rejects by (Main Category + Category)
+        const rejectMap = new Map();
+        rejected.forEach(r => {
+          const key = `${r["Main Category"]}__${r["Category"]}`;
+          if (!rejectMap.has(key)) rejectMap.set(key, []);
+          rejectMap.get(key).push(r);
+        });
+
+        // Build parent table dataset
+        // Each approved row becomes a parent; if any rejects share its (Main Category + Category), attach as children
+        const parentData = approved.map(r => {
+          const key = `${r["Main Category"]}__${r["Category"]}`;
+          return {
+            _children: rejectMap.get(key) || [],
+            ...r
+          };
+        });
+
+        // Build header with an extra first column for the expand arrow
+        const thead = document.querySelector("#vettingTable thead");
+        thead.innerHTML = `
+          <tr>
+            <th></th>
+            ${DISPLAY_COLUMNS.map(c => `<th>${escapeHtml(c)}</th>`).join("")}
+          </tr>
+        `;
+
+        // Build tbody
+        const tbody = document.querySelector("#vettingTable tbody");
+        tbody.innerHTML = parentData.map(r => {
+          const hasChildren = r._children && r._children.length > 0;
+
+          // First cell: arrow
+          const arrowCell = hasChildren ? "▶" : "▶";
+          const rowClass = hasChildren ? "" : "no-children";
+
+          // Build visible cells
+          const cells = DISPLAY_COLUMNS.map(col => {
+            let val = r[col] ?? "";
+            if (col === "Product / Model") {
+              val = asLink(val, r["Link"]);
+            } else {
+              val = escapeHtml(val);
+            }
+            return `<td>${val}</td>`;
+          }).join("");
+
+          return `
+            <tr class="${rowClass}" data-has-children="${hasChildren ? "1" : "0"}">
+              <td class="details-control">${arrowCell}</td>
+              ${cells}
+            </tr>
+          `;
+        }).join("");
+
+        // Init DataTable
+        const dt = $("#vettingTable").DataTable({
+          // IMPORTANT: remove built-in search box (no "f")
+          dom: "lrtip",
+          pageLength: 25,
+          order: [],
+          fixedHeader: true,
+          columnDefs: [
+            { orderable: false, targets: 0 } // arrow col not sortable
+          ]
+        });
+
+        // Populate Main Category dropdown from visible parent rows
+        const mainCatIndex = 1; // Because our arrow column is at index 0, Main Category is 1
+        const uniqueCats = new Set();
+
+        parentData.forEach(r => {
+          if (r["Main Category"]) uniqueCats.add(r["Main Category"]);
+        });
+
+        const filter = document.getElementById("categoryFilter");
+        Array.from(uniqueCats).sort().forEach(cat => {
+          const opt = document.createElement("option");
+          opt.value = cat;
+          opt.textContent = cat;
+          filter.appendChild(opt);
+        });
+
+        // Dropdown filter behavior (hides other categories)
+        filter.addEventListener("change", () => {
+          const val = filter.value;
+          if (val === "__ALL__") {
+            dt.column(mainCatIndex).search("").draw();
+          } else {
+            // exact match
+            dt.column(mainCatIndex).search("^" + val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$", true, false).draw();
+          }
+        });
+
+        // Expand/collapse child rows on arrow click
+        $("#vettingTable tbody").on("click", "td.details-control", function() {
+          const tr = $(this).closest("tr");
+          const row = dt.row(tr);
+
+          const hasChildren = tr.attr("data-has-children") === "1";
+          if (!hasChildren) return;
+
+          // Find matching parentData by visible row index
+          const rowIndex = row.index();
+          const rowDataObj = parentData[rowIndex];
+          const children = rowDataObj?._children || [];
+
+          if (row.child.isShown()) {
+            row.child.hide();
+            tr.find("td.details-control").text("▶");
+          } else {
+            row.child(formatChildRows(children)).show();
+            tr.find("td.details-control").text("▼");
+          }
+        });
+
+        // Make rows with no children look "disabled"
+        $("#vettingTable tbody tr").each(function() {
+          const has = $(this).attr("data-has-children") === "1";
+          if (!has) $(this).addClass("no-children");
+        });
+      },
+      error: function(err) {
+        console.error("CSV load error:", err);
+      }
+    });
   </script>
 </body>
 </html>
+
