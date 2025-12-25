@@ -43,9 +43,7 @@
       gap: 10px;
     }
 
-    nav {
-      margin-top: 0.5rem;
-    }
+    nav { margin-top: 0.5rem; }
 
     nav a {
       color: #0a3d62;
@@ -91,7 +89,6 @@
 
     .subtitle em { font-style: italic; }
 
-    /* Controls row (dropdown) */
     .controls {
       display: flex;
       justify-content: flex-end;
@@ -116,14 +113,12 @@
       font-weight: 600;
     }
 
-    /* DataTables tweaks */
     table.dataTable thead th {
       background: #eaf4ee !important;
       color: #0a3d62 !important;
       font-weight: 700;
     }
 
-    /* Row expand arrow column */
     td.details-control {
       cursor: pointer;
       width: 26px;
@@ -138,7 +133,6 @@
       cursor: default;
     }
 
-    /* Rejections child content */
     .child-wrap {
       background: #f7f7f7;
       border-left: 4px solid #c0c7cc;
@@ -166,9 +160,7 @@
       vertical-align: top;
     }
 
-    .muted {
-      color: #666;
-    }
+    .muted { color: #666; }
 
     footer {
       text-align: center;
@@ -185,8 +177,6 @@
 <body>
   <header id="top">
     <h1>🧾 Human Reset Project — Vetting Log</h1>
-
-    <!-- ✅ Updated global nav (matches the new site structure) -->
     <nav>
       <a href="index.html">Home</a>
       <a href="supplements.html">Supplements</a>
@@ -229,16 +219,12 @@
     Created with 💚 by Brandy — Human Reset Project
   </footer>
 
-  <!-- JS -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
-
-  <!-- PapaParse (correct CSV parsing, handles commas inside quotes) -->
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
   <script>
-    // Columns we will display in the main (Approved) table
     const DISPLAY_COLUMNS = [
       "Main Category",
       "Category",
@@ -251,7 +237,6 @@
       "Made In"
     ];
 
-    // Columns we show inside the "Didn't Make the Cut" expandable area
     const CHILD_COLUMNS = [
       "Status",
       "Product / Model",
@@ -304,7 +289,12 @@
       return html;
     }
 
-    // Load CSV and build parent (approved) rows with expandable children (rejected)
+    function getMainParam() {
+      const params = new URLSearchParams(window.location.search);
+      const main = params.get("main");
+      return main ? main.trim() : "";
+    }
+
     Papa.parse("Non_Toxic_Product_Vetting_Log.csv", {
       download: true,
       header: true,
@@ -312,7 +302,6 @@
       complete: function(results) {
         const all = results.data || [];
 
-        // Normalize + remove Under Review completely (per your decision)
         const rows = all
           .map(r => {
             const cleaned = {};
@@ -321,11 +310,9 @@
           })
           .filter(r => (r["Status"] || "").toLowerCase() !== "under review");
 
-        // Split approved vs rejected
         const approved = rows.filter(r => (r["Status"] || "").toLowerCase() === "approved");
         const rejected = rows.filter(r => (r["Status"] || "").toLowerCase() === "rejected");
 
-        // Group rejects by (Main Category + Category)
         const rejectMap = new Map();
         rejected.forEach(r => {
           const key = `${r["Main Category"]}__${r["Category"]}`;
@@ -333,13 +320,11 @@
           rejectMap.get(key).push(r);
         });
 
-        // Each approved row becomes a parent; if any rejects share its (Main Category + Category), attach as children
         const parentData = approved.map(r => {
           const key = `${r["Main Category"]}__${r["Category"]}`;
           return { _children: rejectMap.get(key) || [], ...r };
         });
 
-        // Build header with an extra first column for the expand arrow
         const thead = document.querySelector("#vettingTable thead");
         thead.innerHTML = `
           <tr>
@@ -348,12 +333,9 @@
           </tr>
         `;
 
-        // Build tbody
         const tbody = document.querySelector("#vettingTable tbody");
         tbody.innerHTML = parentData.map(r => {
           const hasChildren = r._children && r._children.length > 0;
-
-          // First cell: arrow (always shown, disabled style when no children)
           const arrowCell = "▶";
           const rowClass = hasChildren ? "" : "no-children";
 
@@ -375,17 +357,15 @@
           `;
         }).join("");
 
-        // Init DataTable
         const dt = $("#vettingTable").DataTable({
-          dom: "lrtip",          // remove built-in search box
+          dom: "lrtip",
           pageLength: 25,
           order: [],
           fixedHeader: true,
           columnDefs: [{ orderable: false, targets: 0 }]
         });
 
-        // Populate Main Category dropdown from visible parent rows
-        const mainCatIndex = 1; // arrow is 0, Main Category is 1
+        const mainCatIndex = 1; // arrow col is 0, Main Category is 1
         const uniqueCats = new Set();
         parentData.forEach(r => { if (r["Main Category"]) uniqueCats.add(r["Main Category"]); });
 
@@ -397,17 +377,24 @@
           filter.appendChild(opt);
         });
 
-        // Dropdown filter behavior (hides other categories)
-        filter.addEventListener("change", () => {
-          const val = filter.value;
-          if (val === "__ALL__") {
+        function applyFilter(val) {
+          if (!val || val === "__ALL__") {
+            filter.value = "__ALL__";
             dt.column(mainCatIndex).search("").draw();
-          } else {
-            dt.column(mainCatIndex).search("^" + val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$", true, false).draw();
+            return;
           }
-        });
+          filter.value = val;
+          dt.column(mainCatIndex).search("^" + val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$", true, false).draw();
+        }
 
-        // Expand/collapse child rows on arrow click
+        filter.addEventListener("change", () => applyFilter(filter.value === "__ALL__" ? "" : filter.value));
+
+        // ✅ Auto-apply filter from URL, e.g. vetting-log.html?main=Cleaning
+        const urlMain = getMainParam();
+        if (urlMain) {
+          applyFilter(urlMain);
+        }
+
         $("#vettingTable tbody").on("click", "td.details-control", function() {
           const tr = $(this).closest("tr");
           const row = dt.row(tr);
@@ -428,7 +415,6 @@
           }
         });
 
-        // Make rows with no children look "disabled"
         $("#vettingTable tbody tr").each(function() {
           const has = $(this).attr("data-has-children") === "1";
           if (!has) $(this).addClass("no-children");
