@@ -55,6 +55,7 @@
       padding: 4px 8px;
       border-radius: 6px;
       transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-block;
     }
     nav a:hover {
       background-color: #eaf4ee;
@@ -184,8 +185,17 @@
 <body>
   <header id="top">
     <h1>🧾 Human Reset Project — Vetting Log</h1>
+
+    <!-- ✅ Updated global nav (matches the new site structure) -->
     <nav>
-      <a href="index.html">🏡 Home</a>
+      <a href="index.html">Home</a>
+      <a href="supplements.html">Supplements</a>
+      <a href="pet-wellness.html">Pet Wellness</a>
+      <a href="cleaning.html">Cleaning</a>
+      <a href="home-goods.html">Home Goods</a>
+      <a href="oral-health.html">Oral Health</a>
+      <a href="clothing.html">Clothing</a>
+      <a href="vetting-log.html">🧾 Vetting Log</a>
       <a href="#top">Back to Top</a>
     </nav>
   </header>
@@ -305,7 +315,6 @@
         // Normalize + remove Under Review completely (per your decision)
         const rows = all
           .map(r => {
-            // Trim keys we care about
             const cleaned = {};
             Object.keys(r).forEach(k => cleaned[k.trim()] = (r[k] ?? "").trim());
             return cleaned;
@@ -324,14 +333,10 @@
           rejectMap.get(key).push(r);
         });
 
-        // Build parent table dataset
         // Each approved row becomes a parent; if any rejects share its (Main Category + Category), attach as children
         const parentData = approved.map(r => {
           const key = `${r["Main Category"]}__${r["Category"]}`;
-          return {
-            _children: rejectMap.get(key) || [],
-            ...r
-          };
+          return { _children: rejectMap.get(key) || [], ...r };
         });
 
         // Build header with an extra first column for the expand arrow
@@ -348,11 +353,10 @@
         tbody.innerHTML = parentData.map(r => {
           const hasChildren = r._children && r._children.length > 0;
 
-          // First cell: arrow
-          const arrowCell = hasChildren ? "▶" : "▶";
+          // First cell: arrow (always shown, disabled style when no children)
+          const arrowCell = "▶";
           const rowClass = hasChildren ? "" : "no-children";
 
-          // Build visible cells
           const cells = DISPLAY_COLUMNS.map(col => {
             let val = r[col] ?? "";
             if (col === "Product / Model") {
@@ -373,23 +377,17 @@
 
         // Init DataTable
         const dt = $("#vettingTable").DataTable({
-          // IMPORTANT: remove built-in search box (no "f")
-          dom: "lrtip",
+          dom: "lrtip",          // remove built-in search box
           pageLength: 25,
           order: [],
           fixedHeader: true,
-          columnDefs: [
-            { orderable: false, targets: 0 } // arrow col not sortable
-          ]
+          columnDefs: [{ orderable: false, targets: 0 }]
         });
 
         // Populate Main Category dropdown from visible parent rows
-        const mainCatIndex = 1; // Because our arrow column is at index 0, Main Category is 1
+        const mainCatIndex = 1; // arrow is 0, Main Category is 1
         const uniqueCats = new Set();
-
-        parentData.forEach(r => {
-          if (r["Main Category"]) uniqueCats.add(r["Main Category"]);
-        });
+        parentData.forEach(r => { if (r["Main Category"]) uniqueCats.add(r["Main Category"]); });
 
         const filter = document.getElementById("categoryFilter");
         Array.from(uniqueCats).sort().forEach(cat => {
@@ -405,7 +403,6 @@
           if (val === "__ALL__") {
             dt.column(mainCatIndex).search("").draw();
           } else {
-            // exact match
             dt.column(mainCatIndex).search("^" + val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$", true, false).draw();
           }
         });
@@ -418,7 +415,6 @@
           const hasChildren = tr.attr("data-has-children") === "1";
           if (!hasChildren) return;
 
-          // Find matching parentData by visible row index
           const rowIndex = row.index();
           const rowDataObj = parentData[rowIndex];
           const children = rowDataObj?._children || [];
@@ -445,4 +441,3 @@
   </script>
 </body>
 </html>
-
