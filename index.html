@@ -6,9 +6,7 @@
   <title>Brandy's Trusted Wellness Picks</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
       background: #f4f4f4;
@@ -36,9 +34,7 @@
       color: #0a3d62;
     }
 
-    nav {
-      margin-top: 0.5rem;
-    }
+    nav { margin-top: 0.5rem; }
 
     nav a {
       color: #0a3d62;
@@ -48,6 +44,7 @@
       padding: 4px 8px;
       border-radius: 6px;
       transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-block;
     }
 
     nav a:hover {
@@ -58,7 +55,7 @@
     /* --- Main Content --- */
     main {
       padding: 2rem 1rem 4rem;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
     }
 
@@ -76,21 +73,16 @@
       color: #0a3d62;
     }
 
-    ul {
-      padding-left: 1.5rem;
-    }
+    a { color: #0a3d62; text-decoration: underline; }
 
-    li {
-      margin-bottom: 0.8rem;
-    }
+    .emoji { font-size: 1.2rem; }
 
-    a {
-      color: #0a3d62;
-      text-decoration: underline;
-    }
-
-    .emoji {
-      font-size: 1.2rem;
+    .cta {
+      margin-top: 1rem;
+      padding: 0.9rem 1rem;
+      border-radius: 10px;
+      background: #f7f7f7;
+      border: 1px solid #e5e5e5;
     }
 
     /* --- Footer --- */
@@ -102,131 +94,109 @@
       color: #444;
     }
 
-    footer span {
-      color: #0a3d62;
-    }
+    footer span { color: #0a3d62; }
   </style>
 </head>
+
 <body>
   <header>
     <h1><span class="emoji">🌿</span> Brandy’s Trusted Wellness Picks</h1>
     <nav>
-      <a href="#clean-eating">Clean Eating</a>
+      <a href="index.html">Home</a>
+      <a href="#water">Water</a>
+      <a href="#air">Air</a>
+      <a href="#fire">Fire</a>
+      <a href="#earth">Earth</a>
       <a href="supplements.html">Supplements</a>
-      <a href="#pet-wellness">Pet Wellness</a>
-      <a href="#cleaning">Cleaning</a>
-      <a href="#home-goods">Home Goods</a>
-      <a href="#oral-health">Oral Health</a>
-      <a href="#clean-clothing">Clothing</a>
-      <a href="#documentaries">Docs</a>
+      <a href="pet-wellness.html">Pet Wellness</a>
+      <a href="cleaning.html">Cleaning</a>
+      <a href="home-goods.html">Home Goods</a>
+      <a href="oral-health.html">Oral Health</a>
+      <a href="clothing.html">Clothing</a>
       <a href="vetting-log.html">🧾 Vetting Log</a>
     </nav>
   </header>
 
   <main>
     <section id="intro" class="section">
-      <p>Welcome to my carefully curated collection of clean living recommendations—based on years of trial, error, and a relentless quest to live as toxin-free, grounded, and naturally well as possible. These are the people, products, tools, and ideas that have helped me reset my body and mind—and I hope they help you too. <span class="emoji">💚</span></p>
+      <p>
+        Welcome to my carefully curated collection of clean living recommendations—based on years of trial,
+        error, and a relentless quest to live as toxin-free, grounded, and naturally well as possible.
+        My goal is to make this simple, practical, and doable — not overwhelming.
+        <span class="emoji">💚</span>
+      </p>
+
+      <div class="cta">
+        <strong>New here?</strong> Start with the four foundations below: <strong>Water, Air, Fire, Earth</strong>.
+        Then explore the tabs when you’re ready.
+      </div>
     </section>
 
-    <section id="clean-eating" class="section">
-      <h2><span class="emoji">🥗</span> Clean Eating</h2>
-      <ul>
-        <li><strong>Live Spring Water</strong> or <strong>Mountain Valley Spring Water</strong> — I drink mountain spring water delivered in glass from local sources.</li>
-      </ul>
+    <section id="water" class="section">
+      <h2>🌊 Water</h2>
+      <p>
+        Hydration isn’t just about drinking “more water” — it’s about the quality of water your body receives.
+        Natural spring water comes packaged with minerals that support cellular hydration and balance. In contrast,
+        modern tap water can contain disinfectant byproducts, industrial contaminants, and other additives that
+        may not align with long-term wellness goals.
+      </p>
+      <p>
+        You don’t need to panic or become perfect. A simple upgrade is to prioritize cleaner water and rebuild
+        mineral intake in a way that feels sustainable.
+      </p>
+      <div class="cta">
+        Want recommendations? 👉 Start with <a href="vetting-log.html">Vetting Log</a> (and I’ll build out a dedicated Water page next).
+      </div>
     </section>
 
-<section id="pet-wellness" class="section">
-  <h2><span class="emoji">🐾</span> Pet Wellness</h2>
-
-  <p>
-    Commercial pet food—especially kibble—is actually a very recent invention, emerging during World War II
-    when metal cans were redirected to the war effort and manufacturers needed a shelf-stable product that
-    could be packaged cheaply and stored indefinitely.
-  </p>
-
-  <p>
-    While dogs and cats can survive on these ultra-processed diets, they are not biologically designed to
-    thrive on them. Both species evolved to eat moisture-rich, animal-based foods, yet kibble is typically
-    dehydrated, high in processed carbohydrates, and made with lower-quality ingredients that are heavily
-    altered by extreme heat.
-  </p>
-
-  <p>
-    Over time, this disconnect between biology and diet can quietly impact digestion, metabolic health,
-    immune function, skin, urinary health, and overall vitality—especially for cats, who are obligate
-    carnivores and require a diet centered almost entirely on animal protein and fat.
-  </p>
-
-  <p>
-    A biologically appropriate raw or minimally processed diet better aligns with how dogs and cats are
-    designed to eat, supporting hydration, nutrient absorption, and long-term health. For those able and
-    willing, transitioning gradually toward raw—or simply incorporating higher-quality, moisture-rich foods
-    alongside existing diets—can be a meaningful step toward improving a pet’s health without needing to be
-    all-or-nothing.
-  </p>
-
-  <p><strong>Want to see the specific foods, treats, and tools I personally use and trust?</strong></p>
-  <p>
-    👉 <a href="vetting-log.html">Explore Pet Wellness Recommendations</a>
-  </p>
-</section>
-
-
-<section id="cleaning" class="section">
-  <h2><span class="emoji">🧼</span> Cleaning</h2>
-
-  <p>
-    Modern household cleaning products often contain a cocktail of chemicals that were never meant to be
-    inhaled day after day inside an enclosed home — including synthetic fragrances, preservatives,
-    solvents, and disinfectants that can irritate the lungs, disrupt hormones, and contribute to chronic
-    inflammation over time. The tricky part is that “clean smell” is often just fragrance — and fragrance
-    can hide dozens (or even hundreds) of undisclosed ingredients under a single word on the label.
-  </p>
-
-  <p>
-    The goal isn’t perfection — it’s reducing your overall chemical load by choosing simpler formulas
-    and using fewer products that do more. When you clean with safer ingredients, you’re not just
-    protecting your skin and lungs… you’re also protecting indoor air quality for everyone in the home
-    (including pets).
-  </p>
-
-  <p><strong>Want to see the exact cleaning products I personally use and trust?</strong></p>
-  <p>
-    👉 <a href="vetting-log.html">Explore Cleaning Recommendations</a>
-  </p>
-</section>
-
-
-    <section id="home-goods" class="section">
-      <h2><span class="emoji">🏡</span> Home Goods</h2>
-      <ul>
-        <li><strong>Ratio Eight Coffee Maker</strong> — All-metal and glass water path (no plastic), sleek aesthetic, and perfect pour-over taste. Healthy <em>and</em> more beautiful than anything else I researched.</li>
-      </ul>
+    <section id="air" class="section">
+      <h2>🌬️ Air</h2>
+      <p>
+        Indoor air can be more polluted than outdoor air — especially in modern homes filled with synthetic
+        fragrances, cleaning chemicals, off-gassing materials, and stagnant airflow. Because you breathe all day
+        (and your pets do too), improving air quality is one of the highest-impact wellness upgrades.
+      </p>
+      <p>
+        Start with the basics: ventilation, fewer fragranced products, and smarter choices for what you bring
+        into your home. For additional support, air filters can be a helpful tool — but they’re not a replacement
+        for reducing the source of the problem.
+      </p>
+      <div class="cta">
+        Explore practical tips inside <a href="cleaning.html">Cleaning</a> and <a href="home-goods.html">Home Goods</a>.
+      </div>
     </section>
 
-    <section id="oral-health" class="section">
-      <h2><span class="emoji">🦷</span> Oral Health</h2>
-      <ul>
-        <li><strong>Simply O3 Ozone Pulling Solution</strong> — Ozonated oil blend to support oral detox and gum health. <a href="https://www.simplyo3.com/products/ozone-pulling-solution" target="_blank">Buy Here</a></li>
-        <li><strong>Dental Lace Vegan Floss</strong> — Plant-based, refillable, plastic-free floss housed in a glass vial. <a href="https://www.dentallace.com/collections/plant-based-vegan-floss/products/dental-lace-vegan-refills" target="_blank">Buy Here</a></li>
-      </ul>
+    <section id="fire" class="section">
+      <h2>🔥 Fire</h2>
+      <p>
+        Natural sunlight is a biological signal — not just “vitamin D.” Light influences mood, hormones, sleep,
+        and metabolism. Modern life keeps us indoors under artificial lighting that can be flickery, overly blue,
+        and disconnected from how humans evolved to live.
+      </p>
+      <p>
+        The simplest upgrade is more natural light exposure during the day and calmer lighting at night. When
+        you can’t control the sun, you can still improve indoor lighting choices in ways that support your
+        circadian rhythm.
+      </p>
+      <div class="cta">
+        (Coming soon) A dedicated Fire page with my lighting approach + tools that mimic the sun.
+      </div>
     </section>
 
-    <section id="clean-clothing" class="section">
-      <h2><span class="emoji">👕</span> Clean Clothing</h2>
-      <ul>
-        <li><strong>Faherty</strong> — Organic cotton, linen, hemp and other natural fibers for women and men. Beachy, breathable, and thoughtfully made. <a href="https://fahertybrand.com/pages/about" target="_blank">fahertybrand.com</a></li>
-        <li><strong>Paka</strong> — Traceable alpaca fiber clothing and underwear. Fair Trade Certified. Comfy, sustainable, and rooted in Andean tradition. <a href="https://www.pakaapparel.com/pages/our-story" target="_blank">pakaapparel.com</a></li>
-      </ul>
-    </section>
-
-    <section id="documentaries" class="section">
-      <h2><span class="emoji">🎬</span> Documentaries That Changed Me</h2>
-      <ul>
-        <li><strong>Kiss the Ground</strong> — Soil health, regenerative farming, and the path to planetary healing.</li>
-        <li><strong>What the Health</strong> — Provocative content if you’re exploring plant-based health.</li>
-      </ul>
-      <p><strong>Note:</strong> This list is always evolving. Everything here is something I personally use or have vetted through research and trusted experts.</p>
+    <section id="earth" class="section">
+      <h2>🌍 Earth</h2>
+      <p>
+        Humans evolved in constant contact with the earth, but modern life separates us from that connection —
+        especially through insulated homes and rubber-soled shoes. Grounding (direct skin contact with the earth)
+        is a simple practice many people find calming and regulating for the nervous system.
+      </p>
+      <p>
+        You don’t need to make it complicated. Bare feet on grass, sand, or soil — even for a few minutes —
+        can be a powerful reset.
+      </p>
+      <div class="cta">
+        (Coming soon) A dedicated Earth page with grounding basics + my favorite tools and routines.
+      </div>
     </section>
   </main>
 
@@ -235,7 +205,3 @@
   </footer>
 </body>
 </html>
-
-
-
-
