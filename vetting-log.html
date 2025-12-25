@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Human Reset Project — Vetting Log</title>
 
-  <!-- Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-
-  <!-- DataTables CSS -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css" />
 
@@ -55,10 +52,7 @@
       transition: background-color 0.3s ease, color 0.3s ease;
       display: inline-block;
     }
-    nav a:hover {
-      background-color: #eaf4ee;
-      color: #063b4d;
-    }
+    nav a:hover { background-color: #eaf4ee; color: #063b4d; }
 
     main {
       padding: 2rem 1rem 4rem;
@@ -84,17 +78,48 @@
     .subtitle {
       text-align: center;
       margin: 0.75rem auto 0;
-      max-width: 720px;
+      max-width: 760px;
     }
 
     .subtitle em { font-style: italic; }
 
+    /* ✅ Quick filters */
+    .quick-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: flex-start;
+      margin: 0.75rem 0 0.5rem;
+    }
+
+    .qbtn {
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 10px;
+      border: 1px solid #d7e3dc;
+      background: #f6fbf8;
+      color: #0a3d62;
+      cursor: pointer;
+      transition: transform 0.05s ease, background-color 0.2s ease;
+    }
+
+    .qbtn:hover { background: #eaf4ee; }
+    .qbtn:active { transform: translateY(1px); }
+
+    .qbtn.active {
+      background: #0a3d62;
+      border-color: #0a3d62;
+      color: #fff;
+    }
+
+    /* Controls row (dropdown) */
     .controls {
       display: flex;
       justify-content: flex-end;
       align-items: center;
       gap: 10px;
-      margin: 1rem 0 0.5rem;
+      margin: 0.75rem 0 0.5rem;
       flex-wrap: wrap;
     }
 
@@ -128,10 +153,7 @@
       user-select: none;
     }
 
-    tr.no-children td.details-control {
-      color: #c0c7cc;
-      cursor: default;
-    }
+    tr.no-children td.details-control { color: #c0c7cc; cursor: default; }
 
     .child-wrap {
       background: #f7f7f7;
@@ -140,11 +162,7 @@
       border-radius: 8px;
     }
 
-    .child-title {
-      margin: 0 0 10px;
-      color: #555;
-      font-weight: 700;
-    }
+    .child-title { margin: 0 0 10px; color: #555; font-weight: 700; }
 
     .child-table {
       width: 100%;
@@ -194,13 +212,21 @@
     <div class="card">
       <h2 class="title">Non-Toxic Product Vetting Log</h2>
       <p class="subtitle">
-        This living log tracks everything I’ve personally vetted — from cookware to pet products.<br />
         Approved items are shown below. Click the little arrow (▶) beside each product to
         <em>“See What Didn’t Make the Cut.”</em>
       </p>
     </div>
 
     <div class="card">
+      <!-- ✅ Quick Filters -->
+      <div class="quick-filters" id="quickFilters">
+        <button class="qbtn" data-main="__ALL__">All</button>
+        <button class="qbtn" data-main="Pet Care">Pet Care</button>
+        <button class="qbtn" data-main="Cleaning">Cleaning</button>
+        <button class="qbtn" data-main="Kitchen Appliances">Kitchen Appliances</button>
+        <button class="qbtn" data-main="Kitchen & Tableware">Kitchen & Tableware</button>
+      </div>
+
       <div class="controls">
         <label for="categoryFilter">Filter by Main Category:</label>
         <select id="categoryFilter">
@@ -226,34 +252,19 @@
 
   <script>
     const DISPLAY_COLUMNS = [
-      "Main Category",
-      "Category",
-      "Status",
-      "Product / Model",
-      "Materials & Build",
-      "Toxin Notes / Certifications",
-      "Reason for Decision",
-      "Price Range",
-      "Made In"
+      "Main Category","Category","Status","Product / Model","Materials & Build",
+      "Toxin Notes / Certifications","Reason for Decision","Price Range","Made In"
     ];
 
     const CHILD_COLUMNS = [
-      "Status",
-      "Product / Model",
-      "Materials & Build",
-      "Toxin Notes / Certifications",
-      "Reason for Decision",
-      "Price Range",
-      "Made In"
+      "Status","Product / Model","Materials & Build","Toxin Notes / Certifications",
+      "Reason for Decision","Price Range","Made In"
     ];
 
     function escapeHtml(str) {
       return String(str ?? "")
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
+        .replaceAll('"',"&quot;").replaceAll("'","&#039;");
     }
 
     function asLink(text, url) {
@@ -268,24 +279,18 @@
         <div class="child-title">See What Didn’t Make the Cut</div>
         <table class="child-table">
           <thead><tr>${CHILD_COLUMNS.map(c => `<th>${escapeHtml(c)}</th>`).join("")}</tr></thead>
-          <tbody>
-      `;
-
+          <tbody>`;
       childRows.forEach(r => {
         html += "<tr>";
         CHILD_COLUMNS.forEach(col => {
           let val = r[col] ?? "";
-          if (col === "Product / Model") {
-            val = asLink(val, r["Link"]);
-          } else {
-            val = escapeHtml(val);
-          }
+          if (col === "Product / Model") val = asLink(val, r["Link"]);
+          else val = escapeHtml(val);
           html += `<td class="muted">${val}</td>`;
         });
         html += "</tr>";
       });
-
-      html += "</tbody></table></div>";
+      html += `</tbody></table></div>`;
       return html;
     }
 
@@ -293,6 +298,12 @@
       const params = new URLSearchParams(window.location.search);
       const main = params.get("main");
       return main ? main.trim() : "";
+    }
+
+    function setActiveQuick(main) {
+      document.querySelectorAll(".qbtn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.main === (main || "__ALL__"));
+      });
     }
 
     Papa.parse("Non_Toxic_Product_Vetting_Log.csv", {
@@ -325,36 +336,23 @@
           return { _children: rejectMap.get(key) || [], ...r };
         });
 
-        const thead = document.querySelector("#vettingTable thead");
-        thead.innerHTML = `
-          <tr>
-            <th></th>
-            ${DISPLAY_COLUMNS.map(c => `<th>${escapeHtml(c)}</th>`).join("")}
-          </tr>
+        document.querySelector("#vettingTable thead").innerHTML = `
+          <tr><th></th>${DISPLAY_COLUMNS.map(c => `<th>${escapeHtml(c)}</th>`).join("")}</tr>
         `;
 
-        const tbody = document.querySelector("#vettingTable tbody");
-        tbody.innerHTML = parentData.map(r => {
+        document.querySelector("#vettingTable tbody").innerHTML = parentData.map(r => {
           const hasChildren = r._children && r._children.length > 0;
-          const arrowCell = "▶";
           const rowClass = hasChildren ? "" : "no-children";
-
           const cells = DISPLAY_COLUMNS.map(col => {
             let val = r[col] ?? "";
-            if (col === "Product / Model") {
-              val = asLink(val, r["Link"]);
-            } else {
-              val = escapeHtml(val);
-            }
+            if (col === "Product / Model") val = asLink(val, r["Link"]);
+            else val = escapeHtml(val);
             return `<td>${val}</td>`;
           }).join("");
 
-          return `
-            <tr class="${rowClass}" data-has-children="${hasChildren ? "1" : "0"}">
-              <td class="details-control">${arrowCell}</td>
-              ${cells}
-            </tr>
-          `;
+          return `<tr class="${rowClass}" data-has-children="${hasChildren ? "1" : "0"}">
+            <td class="details-control">▶</td>${cells}
+          </tr>`;
         }).join("");
 
         const dt = $("#vettingTable").DataTable({
@@ -365,10 +363,11 @@
           columnDefs: [{ orderable: false, targets: 0 }]
         });
 
-        const mainCatIndex = 1; // arrow col is 0, Main Category is 1
+        const mainCatIndex = 1; // arrow col 0, main category 1
+
+        // Populate dropdown
         const uniqueCats = new Set();
         parentData.forEach(r => { if (r["Main Category"]) uniqueCats.add(r["Main Category"]); });
-
         const filter = document.getElementById("categoryFilter");
         Array.from(uniqueCats).sort().forEach(cat => {
           const opt = document.createElement("option");
@@ -381,30 +380,43 @@
           if (!val || val === "__ALL__") {
             filter.value = "__ALL__";
             dt.column(mainCatIndex).search("").draw();
+            setActiveQuick("__ALL__");
             return;
           }
           filter.value = val;
           dt.column(mainCatIndex).search("^" + val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$", true, false).draw();
+          setActiveQuick(val);
         }
 
         filter.addEventListener("change", () => applyFilter(filter.value === "__ALL__" ? "" : filter.value));
 
-        // ✅ Auto-apply filter from URL, e.g. vetting-log.html?main=Cleaning
-        const urlMain = getMainParam();
-        if (urlMain) {
-          applyFilter(urlMain);
-        }
+        // Quick filter buttons
+        document.getElementById("quickFilters").addEventListener("click", (e) => {
+          const btn = e.target.closest(".qbtn");
+          if (!btn) return;
+          const val = btn.dataset.main;
+          // update URL without reloading
+          const url = new URL(window.location.href);
+          if (val === "__ALL__") url.searchParams.delete("main");
+          else url.searchParams.set("main", val);
+          window.history.replaceState({}, "", url);
+          applyFilter(val === "__ALL__" ? "" : val);
+        });
 
+        // Auto-apply filter from URL
+        const urlMain = getMainParam();
+        if (urlMain) applyFilter(urlMain);
+        else applyFilter("");
+
+        // Expand/collapse
         $("#vettingTable tbody").on("click", "td.details-control", function() {
           const tr = $(this).closest("tr");
           const row = dt.row(tr);
-
           const hasChildren = tr.attr("data-has-children") === "1";
           if (!hasChildren) return;
 
           const rowIndex = row.index();
-          const rowDataObj = parentData[rowIndex];
-          const children = rowDataObj?._children || [];
+          const children = parentData[rowIndex]?._children || [];
 
           if (row.child.isShown()) {
             row.child.hide();
@@ -420,9 +432,7 @@
           if (!has) $(this).addClass("no-children");
         });
       },
-      error: function(err) {
-        console.error("CSV load error:", err);
-      }
+      error: function(err) { console.error("CSV load error:", err); }
     });
   </script>
 </body>
