@@ -5,180 +5,223 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Human Reset Project — Vetting Log</title>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- DataTables + FixedHeader -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" />
   <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.4.0/css/fixedHeader.dataTables.min.css" />
 
   <style>
-    html { scroll-behavior: smooth; }
     body {
       font-family: 'Inter', sans-serif;
+      margin: 0;
       background: #f4f4f4;
       color: #222;
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
     }
 
     header {
       position: sticky;
       top: 0;
+      z-index: 1000;
       background: #ffffffcc;
       backdrop-filter: blur(6px);
-      z-index: 1000;
       text-align: center;
       padding: 1rem 0.5rem;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.06);
     }
 
     header h1 {
-      font-size: 1.8rem;
-      margin: 0.5rem 0;
+      margin: 0.25rem 0 0.5rem;
       color: #0a3d62;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
+      font-size: 1.8rem;
+      font-weight: 800;
     }
 
-    nav { margin-top: 0.5rem; }
+    nav {
+      margin-top: 0.5rem;
+    }
 
     nav a {
       color: #0a3d62;
       margin: 0 10px;
-      font-weight: 600;
+      font-weight: 700;
       text-decoration: none;
       padding: 4px 8px;
-      border-radius: 6px;
-      transition: background-color 0.3s ease, color 0.3s ease;
-      display: inline-block;
+      border-radius: 8px;
+      transition: background-color 0.25s ease, color 0.25s ease;
     }
-    nav a:hover { background-color: #eaf4ee; color: #063b4d; }
+
+    nav a:hover {
+      background-color: #eaf4ee;
+      color: #063b4d;
+    }
 
     main {
-      padding: 2rem 1rem 4rem;
       max-width: 1100px;
       margin: 0 auto;
+      padding: 2rem 1rem 4rem;
     }
 
     .card {
       background: #fff;
-      padding: 1.5rem;
       border-radius: 12px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      padding: 1.5rem;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.06);
       margin-bottom: 1.5rem;
     }
 
-    .title {
+    .hero {
       text-align: center;
+    }
+
+    .hero h2 {
+      margin: 0.25rem 0 0.5rem;
+      color: #0a3d62;
+      font-size: 1.8rem;
+    }
+
+    .hero p {
       margin: 0;
-      color: #0a3d62;
-      font-size: 1.7rem;
+      color: #333;
+      line-height: 1.6;
     }
 
-    .subtitle {
-      text-align: center;
-      margin: 0.75rem auto 0;
-      max-width: 760px;
-    }
-
-    .subtitle em { font-style: italic; }
-
-    /* ✅ Quick filters */
-    .quick-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: flex-start;
-      margin: 0.75rem 0 0.5rem;
-    }
-
-    .qbtn {
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      padding: 8px 12px;
-      border-radius: 10px;
-      border: 1px solid #d7e3dc;
-      background: #f6fbf8;
-      color: #0a3d62;
-      cursor: pointer;
-      transition: transform 0.05s ease, background-color 0.2s ease;
-    }
-
-    .qbtn:hover { background: #eaf4ee; }
-    .qbtn:active { transform: translateY(1px); }
-
-    .qbtn.active {
-      background: #0a3d62;
-      border-color: #0a3d62;
-      color: #fff;
-    }
-
-    /* Controls row (dropdown) */
+    /* Controls row */
     .controls {
       display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 10px;
-      margin: 0.75rem 0 0.5rem;
       flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 0.75rem;
     }
 
-    .controls label {
-      font-weight: 600;
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .pill {
+      border: 1px solid #cfe4d6;
+      background: #f3faf6;
       color: #0a3d62;
-    }
-
-    select {
-      font-family: 'Inter', sans-serif;
-      padding: 6px 10px;
-      border-radius: 8px;
-      border: 1px solid #cfd8dc;
-      background: #fff;
-      color: #222;
-      font-weight: 600;
-    }
-
-    table.dataTable thead th {
-      background: #eaf4ee !important;
-      color: #0a3d62 !important;
+      padding: 0.45rem 0.8rem;
+      border-radius: 10px;
       font-weight: 700;
-    }
-
-    td.details-control {
       cursor: pointer;
-      width: 26px;
-      text-align: center;
-      font-weight: 800;
-      color: #0a3d62;
       user-select: none;
-    }
-
-    tr.no-children td.details-control { color: #c0c7cc; cursor: default; }
-
-    .child-wrap {
-      background: #f7f7f7;
-      border-left: 4px solid #c0c7cc;
-      padding: 12px 14px;
-      border-radius: 8px;
-    }
-
-    .child-title { margin: 0 0 10px; color: #555; font-weight: 700; }
-
-    .child-table {
-      width: 100%;
-      border-collapse: collapse;
+      transition: transform 0.08s ease, background 0.2s ease;
       font-size: 0.95rem;
     }
 
-    .child-table th,
-    .child-table td {
+    .pill:hover { background: #eaf4ee; }
+    .pill:active { transform: translateY(1px); }
+
+    .pill.active {
+      background: #0a3d62;
+      color: white;
+      border-color: #0a3d62;
+    }
+
+    .right-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: flex-end;
+    }
+
+    label {
+      font-weight: 700;
+      color: #0a3d62;
+      white-space: nowrap;
+    }
+
+    select, input[type="text"] {
+      border: 1px solid #cfd8dc;
+      border-radius: 10px;
+      padding: 0.5rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      background: #fff;
+      outline: none;
+    }
+
+    input[type="text"] {
+      width: 240px;
+    }
+
+    /* DataTables table */
+    table.dataTable thead th {
+      background: #eaf4ee !important;
+      color: #0a3d62 !important;
+      font-weight: 800;
+      border-bottom: 1px solid #cfe4d6 !important;
+    }
+
+    table.dataTable tbody td {
+      vertical-align: middle;
+    }
+
+    /* Arrow column */
+    td.dt-control {
+      cursor: pointer;
+      width: 28px;
+      text-align: center;
+      color: #0a3d62;
+      font-weight: 900;
+      user-select: none;
+    }
+
+    /* Child row box */
+    .child-wrap {
+      background: #f7f7f7;
+      border: 1px solid #e1e1e1;
+      border-radius: 12px;
+      padding: 1rem;
+      margin: 0.5rem 0;
+    }
+
+    .child-title {
+      font-weight: 800;
+      color: #0a3d62;
+      margin-bottom: 0.75rem;
+    }
+
+    .mini-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .mini-table th, .mini-table td {
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid #eee;
       text-align: left;
-      padding: 8px 10px;
-      border-bottom: 1px solid #e0e0e0;
       vertical-align: top;
     }
 
-    .muted { color: #666; }
+    .mini-table th {
+      background: #eaf4ee;
+      color: #0a3d62;
+      font-weight: 800;
+    }
+
+    .badge-reject {
+      display: inline-block;
+      font-weight: 800;
+      font-size: 0.85rem;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      background: #f2dede;
+      color: #8a1f1f;
+      margin-right: 0.5rem;
+      white-space: nowrap;
+    }
 
     footer {
       text-align: center;
@@ -192,265 +235,318 @@
     a { color: #0a3d62; }
   </style>
 </head>
+
 <body>
-  <header id="top">
+  <header>
     <h1>🧾 Human Reset Project — Vetting Log</h1>
     <nav>
-      <a href="index.html">Home</a>
-      <a href="supplements.html">Supplements</a>
-      <a href="pet-wellness.html">Pet Wellness</a>
-      <a href="cleaning.html">Cleaning</a>
-      <a href="home-goods.html">Home Goods</a>
-      <a href="oral-health.html">Oral Health</a>
-      <a href="clothing.html">Clothing</a>
-      <a href="vetting-log.html">🧾 Vetting Log</a>
+      <a href="index.html">🏡 Home</a>
+      <a href="#top">Back to Top</a>
     </nav>
   </header>
 
-  <main>
-    <div class="card">
-      <h2 class="title">Non-Toxic Product Vetting Log</h2>
-      <p class="subtitle">
+  <main id="top">
+    <section class="card hero">
+      <h2>Non-Toxic Product Vetting Log</h2>
+      <p>
         Approved items are shown below. Click the little arrow (▶) beside each product to
         <em>“See What Didn’t Make the Cut.”</em>
       </p>
-    </div>
+    </section>
 
-    <div class="card">
-      <!-- ✅ Quick Filters -->
-      <div class="quick-filters" id="quickFilters">
-        <button class="qbtn" data-main="__ALL__">All</button>
-        <button class="qbtn" data-main="Clean Eating">Clean Eating</button>
-        <button class="qbtn" data-main="Pet Care">Pet Care</button>
-        <button class="qbtn" data-main="Cleaning">Cleaning</button>
-        <button class="qbtn" data-main="Kitchen Appliances">Kitchen Appliances</button>
-        <button class="qbtn" data-main="Home Goods">Home Goods</button>
-        <button class="qbtn" data-main="Oral Health">Oral Health</button>
-        <button class="qbtn" data-main="Clothing">Clothing</button>
-        <button class="qbtn" data-main="Grounding">Grounding</button>
-        <button class="qbtn" data-main="Skin Care">Skin Care</button>
-      </div>
-
+    <section class="card">
       <div class="controls">
-        <label for="categoryFilter">Filter by Main Category:</label>
-        <select id="categoryFilter">
-          <option value="__ALL__">All</option>
-        </select>
+        <div class="btn-row" id="categoryButtons"></div>
+
+        <div class="right-controls">
+          <div>
+            <label for="mainCategorySelect">Filter by Main Category:&nbsp;</label>
+            <select id="mainCategorySelect">
+              <option value="All">All</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="searchBox">Search:&nbsp;</label>
+            <input id="searchBox" type="text" placeholder="Type to search…" />
+          </div>
+        </div>
       </div>
 
-      <table id="vettingTable" class="display" style="width:100%">
-        <thead></thead>
-        <tbody></tbody>
-      </table>
-    </div>
+      <div style="margin-top: 1rem;">
+        <table id="vettingTable" class="display" style="width:100%">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Main Category</th>
+              <th>Category</th>
+              <th>Product</th>
+              <th>Reason for Decision</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
   </main>
 
   <footer>
     Created with 💚 by Brandy — Human Reset Project
   </footer>
 
+  <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/fixedheader/3.4.0/js/dataTables.fixedHeader.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
   <script>
-    // ✅ New simplified columns
-    const DISPLAY_COLUMNS = [
-      "Main Category",
-      "Category",
-      "Product",
-      "Reason for Decision"
-    ];
+    // Robust CSV parser (handles commas inside quotes)
+    function parseCSV(csvText) {
+      const rows = [];
+      let row = [];
+      let current = "";
+      let inQuotes = false;
 
-    // ✅ Child rows show only the rejected Product + Reason
-    const CHILD_COLUMNS = [
-      "Status",
-      "Product",
-      "Reason for Decision"
-    ];
+      for (let i = 0; i < csvText.length; i++) {
+        const char = csvText[i];
+        const next = csvText[i + 1];
 
-    function escapeHtml(str) {
-      return String(str ?? "")
-        .replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;")
-        .replaceAll('"',"&quot;").replaceAll("'","&#039;");
+        if (char === '"' && inQuotes && next === '"') {
+          current += '"';
+          i++;
+        } else if (char === '"') {
+          inQuotes = !inQuotes;
+        } else if (char === ',' && !inQuotes) {
+          row.push(current);
+          current = "";
+        } else if ((char === '\n' || char === '\r') && !inQuotes) {
+          if (char === '\r' && next === '\n') i++;
+          row.push(current);
+          if (row.some(cell => cell.trim() !== "")) rows.push(row);
+          row = [];
+          current = "";
+        } else {
+          current += char;
+        }
+      }
+
+      row.push(current);
+      if (row.some(cell => cell.trim() !== "")) rows.push(row);
+
+      return rows;
     }
 
-    // Product column contains HTML <a> tags already in the CSV
-    // We allow that HTML to render, but we keep other columns escaped.
-    function productHtml(val) {
-      return String(val ?? "");
+    function safeText(s) {
+      return (s || "").toString().trim();
     }
 
-    function formatChildRows(childRows) {
-      let html = `<div class="child-wrap">
-        <div class="child-title">See What Didn’t Make the Cut</div>
-        <table class="child-table">
-          <thead><tr>${CHILD_COLUMNS.map(c => `<th>${escapeHtml(c)}</th>`).join("")}</tr></thead>
-          <tbody>`;
+    function buildChild(rejectedRows) {
+      if (!rejectedRows || rejectedRows.length === 0) return "";
 
-      childRows.forEach(r => {
-        html += "<tr>";
-        CHILD_COLUMNS.forEach(col => {
-          let val = r[col] ?? "";
-          if (col === "Product") val = productHtml(val);
-          else val = escapeHtml(val);
-          html += `<td class="muted">${val}</td>`;
-        });
-        html += "</tr>";
+      let html = `
+        <div class="child-wrap">
+          <div class="child-title">See What Didn’t Make the Cut</div>
+          <table class="mini-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Reason for Decision</th>
+              </tr>
+            </thead>
+            <tbody>
+      `;
+
+      rejectedRows.forEach(r => {
+        html += `
+          <tr>
+            <td><span class="badge-reject">Rejected</span>${r.product}</td>
+            <td>${r.reason}</td>
+          </tr>
+        `;
       });
 
-      html += `</tbody></table></div>`;
+      html += `
+            </tbody>
+          </table>
+        </div>
+      `;
+
       return html;
     }
 
-    function getMainParam() {
-      const params = new URLSearchParams(window.location.search);
-      const main = params.get("main");
-      return main ? main.trim() : "";
-    }
+    async function loadVettingLog() {
+      const response = await fetch("Non_Toxic_Product_Vetting_Log.csv");
+      const csvText = await response.text();
 
-    function setActiveQuick(main) {
-      document.querySelectorAll(".qbtn").forEach(btn => {
-        btn.classList.toggle("active", btn.dataset.main === (main || "__ALL__"));
+      const rows = parseCSV(csvText);
+      const headers = rows.shift().map(h => safeText(h));
+
+      // Expected: Main Category, Category, Status, Product, Reason for Decision
+      const idx = (name) => headers.indexOf(name);
+
+      const iMain = idx("Main Category");
+      const iCat = idx("Category");
+      const iStatus = idx("Status");
+      const iProduct = idx("Product");
+      const iReason = idx("Reason for Decision");
+
+      // Build data objects
+      const all = rows.map(r => ({
+        main: safeText(r[iMain]),
+        cat: safeText(r[iCat]),
+        status: safeText(r[iStatus]),
+        product: (r[iProduct] || "").toString().trim(),
+        reason: safeText(r[iReason])
+      })).filter(x => x.main || x.cat || x.product);
+
+      // Group by (Main Category + Category) so approved rows can hide rejected rows under arrow
+      const groups = new Map();
+      all.forEach(item => {
+        const key = `${item.main}|||${item.cat}`;
+        if (!groups.has(key)) groups.set(key, { approved: [], rejected: [] });
+
+        if (item.status.toLowerCase() === "rejected") groups.get(key).rejected.push(item);
+        else groups.get(key).approved.push(item); // treat anything else as approved-visible
+      });
+
+      // Flatten into rows for main table: only approved items appear as main rows
+      const mainRows = [];
+      groups.forEach((g, key) => {
+        g.approved.forEach(a => {
+          mainRows.push({
+            main: a.main,
+            cat: a.cat,
+            product: a.product,
+            reason: a.reason,
+            rejectedChildren: g.rejected.map(r => ({
+              product: r.product,
+              reason: r.reason
+            }))
+          });
+        });
+      });
+
+      // Populate dropdown + buttons
+      const uniqueMainCats = Array.from(new Set(mainRows.map(x => x.main))).sort();
+
+      const select = document.getElementById("mainCategorySelect");
+      uniqueMainCats.forEach(c => {
+        const opt = document.createElement("option");
+        opt.value = c;
+        opt.textContent = c;
+        select.appendChild(opt);
+      });
+
+      const btnWrap = document.getElementById("categoryButtons");
+
+      function makeButton(label) {
+        const btn = document.createElement("button");
+        btn.className = "pill";
+        btn.type = "button";
+        btn.textContent = label;
+        btn.dataset.value = label;
+        return btn;
+      }
+
+      const allBtn = makeButton("All");
+      allBtn.classList.add("active");
+      btnWrap.appendChild(allBtn);
+
+      uniqueMainCats.forEach(c => btnWrap.appendChild(makeButton(c)));
+
+      // Render table body
+      const tbody = document.querySelector("#vettingTable tbody");
+      tbody.innerHTML = "";
+      mainRows.forEach(row => {
+        const hasChildren = row.rejectedChildren && row.rejectedChildren.length > 0;
+        const arrow = hasChildren ? "▶" : "";
+
+        const tr = document.createElement("tr");
+        tr.dataset.main = row.main;
+        tr.dataset.haschildren = hasChildren ? "1" : "0";
+        tr.innerHTML = `
+          <td class="dt-control">${arrow}</td>
+          <td>${row.main}</td>
+          <td>${row.cat}</td>
+          <td>${row.product}</td>
+          <td>${row.reason}</td>
+        `;
+
+        // stash child HTML
+        tr._childHTML = hasChildren ? buildChild(row.rejectedChildren) : "";
+        tbody.appendChild(tr);
+      });
+
+      // Init DataTable (NO paging + NO length menu)
+      const dt = $("#vettingTable").DataTable({
+        // no built-in length dropdown, no paging controls, keep the table only
+        dom: "rt",
+        paging: false,
+        info: false,
+        order: [],
+        fixedHeader: true,
+        columnDefs: [
+          { orderable: false, targets: 0 }
+        ]
+      });
+
+      // Custom search box
+      const searchBox = document.getElementById("searchBox");
+      searchBox.addEventListener("input", () => {
+        dt.search(searchBox.value).draw();
+      });
+
+      // Dropdown filter
+      select.addEventListener("change", () => {
+        const val = select.value;
+        setActiveButton(val);
+        if (val === "All") dt.column(1).search("").draw();
+        else dt.column(1).search("^" + escapeRegex(val) + "$", true, false).draw();
+      });
+
+      function escapeRegex(str) {
+        return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      }
+
+      function setActiveButton(val) {
+        document.querySelectorAll(".pill").forEach(b => b.classList.remove("active"));
+        document.querySelectorAll(".pill").forEach(b => {
+          if (b.dataset.value === val) b.classList.add("active");
+        });
+      }
+
+      // Button filter
+      btnWrap.addEventListener("click", (e) => {
+        const btn = e.target.closest(".pill");
+        if (!btn) return;
+
+        const val = btn.dataset.value;
+        select.value = val; // sync dropdown
+        setActiveButton(val);
+
+        if (val === "All") dt.column(1).search("").draw();
+        else dt.column(1).search("^" + escapeRegex(val) + "$", true, false).draw();
+      });
+
+      // Expand/collapse rejected rows
+      $("#vettingTable tbody").on("click", "td.dt-control", function () {
+        const tr = $(this).closest("tr");
+        const row = dt.row(tr);
+
+        // no children
+        if (tr[0].dataset.haschildren !== "1") return;
+
+        if (row.child.isShown()) {
+          row.child.hide();
+          $(this).text("▶");
+        } else {
+          row.child(tr[0]._childHTML).show();
+          $(this).text("▼");
+        }
       });
     }
 
-    Papa.parse("Non_Toxic_Product_Vetting_Log.csv", {
-      download: true,
-      header: true,
-      skipEmptyLines: true,
-      complete: function(results) {
-        const all = results.data || [];
-
-        const rows = all
-          .map(r => {
-            const cleaned = {};
-            Object.keys(r).forEach(k => cleaned[k.trim()] = (r[k] ?? "").trim());
-            return cleaned;
-          });
-
-        const approved = rows.filter(r => (r["Status"] || "").toLowerCase() === "approved");
-        const rejected = rows.filter(r => (r["Status"] || "").toLowerCase() === "rejected");
-
-        // Group rejects under the matching Approved by Main Category + Category
-        const rejectMap = new Map();
-        rejected.forEach(r => {
-          const key = `${r["Main Category"]}__${r["Category"]}`;
-          if (!rejectMap.has(key)) rejectMap.set(key, []);
-          rejectMap.get(key).push(r);
-        });
-
-        const parentData = approved.map(r => {
-          const key = `${r["Main Category"]}__${r["Category"]}`;
-          return { _children: rejectMap.get(key) || [], ...r };
-        });
-
-        // Table header
-        document.querySelector("#vettingTable thead").innerHTML = `
-          <tr><th></th>${DISPLAY_COLUMNS.map(c => `<th>${escapeHtml(c)}</th>`).join("")}</tr>
-        `;
-
-        // Table body
-        document.querySelector("#vettingTable tbody").innerHTML = parentData.map(r => {
-          const hasChildren = r._children && r._children.length > 0;
-          const rowClass = hasChildren ? "" : "no-children";
-
-          const cells = DISPLAY_COLUMNS.map(col => {
-            let val = r[col] ?? "";
-            if (col === "Product") val = productHtml(val);
-            else val = escapeHtml(val);
-            return `<td>${val}</td>`;
-          }).join("");
-
-          return `<tr class="${rowClass}" data-has-children="${hasChildren ? "1" : "0"}">
-            <td class="details-control">▶</td>${cells}
-          </tr>`;
-        }).join("");
-
-const table = $('#vettingTable').DataTable({
-  paging: false,        // 🔥 no pagination
-  lengthChange: false, // 🔥 removes "Show X entries"
-  info: false,         // optional: removes "Showing 1 to X of X"
-  ordering: true,
-  autoWidth: false
-});
-
-        const mainCatIndex = 1; // arrow col 0, main category 1
-
-        // Populate dropdown with unique main categories from approved items
-        const uniqueCats = new Set();
-        parentData.forEach(r => { if (r["Main Category"]) uniqueCats.add(r["Main Category"]); });
-        const filter = document.getElementById("categoryFilter");
-        Array.from(uniqueCats).sort().forEach(cat => {
-          const opt = document.createElement("option");
-          opt.value = cat;
-          opt.textContent = cat;
-          filter.appendChild(opt);
-        });
-
-        function applyFilter(val) {
-          if (!val || val === "__ALL__") {
-            filter.value = "__ALL__";
-            dt.column(mainCatIndex).search("").draw();
-            setActiveQuick("__ALL__");
-            return;
-          }
-          filter.value = val;
-          dt.column(mainCatIndex)
-            .search("^" + val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$", true, false)
-            .draw();
-          setActiveQuick(val);
-        }
-
-        filter.addEventListener("change", () => applyFilter(filter.value === "__ALL__" ? "" : filter.value));
-
-        // Quick filter buttons
-        document.getElementById("quickFilters").addEventListener("click", (e) => {
-          const btn = e.target.closest(".qbtn");
-          if (!btn) return;
-          const val = btn.dataset.main;
-
-          // update URL without reloading
-          const url = new URL(window.location.href);
-          if (val === "__ALL__") url.searchParams.delete("main");
-          else url.searchParams.set("main", val);
-          window.history.replaceState({}, "", url);
-
-          applyFilter(val === "__ALL__" ? "" : val);
-        });
-
-        // Auto-apply filter from URL
-        const urlMain = getMainParam();
-        if (urlMain) applyFilter(urlMain);
-        else applyFilter("");
-
-        // Expand/collapse
-        $("#vettingTable tbody").on("click", "td.details-control", function() {
-          const tr = $(this).closest("tr");
-          const row = dt.row(tr);
-          const hasChildren = tr.attr("data-has-children") === "1";
-          if (!hasChildren) return;
-
-          const rowIndex = row.index();
-          const children = parentData[rowIndex]?._children || [];
-
-          if (row.child.isShown()) {
-            row.child.hide();
-            tr.find("td.details-control").text("▶");
-          } else {
-            row.child(formatChildRows(children)).show();
-            tr.find("td.details-control").text("▼");
-          }
-        });
-
-        $("#vettingTable tbody tr").each(function() {
-          const has = $(this).attr("data-has-children") === "1";
-          if (!has) $(this).addClass("no-children");
-        });
-      },
-      error: function(err) { console.error("CSV load error:", err); }
-    });
+    loadVettingLog();
   </script>
 </body>
 </html>
