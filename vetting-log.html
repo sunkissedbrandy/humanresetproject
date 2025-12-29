@@ -220,11 +220,15 @@
       <!-- ✅ Quick Filters -->
       <div class="quick-filters" id="quickFilters">
         <button class="qbtn" data-main="__ALL__">All</button>
-      <button class="qbtn" data-main="Oral Health">Oral Health</button>
+        <button class="qbtn" data-main="Clean Eating">Clean Eating</button>
         <button class="qbtn" data-main="Pet Care">Pet Care</button>
         <button class="qbtn" data-main="Cleaning">Cleaning</button>
         <button class="qbtn" data-main="Kitchen Appliances">Kitchen Appliances</button>
-        <button class="qbtn" data-main="Kitchen & Tableware">Kitchen & Tableware</button>
+        <button class="qbtn" data-main="Home Goods">Home Goods</button>
+        <button class="qbtn" data-main="Oral Health">Oral Health</button>
+        <button class="qbtn" data-main="Clothing">Clothing</button>
+        <button class="qbtn" data-main="Grounding">Grounding</button>
+        <button class="qbtn" data-main="Skin Care">Skin Care</button>
       </div>
 
       <div class="controls">
@@ -251,14 +255,20 @@
   <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
   <script>
+    // ✅ New simplified columns
     const DISPLAY_COLUMNS = [
-      "Main Category","Category","Status","Product / Model","Materials & Build",
-      "Toxin Notes / Certifications","Reason for Decision","Price Range","Made In"
+      "Main Category",
+      "Category",
+      "Status",
+      "Product",
+      "Reason for Decision"
     ];
 
+    // ✅ Child rows show only the rejected Product + Reason
     const CHILD_COLUMNS = [
-      "Status","Product / Model","Materials & Build","Toxin Notes / Certifications",
-      "Reason for Decision","Price Range","Made In"
+      "Status",
+      "Product",
+      "Reason for Decision"
     ];
 
     function escapeHtml(str) {
@@ -267,11 +277,10 @@
         .replaceAll('"',"&quot;").replaceAll("'","&#039;");
     }
 
-    function asLink(text, url) {
-      const safeText = escapeHtml(text);
-      const safeUrl = escapeHtml(url);
-      if (!url) return safeText;
-      return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${safeText}</a>`;
+    // Product column contains HTML <a> tags already in the CSV
+    // We allow that HTML to render, but we keep other columns escaped.
+    function productHtml(val) {
+      return String(val ?? "");
     }
 
     function formatChildRows(childRows) {
@@ -280,16 +289,18 @@
         <table class="child-table">
           <thead><tr>${CHILD_COLUMNS.map(c => `<th>${escapeHtml(c)}</th>`).join("")}</tr></thead>
           <tbody>`;
+
       childRows.forEach(r => {
         html += "<tr>";
         CHILD_COLUMNS.forEach(col => {
           let val = r[col] ?? "";
-          if (col === "Product / Model") val = asLink(val, r["Link"]);
+          if (col === "Product") val = productHtml(val);
           else val = escapeHtml(val);
           html += `<td class="muted">${val}</td>`;
         });
         html += "</tr>";
       });
+
       html += `</tbody></table></div>`;
       return html;
     }
@@ -318,12 +329,12 @@
             const cleaned = {};
             Object.keys(r).forEach(k => cleaned[k.trim()] = (r[k] ?? "").trim());
             return cleaned;
-          })
-          .filter(r => (r["Status"] || "").toLowerCase() !== "under review");
+          });
 
         const approved = rows.filter(r => (r["Status"] || "").toLowerCase() === "approved");
         const rejected = rows.filter(r => (r["Status"] || "").toLowerCase() === "rejected");
 
+        // Group rejects under the matching Approved by Main Category + Category
         const rejectMap = new Map();
         rejected.forEach(r => {
           const key = `${r["Main Category"]}__${r["Category"]}`;
@@ -336,16 +347,19 @@
           return { _children: rejectMap.get(key) || [], ...r };
         });
 
+        // Table header
         document.querySelector("#vettingTable thead").innerHTML = `
           <tr><th></th>${DISPLAY_COLUMNS.map(c => `<th>${escapeHtml(c)}</th>`).join("")}</tr>
         `;
 
+        // Table body
         document.querySelector("#vettingTable tbody").innerHTML = parentData.map(r => {
           const hasChildren = r._children && r._children.length > 0;
           const rowClass = hasChildren ? "" : "no-children";
+
           const cells = DISPLAY_COLUMNS.map(col => {
             let val = r[col] ?? "";
-            if (col === "Product / Model") val = asLink(val, r["Link"]);
+            if (col === "Product") val = productHtml(val);
             else val = escapeHtml(val);
             return `<td>${val}</td>`;
           }).join("");
@@ -365,7 +379,7 @@
 
         const mainCatIndex = 1; // arrow col 0, main category 1
 
-        // Populate dropdown
+        // Populate dropdown with unique main categories from approved items
         const uniqueCats = new Set();
         parentData.forEach(r => { if (r["Main Category"]) uniqueCats.add(r["Main Category"]); });
         const filter = document.getElementById("categoryFilter");
@@ -384,7 +398,9 @@
             return;
           }
           filter.value = val;
-          dt.column(mainCatIndex).search("^" + val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$", true, false).draw();
+          dt.column(mainCatIndex)
+            .search("^" + val.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "$", true, false)
+            .draw();
           setActiveQuick(val);
         }
 
@@ -395,11 +411,13 @@
           const btn = e.target.closest(".qbtn");
           if (!btn) return;
           const val = btn.dataset.main;
+
           // update URL without reloading
           const url = new URL(window.location.href);
           if (val === "__ALL__") url.searchParams.delete("main");
           else url.searchParams.set("main", val);
           window.history.replaceState({}, "", url);
+
           applyFilter(val === "__ALL__" ? "" : val);
         });
 
