@@ -368,13 +368,13 @@
           </tr>`;
         }).join("");
 
-        const dt = $("#vettingTable").DataTable({
-          dom: "lrtip",
-          pageLength: 25,
-          order: [],
-          fixedHeader: true,
-          columnDefs: [{ orderable: false, targets: 0 }]
-        });
+const table = $('#vettingTable').DataTable({
+  paging: false,        // 🔥 no pagination
+  lengthChange: false, // 🔥 removes "Show X entries"
+  info: false,         // optional: removes "Showing 1 to X of X"
+  ordering: true,
+  autoWidth: false
+});
 
         const mainCatIndex = 1; // arrow col 0, main category 1
 
