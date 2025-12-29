@@ -1,28 +1,16 @@
-Main Category,Category,Status,Product / Model,Materials & Build,Toxin Notes / Certifications,Reason for Decision,Price Range,Made In,Link
-Kitchen Appliances,Coffee Maker,Approved,Ratio Eight,Stainless steel + glass water path,"Plastic-free, Prop 65 safe","Pure flavor, durable, non-toxic design",$599 (refurb),USA,https://ratiocoffee.com/products/ratio-eight
-Kitchen Appliances,Coffee Maker,Rejected,SMEG Drip Coffee Maker,Plastic internal tubing + silicone seals,Prop 65 warning (lead & phthalates),Failed safety criteria (plastic contact with hot water),$229,China / Italy assembly,
-Kitchen Appliances,Rice Cooker,Approved,Cuchen IH Dual Pressure CRP-TWK0640WUS,Stainless inner pot (PFAS-free),No PTFE/PFAS/lead,Non-toxic precision cooking,$350,Korea,https://cuchenusamall.com/products/6-cup-ih-dual-pressure-rice-cooker-crh-twk0640wus-copy
-Kitchen Appliances,Rice Cooker,Rejected,Zojirushi Neuro Fuzzy,Non-stick PTFE inner pot,Contains Teflon coating (PFAS concern),Excellent performance but not non-toxic,$189,Japan,
-Home Environment,Air Purifier,Under Review,TBD (Austin Air vs AirDoctor vs Smart Air),Activated carbon + HEPA,Checking ozone output & filter composition,Pending test results,$350–$700,,
-Pet Care,Cat Bowls,Approved,Basis Products Stainless Steel Cat Bowls,Solid 18/8 stainless steel,"No coatings or plastic base","Non-toxic, dishwasher-safe, durable",$20–$30,USA,https://basisproducts.com
-Kitchen Appliances,Food Processor,Under Review,Magimix 4200XL or 5200XL,BPA-free Tritan bowl,Checking BPA/BPS migration data,Top choice for durability + minimal plastic contact,$350–$450,France,https://www.magimix.us
-Kitchen & Tableware,"Dinnerware (Plates, Bowls, Cups)",Approved,East Fork Pottery,"Stoneware, lead-free glaze",Meets CA Prop 65 & FDA leach tests,"Artisan, durable, non-toxic glazes",$20–$60 per piece,USA,https://eastfork.com
-Kitchen & Tableware,Dinnerware (Alternative Option),Under Review,Haand Ceramics,Handmade porcelain,Awaiting lab test confirmation,"Small-batch USA maker, no heavy metals detected in spot tests",$25–$75,USA,https://haand.us
-Pet Care,Raw Food,Approved,OC Raw Rabbit & Produce (dog formula),"Frozen raw; rabbit-based",Moisture-rich animal-based food (better aligned with biology),Base diet staple,$$,USA,https://ocraw.com/product/rabbit-produce/
-Pet Care,Treats,Approved,Green Juju Rabbit Trainers,Freeze-dried single-ingredient rabbit,Clean single-ingredient treat,High-value sensitive-tummy treat,$$,USA,https://greenjuju.com/products/rabbit-trainers
-Pet Care,Hydration / Topper,Approved,Smallbatch Pets Bone Broth,Frozen bone broth,Simple ingredients + hydration support,Meal topper for hydration and digestion,$$,USA,https://smallbatchpets.com/bone-broth-frozen
-Pet Care,Hydration / Topper,Approved,Bones & Co. Raw Goat Milk,Raw goat milk,Hydration + bioactive support,Hydration booster / topper,$$,USA,https://www.thebonesandco.com/goat-milk
-Pet Care,Toys,Approved,Lemon & Lavender Rabbit Fur Spinner Cat Toy,Rabbit fur + non-toxic glue,Non-toxic materials focus,Favorite enrichment toy,$$,USA,https://lemonandlavendermadison.com/products/natural-rabbit-fur-rooster-feathers-cat-toys-spinners
-Cleaning,All-Purpose Cleaning,Approved,"Branch Basics (Dishwasher Tablets, Laundry Detergent, Multi-purpose Cleaner)","Plant-based concentrates + minimalist ingredient approach","Fragrance-free / low-tox approach","Clean + simple system to reduce chemical load",$,USA,https://branchbasics.com
-Oral Health,Floss,Approved,Terra & Co Floss,Plant-based floss,Plastic-free / fluoride-free,Clean oral care without synthetic fibers,$$,USA,https://www.terraco.co
-Oral Health,Toothpaste,Approved,RiseWell Toothpaste,Hydroxyapatite-based toothpaste,Fluoride-free / enamel-safe,Supports remineralization without harsh ingredients,$$,USA,https://risewell.com
-Oral Health,Floss,Rejected,Dental Lace Synthetic Floss,Polyester-based floss,Plastic-derived material,Contains synthetic plastic fibers,$$,USA,https://www.dentallace.com
-
-
-
-
-
-
-
-
-
+Main Category,Category,Status,Product,Reason for Decision
+Kitchen Appliances,Coffee Maker,Approved,"<a href=""https://ratiocoffee.com/products/ratio-eight"" target=""_blank"" rel=""noopener noreferrer"">Ratio Eight</a>","Pure flavor, durable, non-toxic design"
+Kitchen Appliances,Coffee Maker,Rejected,SMEG Drip Coffee Maker,"Failed safety criteria (plastic contact with hot water)"
+Kitchen Appliances,Rice Cooker,Approved,"<a href=""https://cuchenusamall.com/products/6-cup-ih-dual-pressure-rice-cooker-crh-twk0640wus-copy"" target=""_blank"" rel=""noopener noreferrer"">Cuchen IH Dual Pressure CRP-TWK0640WUS</a>","Non-toxic precision cooking"
+Kitchen Appliances,Rice Cooker,Rejected,Zojirushi Neuro Fuzzy,"Excellent performance but not non-toxic"
+Pet Care,Cat Bowls,Approved,"<a href=""https://basisproducts.com"" target=""_blank"" rel=""noopener noreferrer"">Basis Products Stainless Steel Cat Bowls</a>","Non-toxic, dishwasher-safe, durable"
+Home Goods,"Dinnerware (Plates, Bowls, Cups)",Approved,"<a href=""https://eastfork.com"" target=""_blank"" rel=""noopener noreferrer"">East Fork Pottery</a>","Artisan, durable, non-toxic glazes"
+Pet Care,Raw Food,Approved,"<a href=""https://ocraw.com/product/rabbit-produce/"" target=""_blank"" rel=""noopener noreferrer"">OC Raw Rabbit &amp; Produce (dog formula)</a>","Base diet staple"
+Pet Care,Treats,Approved,"<a href=""https://greenjuju.com/products/rabbit-trainers"" target=""_blank"" rel=""noopener noreferrer"">Green Juju Rabbit Trainers</a>","High-value sensitive-tummy treat"
+Pet Care,Hydration / Topper,Approved,"<a href=""https://smallbatchpets.com/bone-broth-frozen"" target=""_blank"" rel=""noopener noreferrer"">Smallbatch Pets Bone Broth</a>","Meal topper for hydration and digestion"
+Pet Care,Hydration / Topper,Approved,"<a href=""https://www.thebonesandco.com/goat-milk"" target=""_blank"" rel=""noopener noreferrer"">Bones &amp; Co. Raw Goat Milk</a>","Hydration booster / topper"
+Pet Care,Toys,Approved,"<a href=""https://lemonandlavendermadison.com/products/natural-rabbit-fur-rooster-feathers-cat-toys-spinners"" target=""_blank"" rel=""noopener noreferrer"">Lemon &amp; Lavender Rabbit Fur Spinner Cat Toy</a>","Favorite enrichment toy"
+Cleaning,All-Purpose Cleaning,Approved,"<a href=""https://branchbasics.com"" target=""_blank"" rel=""noopener noreferrer"">Branch Basics (Dishwasher Tablets, Laundry Detergent, Multi-purpose Cleaner)</a>","Clean + simple system to reduce chemical load"
+Oral Health,Floss,Approved,"<a href=""https://www.terraco.co"" target=""_blank"" rel=""noopener noreferrer"">Terra &amp; Co Floss</a>","Clean oral care without synthetic fibers"
+Oral Health,Toothpaste,Approved,"<a href=""https://risewell.com"" target=""_blank"" rel=""noopener noreferrer"">RiseWell Toothpaste</a>","Supports remineralization without harsh ingredients"
+Oral Health,Floss,Rejected,"<a href=""https://www.dentallace.com"" target=""_blank"" rel=""noopener noreferrer"">Dental Lace Synthetic Floss</a>","Contains synthetic plastic fibers"
