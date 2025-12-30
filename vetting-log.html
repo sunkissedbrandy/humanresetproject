@@ -480,14 +480,16 @@
             { targets: 3, render: function(data, type) { return data; } }
           ],
           drawCallback: function() {
-            // mark empty arrow cells for cursor behavior
-            $('#vettingTable tbody tr').each(function() {
-              const rowData = dt.row(this).data();
-              const cell = $(this).find('td.details-control');
-              if (rowData && !rowData._hasRejects) cell.addClass('empty');
-              else cell.removeClass('empty');
-            });
-          }
+  const api = this.api();
+
+  $('#vettingTable tbody tr').each(function() {
+    const rowData = api.row(this).data();
+    const cell = $(this).find('td.details-control');
+
+    if (rowData && !rowData._hasRejects) cell.addClass('empty');
+    else cell.removeClass('empty');
+  });
+}
         });
 
         // Expand/collapse handler (delegated; survives redraws)
