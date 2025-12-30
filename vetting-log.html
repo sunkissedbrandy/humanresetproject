@@ -26,7 +26,6 @@
       line-height: 1.6;
     }
 
-    /* Sticky Header */
     header {
       position: sticky;
       top: 0;
@@ -88,7 +87,6 @@
     }
     .subtext em { font-style: italic; }
 
-    /* Controls Row */
     .controls {
       display: flex;
       flex-wrap: wrap;
@@ -144,20 +142,15 @@
       color: #222;
     }
 
-    /* DataTables polish */
     table.dataTable thead th {
       background: #eaf4ee !important;
       color: #0a3d62;
       font-weight: 800;
       border-bottom: 1px solid #cfe5d7 !important;
     }
-    table.dataTable tbody td {
-      vertical-align: middle;
-    }
+    table.dataTable tbody td { vertical-align: middle; }
 
-    /* Remove DataTables length control (Show X entries) */
     div.dataTables_length { display: none !important; }
-    /* Keep search */
     div.dataTables_filter {
       float: left !important;
       text-align: left !important;
@@ -170,7 +163,6 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* Details-control arrow cell */
     td.details-control {
       cursor: pointer;
       width: 28px;
@@ -183,7 +175,6 @@
       color: transparent;
     }
 
-    /* Child row styling */
     .child-wrap {
       background: #f6f7f8;
       border-radius: 12px;
@@ -237,7 +228,6 @@
     }
     footer span { color: #0a3d62; font-weight: 700; }
 
-    /* Make product links look nice */
     a { color: #0a3d62; text-decoration: underline; }
   </style>
 </head>
@@ -292,11 +282,15 @@
   </footer>
 
   <script>
-    let dt;
+    let dt = null;
     let rejectsByKey = {}; // key: Main||Category -> array of rejected rows
 
     function keyFor(main, category) {
       return `${main}||${category}`;
+    }
+
+    function escapeRegex(str) {
+      return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
 
     function setActivePill(value) {
@@ -306,16 +300,17 @@
     }
 
     function applyMainCategoryFilter(value) {
-      // Sync dropdown + pills
+      // Guard: if DT isn't ready yet, just sync UI
       document.getElementById('mainCatSelect').value = value;
       setActivePill(value);
 
-      // Column index 1 = Main Category (because col 0 is arrow)
+      if (!dt) return;
+
+      // Column index 1 = Main Category (col 0 is arrow)
       if (value === 'All') {
         dt.column(1).search('').draw();
       } else {
-        // exact match
-        dt.column(1).search('^' + value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '$', true, false).draw();
+        dt.column(1).search('^' + escapeRegex(value) + '$', true, false).draw();
       }
     }
 
@@ -336,7 +331,7 @@
       rejectRows.forEach(r => {
         html += `
           <tr>
-            <td><span class="badge-rejected">Rejected</span>${r.Product}</td>
+            <td><span class="badge-rejected">Rejected</span>${r.Product || ""}</td>
             <td>${r["Reason for Decision"] || ""}</td>
           </tr>
         `;
@@ -350,153 +345,178 @@
       return html;
     }
 
+    function destroyExistingTable() {
+      // If a DataTable already exists (common after copy/paste merges), destroy it cleanly
+      if ($.fn.dataTable.isDataTable('#vettingTable')) {
+        $('#vettingTable').DataTable().clear().destroy();
+      }
+      $('#vettingTable tbody').empty();
+      dt = null;
+    }
+
     async function loadCSV() {
-      const url = 'Non_Toxic_Product_Vetting_Log.csv?v=' + Date.now(); // cache-bust
-      const res = await fetch(url);
-      const csvText = await res.text();
+      try {
+        destroyExistingTable();
 
-      const parsed = Papa.parse(csvText, {
-        header: true,
-        skipEmptyLines: true
-      });
+        const url = 'Non_Toxic_Product_Vetting_Log.csv?v=' + Date.now(); // cache-bust
+        const res = await fetch(url, { cache: "no-store" });
 
-      const data = parsed.data || [];
-
-      // Build reject map + approved list
-      rejectsByKey = {};
-      const approved = [];
-
-      data.forEach(r => {
-        const main = (r["Main Category"] || "").trim();
-        const cat  = (r["Category"] || "").trim();
-        const status = (r["Status"] || "").trim();
-        const k = keyFor(main, cat);
-
-        // Ensure fields exist
-        r["Main Category"] = main;
-        r["Category"] = cat;
-        r["Status"] = status;
-
-        if (status === "Rejected") {
-          if (!rejectsByKey[k]) rejectsByKey[k] = [];
-          rejectsByKey[k].push(r);
-        } else if (status === "Approved") {
-          approved.push(r);
+        if (!res.ok) {
+          throw new Error(`Could not load CSV (${res.status}). Check file name/path in repo root.`);
         }
-      });
 
-      // Unique main categories for pills/dropdown
-      const mainCats = Array.from(new Set(
-        approved.map(r => r["Main Category"]).filter(Boolean)
-      )).sort();
+        const csvText = await res.text();
 
-      // Build pills
-      const pillRow = document.getElementById('pillRow');
-      pillRow.innerHTML = '';
+        const parsed = Papa.parse(csvText, {
+          header: true,
+          skipEmptyLines: true,
+        });
 
-      const allPill = document.createElement('div');
-      allPill.className = 'pill active';
-      allPill.textContent = 'All';
-      allPill.dataset.value = 'All';
-      allPill.onclick = () => applyMainCategoryFilter('All');
-      pillRow.appendChild(allPill);
+        if (parsed.errors && parsed.errors.length) {
+          console.warn('CSV parse warnings:', parsed.errors);
+        }
 
-      mainCats.forEach(mc => {
-        const p = document.createElement('div');
-        p.className = 'pill';
-        p.textContent = mc;
-        p.dataset.value = mc;
-        p.onclick = () => applyMainCategoryFilter(mc);
-        pillRow.appendChild(p);
-      });
+        const data = parsed.data || [];
 
-      // Build dropdown
-      const sel = document.getElementById('mainCatSelect');
-      sel.innerHTML = '<option value="All" selected>All</option>';
-      mainCats.forEach(mc => {
-        const opt = document.createElement('option');
-        opt.value = mc;
-        opt.textContent = mc;
-        sel.appendChild(opt);
-      });
-      sel.onchange = (e) => applyMainCategoryFilter(e.target.value);
+        // Build reject map + approved list
+        rejectsByKey = {};
+        const approved = [];
 
-      // Build table rows for DataTables
-      // Column 0 is the arrow cell; we decide if it has rejects based on main+category key
-      const tableData = approved.map(r => {
-        const k = keyFor(r["Main Category"], r["Category"]);
-        const hasRejects = Array.isArray(rejectsByKey[k]) && rejectsByKey[k].length > 0;
+        data.forEach(r => {
+          const main = (r["Main Category"] || "").trim();
+          const cat  = (r["Category"] || "").trim();
+          const status = (r["Status"] || "").trim();
+          const k = keyFor(main, cat);
 
-        return {
-          _hasRejects: hasRejects,
-          _key: k,
-          "Main Category": r["Main Category"],
-          "Category": r["Category"],
-          "Product": r["Product"] || "",
-          "Reason for Decision": r["Reason for Decision"] || ""
-        };
-      });
+          r["Main Category"] = main;
+          r["Category"] = cat;
+          r["Status"] = status;
 
-      // Initialize DataTable
-      dt = $('#vettingTable').DataTable({
-        data: tableData,
-        columns: [
-          {
-            data: null,
-            orderable: false,
-            className: 'details-control',
-            defaultContent: '▶',
-            render: function(data, type, row) {
-              return row._hasRejects ? '▶' : '';
+          if (status === "Rejected") {
+            if (!rejectsByKey[k]) rejectsByKey[k] = [];
+            rejectsByKey[k].push(r);
+          } else if (status === "Approved") {
+            approved.push(r);
+          }
+        });
+
+        // Unique main categories for pills/dropdown (from Approved only)
+        const mainCats = Array.from(new Set(
+          approved.map(r => r["Main Category"]).filter(Boolean)
+        )).sort();
+
+        // Build pills
+        const pillRow = document.getElementById('pillRow');
+        pillRow.innerHTML = '';
+
+        const allPill = document.createElement('div');
+        allPill.className = 'pill active';
+        allPill.textContent = 'All';
+        allPill.dataset.value = 'All';
+        allPill.addEventListener('click', () => applyMainCategoryFilter('All'));
+        pillRow.appendChild(allPill);
+
+        mainCats.forEach(mc => {
+          const p = document.createElement('div');
+          p.className = 'pill';
+          p.textContent = mc;
+          p.dataset.value = mc;
+          p.addEventListener('click', () => applyMainCategoryFilter(mc));
+          pillRow.appendChild(p);
+        });
+
+        // Build dropdown
+        const sel = document.getElementById('mainCatSelect');
+        sel.innerHTML = '<option value="All" selected>All</option>';
+        mainCats.forEach(mc => {
+          const opt = document.createElement('option');
+          opt.value = mc;
+          opt.textContent = mc;
+          sel.appendChild(opt);
+        });
+        sel.onchange = (e) => applyMainCategoryFilter(e.target.value);
+
+        // Build table data
+        const tableData = approved.map(r => {
+          const k = keyFor(r["Main Category"], r["Category"]);
+          const hasRejects = Array.isArray(rejectsByKey[k]) && rejectsByKey[k].length > 0;
+
+          return {
+            _hasRejects: hasRejects,
+            _key: k,
+            "Main Category": r["Main Category"],
+            "Category": r["Category"],
+            "Product": r["Product"] || "",
+            "Reason for Decision": r["Reason for Decision"] || ""
+          };
+        });
+
+        // Init DataTable
+        dt = $('#vettingTable').DataTable({
+          data: tableData,
+          columns: [
+            {
+              data: null,
+              orderable: false,
+              className: 'details-control',
+              defaultContent: '▶',
+              render: function(data, type, row) {
+                return row._hasRejects ? '▶' : '';
+              }
+            },
+            { data: "Main Category" },
+            { data: "Category" },
+            { data: "Product" },
+            { data: "Reason for Decision" }
+          ],
+          paging: false,
+          info: false,
+          lengthChange: false,
+          searching: true,
+          order: [[1, 'asc'], [2, 'asc'], [3, 'asc']],
+          columnDefs: [
+            { targets: 0, width: "28px" },
+            // Ensure HTML links in Product render as HTML
+            { targets: 3, render: function(data, type) { return data; } }
+          ],
+          drawCallback: function() {
+            // mark empty arrow cells for cursor behavior
+            $('#vettingTable tbody tr').each(function() {
+              const rowData = dt.row(this).data();
+              const cell = $(this).find('td.details-control');
+              if (rowData && !rowData._hasRejects) cell.addClass('empty');
+              else cell.removeClass('empty');
+            });
+          }
+        });
+
+        // Expand/collapse handler (delegated; survives redraws)
+        $('#vettingTable tbody')
+          .off('click', 'td.details-control')
+          .on('click', 'td.details-control', function () {
+            const tr = $(this).closest('tr');
+            const row = dt.row(tr);
+            const rowData = row.data();
+
+            if (!rowData || !rowData._hasRejects) return;
+
+            if (row.child.isShown()) {
+              row.child.hide();
+              tr.find('td.details-control').text('▶');
+            } else {
+              const rej = rejectsByKey[rowData._key] || [];
+              row.child(buildChildHTML(rej)).show();
+              tr.find('td.details-control').text('▼');
             }
-          },
-          { data: "Main Category" },
-          { data: "Category" },
-          { data: "Product" },
-          { data: "Reason for Decision" }
-        ],
-        // show full list, no paging
-        paging: false,
-        info: false,
-        lengthChange: false,
-        searching: true,
-        order: [[1, 'asc'], [2, 'asc'], [3, 'asc']],
-        // let product HTML render as links
-        columnDefs: [
-          { targets: 0, width: "28px" },
-          { targets: 3, render: function(data) { return data; } }
-        ],
-        drawCallback: function() {
-          // Mark empty arrow cells so cursor doesn't tease people
-          $('#vettingTable tbody tr').each(function() {
-            const rowData = dt.row(this).data();
-            const cell = $(this).find('td.details-control');
-            if (rowData && !rowData._hasRejects) cell.addClass('empty');
-            else cell.removeClass('empty');
           });
-        }
-      });
 
-      // Expand/collapse handler
-      $('#vettingTable tbody').off('click', 'td.details-control').on('click', 'td.details-control', function () {
-        const tr = $(this).closest('tr');
-        const row = dt.row(tr);
-        const rowData = row.data();
+        // Default filter = All
+        applyMainCategoryFilter('All');
 
-        if (!rowData || !rowData._hasRejects) return;
-
-        if (row.child.isShown()) {
-          row.child.hide();
-          tr.find('td.details-control').text('▶');
-        } else {
-          const rej = rejectsByKey[rowData._key] || [];
-          row.child(buildChildHTML(rej)).show();
-          tr.find('td.details-control').text('▼');
-        }
-      });
-
-      // Default filter = All
-      applyMainCategoryFilter('All');
+      } catch (err) {
+        console.error(err);
+        alert("Vetting Log error: " + err.message);
+      }
     }
 
     loadCSV();
