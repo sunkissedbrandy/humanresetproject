@@ -1,7 +1,7 @@
 Main Category,Category,Status,Product,Reason for Decision
 Clean Eating,Coffee,Approved,"<a href=""https://biodynamiccoffee.com/"" target=""_blank"" rel=""noopener noreferrer"">Biodynamic Coffee</a>","Regeneratively grown, cleaner coffee option—great if you’re trying to minimize mold/mycotoxin risk and support soil health."
-Clean Eating,Food,Approved,"<a href=""https://www.veganbakerymiami.com/"" target=""_blank"" rel=""noopener noreferrer"">Vegan Bakery - Ancient Grain Sourdough</a>","Minimal-ingredient sourdough (ancient grains) that’s traditionally fermented—gentler on digestion and aligned with clean eating."
-Clean Eating,Food,Approved,"<a href=""https://thecoconutcult.com/"" target=""_blank"" rel=""noopener noreferrer"">Coconut Cult</a>","Potent probiotic food—useful add-on if you’re rebuilding gut health (start low, go slow)."
+Clean Eating,Bread,Approved,"<a href=""https://www.veganbakerymiami.com/collections/einkorn-sourdough-bread"" target=""_blank"" rel=""noopener noreferrer"">Vegan Bakery - Ancient Grain Sourdough</a>","Minimal-ingredient sourdough (ancient grains) that’s traditionally fermented—gentler on digestion and aligned with clean eating."
+Clean Eating,Yogurt,Approved,"<a href=""https://thecoconutcult.com/"" target=""_blank"" rel=""noopener noreferrer"">Coconut Cult</a>","Potent probiotic food—useful add-on if you’re rebuilding gut health."
 Cleaning,All-Purpose,Approved,"<a href=""https://branchbasics.com/collections/laundry/products/the-concentrate?variant=35565293764772"" target=""_blank"" rel=""noopener noreferrer"">Branch Basics Concentrate</a>","One base concentrate replaces many cleaners—simple, low-tox system that reduces chemical load."
 Cleaning,All-Purpose,Approved,"<a href=""https://branchbasics.com/collections/all/products/hand-soap?variant=44613797970084"" target=""_blank"" rel=""noopener noreferrer"">Branch Basics Hand Soap</a>","Plant-based, fragrance-free cleaning that avoids harsh solvents and endocrine-disrupting ingredients."
 Cleaning,All-Purpose,Approved,"<a href=""https://branchbasics.com/products/oxygen-boost"" target=""_blank"" rel=""noopener noreferrer"">Branch Basics Oxygen Boost</a>","Non-chlorine oxygen booster for stains/whitening—powerful without the toxic fumes and residues."
@@ -54,6 +54,7 @@ Skin Care,Face,Approved,"<a href=""https://primallypure.com/collections/skin-spe
 Skin Care,Lips,Approved,"<a href=""https://primallypure.com/products/lip-balm?variant=3577777411"" target=""_blank"" rel=""noopener noreferrer"">Primally Pure Lip Balm</a>","Clean balm you can actually feel good about ingesting—no petroleum or artificial flavors."
 Skin Care,Sun,Approved,"<a href=""https://primallypure.com/collections/sunscreen"" target=""_blank"" rel=""noopener noreferrer"">Primally Pure Sunscreen</a>","Mineral-based sun protection without the common chemical-filter concerns."
 Skin Care,Outdoor,Approved,"<a href=""https://primallypure.com/products/nature-spray?_pos=1&_sid=e0ceaef46&_ss=r"" target=""_blank"" rel=""noopener noreferrer"">Primally Pure Bug Spray</a>","Plant-based bug defense that avoids conventional pesticide-heavy formulas."
+
 
 
 
