@@ -5,23 +5,106 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Home Goods | Human Reset Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #f4f4f4; color: #222; padding: 0; margin: 0; line-height: 1.6; }
-    header { position: sticky; top: 0; background: #ffffffcc; backdrop-filter: blur(6px); z-index: 1000; text-align: center; padding: 1rem 0.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    header h1 { font-size: 1.8rem; margin: 0.5rem 0; color: #0a3d62; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f4f4;
+      color: #222;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+
+    /* Header + Nav */
+    header {
+      position: sticky;
+      top: 0;
+      background: #ffffffcc;
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      text-align: center;
+      padding: 1rem 0.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin: 0.5rem 0;
+      color: #0a3d62;
+    }
+
     nav { margin-top: 0.5rem; }
-    nav a { color: #0a3d62; margin: 0 10px; font-weight: 600; text-decoration: none; padding: 4px 8px; border-radius: 6px; transition: background-color 0.3s ease, color 0.3s ease; display: inline-block; }
-    nav a:hover { background-color: #eaf4ee; color: #063b4d; }
-    main { padding: 2rem 1rem 4rem; max-width: 800px; margin: 0 auto; }
-    .section { background: #fff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.05); margin-bottom: 2rem; }
-    h2 { margin-top: 0; font-size: 1.5rem; color: #0a3d62; }
-    a { color: #0a3d62; text-decoration: underline; }
-    .cta { margin-top: 1rem; padding: 0.9rem 1rem; border-radius: 10px; background: #f7f7f7; border: 1px solid #e5e5e5; }
-    footer { text-align: center; background: #eaf4ee; padding: 1rem; font-size: 0.9rem; color: #444; }
+
+    nav a {
+      color: #0a3d62;
+      margin: 0 10px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-block;
+    }
+
+    nav a:hover {
+      background-color: #eaf4ee;
+      color: #063b4d;
+    }
+
+    /* Layout */
+    main {
+      padding: 2rem 1rem 4rem;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .section {
+      background: #fff;
+      padding: 1.75rem;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      margin-bottom: 0;
+    }
+
+    /* Intentional visual pause between sections */
+    .section-break {
+      margin-top: 1.5rem;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.5rem;
+      color: #0a3d62;
+    }
+
+    a {
+      color: #0a3d62;
+      text-decoration: underline;
+    }
+
+    .cta {
+      margin-top: 1.5rem;
+      padding: 1rem 1.1rem;
+      border-radius: 12px;
+      background: #f7f7f7;
+      border: 1px solid #e5e5e5;
+    }
+
+    footer {
+      text-align: center;
+      background: #eaf4ee;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
     footer span { color: #0a3d62; }
   </style>
 </head>
+
 <body>
   <header>
     <h1>🌿 Brandy’s Trusted Wellness Picks</h1>
@@ -39,6 +122,7 @@
   </header>
 
   <main>
+    <!-- SECTION 1: Education -->
     <section class="section">
       <h2>🏡 Home Goods</h2>
 
@@ -52,10 +136,28 @@
         The goal is to make upgrades that matter most: focus on what touches your food and water, what you breathe,
         and what you sleep on. You don’t need to replace everything — you just need a smarter order of operations.
       </p>
+    </section>
+
+    <!-- SECTION 2: Resources + CTA -->
+    <section class="section section-break">
+      <h2>Resources:</h2>
+
+      <p>
+        <a href="https://www.youtube.com/watch?v=H2wnf6qVVUc" target="_blank" rel="noopener noreferrer">
+          Plant Paper – Why make the switch?
+        </a>
+      </p>
+
+      <p>
+        <a href="https://www.youtube.com/watch?v=jxmXsPPyBME" target="_blank" rel="noopener noreferrer">
+          How to Reduce Your Toxic Load
+        </a>
+      </p>
 
       <div class="cta">
         <strong>Want the specific items I’ve vetted and trust?</strong><br />
-        👉 Go to the <a href="vetting-log.html">Vetting Log</a> and use the dropdown filter to select your category (e.g., Kitchen Appliances).
+        👉 Go to the <a href="vetting-log.html">Vetting Log</a> and use the dropdown filter to select your category
+        (e.g., Kitchen Appliances).
       </div>
     </section>
   </main>
@@ -65,4 +167,3 @@
   </footer>
 </body>
 </html>
-
