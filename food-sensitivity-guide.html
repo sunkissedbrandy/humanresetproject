@@ -54,7 +54,7 @@
     /* Layout */
     main {
       padding: 2rem 1rem 4rem;
-      max-width: 980px;
+      max-width: 1080px;
       margin: 0 auto;
     }
 
@@ -87,13 +87,46 @@
       color: #444;
     }
 
-    /* Soft educational callout (matches Farmers/Home Goods style) */
+    /* Soft educational callout */
     .note {
       background: #eaf4ee;
       border: 1px solid #cfe5d7;
       border-radius: 12px;
       padding: 1rem 1.1rem;
       margin-top: 1rem;
+    }
+
+    /* Category pills (internal page navigation) */
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0 0;
+    }
+
+    .pill {
+      border: 1px solid #cfe5d7;
+      background: #f7fbf8;
+      color: #0a3d62;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-weight: 600;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      font-size: 0.95rem;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .pill:hover { background: #eaf4ee; }
+
+    .pill.active {
+      background: #0a3d62;
+      border-color: #0a3d62;
+      color: #fff;
     }
 
     /* Table wrapper */
@@ -109,7 +142,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 900px;
+      min-width: 980px;
       background: #fff;
     }
 
@@ -124,6 +157,7 @@
       padding: 12px;
       border-bottom: 1px solid #d6eadf;
       white-space: nowrap;
+      vertical-align: bottom;
     }
 
     tbody td {
@@ -167,44 +201,66 @@
   </header>
 
   <main>
-    <!-- INTRO -->
+    <!-- SECTION 1: Intro -->
     <section class="section">
       <h2>🍃 Food Sensitivity Guide</h2>
 
       <p class="subtext">
-        A quick-reference guide to help make food choices more autoimmune-friendly — without fear, perfection,
-        or unnecessary restriction.
+        This is a quick-reference guide for people who want to reduce dietary stressors, improve digestion,
+        lower inflammation, and support overall resilience — without fear, perfection, or unnecessary restriction.
+        Some items here are especially relevant for thyroid-sensitive or autoimmune-prone folks, but the core idea
+        applies broadly: <strong>tolerance often improves with smarter prep methods and better “order of operations.”</strong>
       </p>
+
+      <div class="note">
+        <strong>Common trigger foods (worth being aware of):</strong><br />
+        When people are troubleshooting symptoms (bloating, fatigue, skin flares, headaches, joint pain, congestion,
+        mood swings, etc.), some of the most common “trial removals” include:
+        <strong>gluten</strong>, <strong>dairy</strong>, <strong>soy</strong>, <strong>corn</strong>, and often <strong>eggs</strong>
+        or highly processed oils/additives. This guide doesn’t replace experimentation — it helps you make cleaner
+        choices while you learn what your body loves.
+      </div>
 
       <div class="note">
         <strong>How to use this:</strong><br />
-        Start with the foods ranked lowest risk. If something you enjoy is higher risk, check the
-        <strong>Prep Method</strong> and <strong>Cook Time</strong> — those details often make all the difference.
+        Start with the foods ranked lower risk. If something you love shows up as higher risk, check the
+        <strong>Prep Method</strong> and <strong>Cook Time</strong> — those details often make the difference between
+        “nope” and “totally fine.”
+      </div>
+
+      <!-- QUICK NAV -->
+      <div class="pill-row" aria-label="Food Sensitivity Guide Sections">
+        <a class="pill active" href="#greens">Greens</a>
+        <a class="pill" href="#vegetables">Vegetables</a>
+        <a class="pill" href="#fruits">Fruits</a>
+        <a class="pill" href="#legumes">Legumes</a>
+        <a class="pill" href="#grains">Grains</a>
+        <a class="pill" href="#nuts">Nuts</a>
+        <a class="pill" href="#seeds">Seeds</a>
+        <a class="pill" href="#spices">Spices</a>
+        <a class="pill" href="#tea">Tea &amp; Drinks</a>
       </div>
     </section>
 
-    <!-- GREENS -->
-    <section class="section section-break">
+    <!-- SECTION 2: GREENS -->
+    <section class="section section-break" id="greens">
       <h2>🥬 Greens (ranked best → worst)</h2>
 
       <p class="subtext">
-        Primary risk factor here is <strong>goitrogens</strong>.
+        Primary risk factor here is <strong>goitrogens</strong> (especially relevant for thyroid-sensitive people).
       </p>
 
-      <!-- GOITROGEN EXPLAINER -->
       <div class="note">
         <strong>Why goitrogens matter:</strong><br />
         Goitrogens are naturally occurring compounds found in certain plants (especially cruciferous vegetables)
-        that can interfere with iodine uptake in the thyroid. For people with a healthy thyroid, this usually
-        isn’t an issue. But for those with hypothyroidism or autoimmune thyroid conditions like Hashimoto’s,
-        large amounts of raw goitrogenic foods can place additional stress on an already sensitive system.
+        that can reduce iodine uptake in the thyroid. For many people, this isn’t a big deal. But if someone has
+        thyroid sensitivity (or low iodine status), large amounts of raw goitrogenic foods can add extra strain.
         <br /><br />
         The good news: goitrogens are <strong>heat-sensitive</strong>. Light cooking — even brief steaming —
-        significantly reduces their activity. This means many higher-risk greens don’t need to be avoided;
-        they simply need to be prepared thoughtfully.
+        significantly reduces their activity. Many “higher-risk” greens don’t need to be avoided; they simply do
+        better with thoughtful prep.
       </div>
 
-      <!-- TABLE -->
       <div class="table-wrap">
         <table>
           <thead>
@@ -218,8 +274,8 @@
               <th class="notes-col">Notes</th>
             </tr>
           </thead>
-
           <tbody>
+            <!-- LOW -->
             <tr>
               <td class="food-col">Romaine</td>
               <td>Goitrogens</td>
@@ -229,7 +285,6 @@
               <td></td>
               <td class="notes-col">Excellent daily base green.</td>
             </tr>
-
             <tr>
               <td class="food-col">Butter Lettuce</td>
               <td>Goitrogens</td>
@@ -237,9 +292,17 @@
               <td>Yes</td>
               <td>Raw</td>
               <td></td>
-              <td class="notes-col">Very gentle and easy to digest.</td>
+              <td class="notes-col">Very gentle and easy to digest for many people.</td>
             </tr>
-
+            <tr>
+              <td class="food-col">Green/Red Leaf Lettuce</td>
+              <td>Goitrogens</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Great rotation base greens.</td>
+            </tr>
             <tr>
               <td class="food-col">Arugula</td>
               <td>Goitrogens</td>
@@ -247,9 +310,28 @@
               <td>Yes</td>
               <td>Raw</td>
               <td></td>
-              <td class="notes-col">Peppery; great rotation green.</td>
+              <td class="notes-col">Peppery; great for variety.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Endive / Radicchio</td>
+              <td>Goitrogens</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Bitter greens can be very supportive for digestion.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Parsley / Cilantro / Basil</td>
+              <td>Goitrogens</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Use generously as greens (not just garnish).</td>
             </tr>
 
+            <!-- MODERATE (better cooked) -->
             <tr>
               <td class="food-col">Kale</td>
               <td>Goitrogens</td>
@@ -257,9 +339,8 @@
               <td>No</td>
               <td>Steam then chill</td>
               <td>Steam: 45–75 sec</td>
-              <td class="notes-col">Quick steam dramatically improves tolerance.</td>
+              <td class="notes-col">Quick steam improves tolerance while keeping salad-friendly texture.</td>
             </tr>
-
             <tr>
               <td class="food-col">Broccoli Leaf</td>
               <td>Goitrogens</td>
@@ -267,9 +348,8 @@
               <td>No</td>
               <td>Steam then chill</td>
               <td>Steam: 45–90 sec</td>
-              <td class="notes-col">Older leaves may need longer steam.</td>
+              <td class="notes-col">Older/tougher leaves may need the longer end.</td>
             </tr>
-
             <tr>
               <td class="food-col">Collard Greens</td>
               <td>Goitrogens</td>
@@ -277,12 +357,786 @@
               <td>No</td>
               <td>Steam then chill</td>
               <td>Steam: 2–3 min</td>
-              <td class="notes-col">More robust leaf; benefits from extra cooking.</td>
+              <td class="notes-col">More robust leaf; tends to do better with extra cooking.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Spinach</td>
+              <td>Goitrogens</td>
+              <td>🟡 Moderate</td>
+              <td>Sometimes</td>
+              <td>Light cook preferred</td>
+              <td>Steam/Sauté: 1–2 min</td>
+              <td class="notes-col">Often tolerated cooked; raw in large amounts can be a lot for sensitive folks.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Cabbage / Tatsoi / Mustard Greens</td>
+              <td>Goitrogens</td>
+              <td>🟡 Moderate</td>
+              <td>No</td>
+              <td>Cooked preferred</td>
+              <td>Steam/Sauté: 3–6 min</td>
+              <td class="notes-col">If sensitive, treat like kale: cook first, then enjoy.</td>
             </tr>
           </tbody>
         </table>
       </div>
     </section>
+
+    <!-- SECTION 3: VEGETABLES -->
+    <section class="section section-break" id="vegetables">
+      <h2>🥕 Vegetables (ranked best → worst)</h2>
+
+      <p class="subtext">
+        This category blends a few common sensitivity patterns: nightshades (for some people), soy-based items,
+        and general “easy wins” that tend to be well tolerated.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="food-col">Food</th>
+              <th>Primary Risk Factor</th>
+              <th>Risk Level</th>
+              <th>Raw OK?</th>
+              <th>Prep Method</th>
+              <th>Cook Time</th>
+              <th class="notes-col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- LOW -->
+            <tr>
+              <td class="food-col">Cucumbers</td>
+              <td>Sensitivity</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Hydrating and typically well tolerated.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Carrots</td>
+              <td>Sensitivity</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw or cooked</td>
+              <td>Roast/Steam: 8–20 min</td>
+              <td class="notes-col">Cooked often feels gentler if digestion is sensitive.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Zucchini</td>
+              <td>Sensitivity</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw or cooked</td>
+              <td>Sauté: 4–6 min</td>
+              <td class="notes-col">Easy rotation vegetable.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Squash (most types)</td>
+              <td>Sensitivity</td>
+              <td>🟢 Low</td>
+              <td>Usually</td>
+              <td>Cooked preferred</td>
+              <td>Roast: 25–45 min</td>
+              <td class="notes-col">Comfort food for the gut; great base carb for many.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Sweet Potato</td>
+              <td>Carb load</td>
+              <td>🟢 Low</td>
+              <td>No</td>
+              <td>Cooked</td>
+              <td>Bake: 45–60 min</td>
+              <td class="notes-col">Usually a strong “safe starch” for many people.</td>
+            </tr>
+
+            <!-- CAUTION -->
+            <tr>
+              <td class="food-col">Hearts of Palm</td>
+              <td>Individual tolerance</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Flagged as “caution” in your notes — keep an eye on personal response.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Purple Onions</td>
+              <td>Individual tolerance</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Raw or cooked</td>
+              <td>Sauté: 6–10 min</td>
+              <td class="notes-col">Caution for some people; cooked is often easier.</td>
+            </tr>
+
+            <!-- AVOID / HIGH -->
+            <tr>
+              <td class="food-col">Tomato</td>
+              <td>Nightshade</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Raw or cooked</td>
+              <td>Simmer: 15–45 min</td>
+              <td class="notes-col">Nightshades can be inflammatory for some sensitive people.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Eggplant</td>
+              <td>Nightshade</td>
+              <td>🔴 High</td>
+              <td>No</td>
+              <td>Cooked</td>
+              <td>Roast: 25–40 min</td>
+              <td class="notes-col">Nightshade; often worth avoiding during sensitivity “reset” phases.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Potatoes</td>
+              <td>Nightshade</td>
+              <td>🔴 High</td>
+              <td>No</td>
+              <td>Cooked</td>
+              <td>Boil: 15–25 min</td>
+              <td class="notes-col">Nightshade; some people do fine, others flare. Test intentionally.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Bell Peppers</td>
+              <td>Nightshade</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Cooked preferred</td>
+              <td>Roast/Sauté: 8–20 min</td>
+              <td class="notes-col">Nightshade; cooking can help but may still be reactive for some.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Edamame / Soybeans</td>
+              <td>Soy sensitivity</td>
+              <td>🔴 High</td>
+              <td>No</td>
+              <td>Cooked</td>
+              <td>Boil: 5–8 min</td>
+              <td class="notes-col">Soy is a common trigger; can also interfere with thyroid hormone uptake for some people.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 4: FRUITS -->
+    <section class="section section-break" id="fruits">
+      <h2>🍓 Fruits (ranked best → worst)</h2>
+
+      <p class="subtext">
+        Sensitivity patterns here are usually about <strong>sugar load</strong> and (for some people) <strong>lectin load</strong>.
+      </p>
+
+      <div class="note">
+        <strong>Quick fruit note:</strong><br />
+        Fruit can be incredibly supportive — but higher sugar fruits can spike blood sugar and cortisol in some people,
+        which can ripple into cravings, sleep disruption, and inflammation. If you’re feeling “off,” try starting with
+        lower sugar fruits and see how you do.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="food-col">Food</th>
+              <th>Primary Risk Factor</th>
+              <th>Risk Level</th>
+              <th>Raw OK?</th>
+              <th>Prep Method</th>
+              <th>Cook Time</th>
+              <th class="notes-col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- LOW -->
+            <tr>
+              <td class="food-col">Blueberries</td>
+              <td>Sugar load</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Generally a “safe” fruit for many people; great antioxidant profile.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Raspberries / Blackberries</td>
+              <td>Sugar load</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Lower sugar; often well tolerated.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Strawberries</td>
+              <td>Sugar load</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Usually a good starting fruit. (As always: listen to your body.)</td>
+            </tr>
+            <tr>
+              <td class="food-col">Cranberries (unsweetened)</td>
+              <td>Sugar load</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Tart + low sugar; often used more like a “functional” fruit.</td>
+            </tr>
+
+            <!-- CAUTION (from your notes) -->
+            <tr>
+              <td class="food-col">Bananas</td>
+              <td>High sugar</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Higher sugar; may spike cortisol for some people.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Grapes</td>
+              <td>High sugar</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Easy to overdo; treat like a “dessert fruit.”</td>
+            </tr>
+            <tr>
+              <td class="food-col">Mango</td>
+              <td>High sugar</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Higher sugar; some people do fine, others feel flared.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Plantains</td>
+              <td>Carb load</td>
+              <td>🟡 Moderate</td>
+              <td>No</td>
+              <td>Cooked</td>
+              <td>Bake/Fry: 10–25 min</td>
+              <td class="notes-col">More “starch” than fruit; treat like a carb side.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Jackfruit</td>
+              <td>Carb load</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Cooked preferred</td>
+              <td>Simmer: 20–40 min</td>
+              <td class="notes-col">Often used as a meat substitute; watch personal response.</td>
+            </tr>
+
+            <!-- AVOID / HIGH -->
+            <tr>
+              <td class="food-col">Goji Berries</td>
+              <td>Personal trigger</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Marked as an avoid in your notes; treat as a “test later” item.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 5: LEGUMES -->
+    <section class="section section-break" id="legumes">
+      <h2>🫘 Legumes (ranked best → worst)</h2>
+
+      <p class="subtext">
+        Primary risk factor here is usually <strong>lectins</strong> (and overall digestibility).
+      </p>
+
+      <div class="note">
+        <strong>Why lectins matter:</strong><br />
+        Lectins are proteins found in many plants (especially legumes and some grains) that can irritate the gut in
+        sensitive people when foods are under-prepared. Many people tolerate lectins just fine — but if digestion is
+        fragile, symptoms can show up as bloating, gas, fatigue, skin flares, or a general “inflammation-y” feeling.
+        <br /><br />
+        The good news: lectins are highly responsive to <strong>prep</strong>. Soaking + rinsing + pressure cooking is
+        one of the best “low-effort / high-impact” upgrades you can make.
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="food-col">Food</th>
+              <th>Primary Risk Factor</th>
+              <th>Risk Level</th>
+              <th>Raw OK?</th>
+              <th>Prep Method</th>
+              <th>Cook Time</th>
+              <th class="notes-col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- LOW-ish starters -->
+            <tr>
+              <td class="food-col">Red Lentils</td>
+              <td>Lectins</td>
+              <td>🟢 Low</td>
+              <td>No</td>
+              <td>Rinse well</td>
+              <td>Simmer: 10–15 min</td>
+              <td class="notes-col">Often one of the easiest legumes to digest (especially well-cooked).</td>
+            </tr>
+            <tr>
+              <td class="food-col">Green/Brown Lentils</td>
+              <td>Lectins</td>
+              <td>🟡 Moderate</td>
+              <td>No</td>
+              <td>Soak 4–8 hrs (optional) + rinse</td>
+              <td>Simmer: 18–25 min</td>
+              <td class="notes-col">Soaking can improve tolerance for sensitive digestion.</td>
+            </tr>
+
+            <!-- CAUTION (from your notes) -->
+            <tr>
+              <td class="food-col">Chickpeas</td>
+              <td>Lectins</td>
+              <td>🟡 Moderate</td>
+              <td>No</td>
+              <td>Soak 8–12 hrs + rinse</td>
+              <td>Pressure cook: 35–45 min</td>
+              <td class="notes-col">A common “caution” legume — prep matters a lot here.</td>
+            </tr>
+
+            <!-- AVOID/HIGH (from your notes) -->
+            <tr>
+              <td class="food-col">Black Beans</td>
+              <td>Lectins</td>
+              <td>🔴 High</td>
+              <td>No</td>
+              <td>Soak 8–12 hrs + rinse</td>
+              <td>Pressure cook: 25–35 min</td>
+              <td class="notes-col">Listed as an avoid; consider testing later after gut is steadier.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Kidney Beans</td>
+              <td>Lectins</td>
+              <td>🔴 High</td>
+              <td>No</td>
+              <td>Soak 8–12 hrs + rinse</td>
+              <td>Pressure cook: 30–40 min</td>
+              <td class="notes-col">Higher lectin concern; strong candidate for “avoid during reset.”</td>
+            </tr>
+            <tr>
+              <td class="food-col">Pinto Beans</td>
+              <td>Lectins</td>
+              <td>🔴 High</td>
+              <td>No</td>
+              <td>Soak 8–12 hrs + rinse</td>
+              <td>Pressure cook: 25–35 min</td>
+              <td class="notes-col">Listed as an avoid in your notes; can be re-tested later if desired.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p class="subtext" style="margin-top:0.75rem;">
+        *Cook times are general ranges and vary by bean age + appliance. When in doubt, cook longer and prioritize tenderness.
+      </p>
+    </section>
+
+    <!-- SECTION 6: GRAINS -->
+    <section class="section section-break" id="grains">
+      <h2>🍚 Grains (ranked best → worst)</h2>
+
+      <p class="subtext">
+        Primary risk factors here can include <strong>lectins</strong>, <strong>digestibility</strong>, and (for some people)
+        <strong>gluten sensitivity</strong>.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="food-col">Food</th>
+              <th>Primary Risk Factor</th>
+              <th>Risk Level</th>
+              <th>Raw OK?</th>
+              <th>Prep Method</th>
+              <th>Cook Time</th>
+              <th class="notes-col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="food-col">White Rice</td>
+              <td>Digestibility</td>
+              <td>🟢 Low</td>
+              <td>No</td>
+              <td>Rinse well</td>
+              <td>Stovetop: 15–20 min</td>
+              <td class="notes-col">Often the gentlest rice option; a common “safe” baseline for many.</td>
+            </tr>
+
+            <tr>
+              <td class="food-col">Black Rice</td>
+              <td>Lectins</td>
+              <td>🟡 Moderate</td>
+              <td>No</td>
+              <td>Rinse + optional soak 2–6 hrs</td>
+              <td>Stovetop: 30–40 min</td>
+              <td class="notes-col">Listed as caution; more fiber/density may be harder for sensitive digestion.</td>
+            </tr>
+
+            <tr>
+              <td class="food-col">Brown Rice</td>
+              <td>Lectins / fiber</td>
+              <td>🟡 Moderate</td>
+              <td>No</td>
+              <td>Rinse + optional soak 2–6 hrs</td>
+              <td>Stovetop: 35–50 min</td>
+              <td class="notes-col">Caution for some people; can feel heavy if digestion is fragile.</td>
+            </tr>
+
+            <tr>
+              <td class="food-col">Quinoa (White)</td>
+              <td>Saponins</td>
+              <td>🟡 Moderate</td>
+              <td>No</td>
+              <td>Rinse extremely well</td>
+              <td>Stovetop: 12–15 min</td>
+              <td class="notes-col">Listed as caution; thorough rinsing is key for tolerance.</td>
+            </tr>
+
+            <tr>
+              <td class="food-col">Job’s Tears</td>
+              <td>Individual tolerance</td>
+              <td>🟡 Moderate</td>
+              <td>No</td>
+              <td>Rinse + optional soak 4–8 hrs</td>
+              <td>Simmer: 45–60 min</td>
+              <td class="notes-col">Listed as caution; treat like a “test and observe” grain.</td>
+            </tr>
+
+            <tr>
+              <td class="food-col">Pearl Couscous</td>
+              <td>Gluten / wheat</td>
+              <td>🔴 High</td>
+              <td>No</td>
+              <td>Cooked</td>
+              <td>Simmer: 8–12 min</td>
+              <td class="notes-col">Listed as avoid; wheat-based items are a common trigger for many people.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 7: NUTS -->
+    <section class="section section-break" id="nuts">
+      <h2>🥜 Nuts (ranked best → worst)</h2>
+
+      <p class="subtext">
+        Sensitivity patterns vary here (mold, histamine, omega balance, personal tolerance). Start simple and rotate.
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="food-col">Food</th>
+              <th>Primary Risk Factor</th>
+              <th>Risk Level</th>
+              <th>Raw OK?</th>
+              <th>Prep Method</th>
+              <th>Cook Time</th>
+              <th class="notes-col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="food-col">Macadamia Nuts</td>
+              <td>Individual tolerance</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Often a solid “gentler” nut for many.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Walnuts / Pecans</td>
+              <td>Individual tolerance</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw or lightly roasted</td>
+              <td>Roast: 8–10 min</td>
+              <td class="notes-col">Rotate; watch freshness (rancid nuts can feel inflammatory).</td>
+            </tr>
+            <tr>
+              <td class="food-col">Brazil Nuts</td>
+              <td>Selenium load</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Nutrient-dense; many people keep portions modest.</td>
+            </tr>
+
+            <tr>
+              <td class="food-col">Almonds</td>
+              <td>Individual tolerance</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Soak 8–12 hrs (optional) + rinse</td>
+              <td>Dehydrate/roast: 20–30 min</td>
+              <td class="notes-col">Listed as caution; soaking can improve tolerance for some.</td>
+            </tr>
+
+            <tr>
+              <td class="food-col">Cashews</td>
+              <td>Personal trigger</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Listed as avoid in your notes; treat as a “test later” nut.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Peanuts</td>
+              <td>Legume / reactivity</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Roasted preferred</td>
+              <td>Roast: 15–20 min</td>
+              <td class="notes-col">Listed as avoid; peanuts are legumes and are reactive for many people.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Pine Nuts / Pistachios</td>
+              <td>Personal trigger</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Listed as avoid; consider re-test later if desired.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 8: SEEDS -->
+    <section class="section section-break" id="seeds">
+      <h2>🌻 Seeds (ranked best → worst)</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="food-col">Food</th>
+              <th>Primary Risk Factor</th>
+              <th>Risk Level</th>
+              <th>Raw OK?</th>
+              <th>Prep Method</th>
+              <th>Cook Time</th>
+              <th class="notes-col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="food-col">Chia / Flax</td>
+              <td>Digestibility</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Soak in liquid</td>
+              <td>Soak: 10–30 min</td>
+              <td class="notes-col">Often easier when soaked (pudding, smoothies).</td>
+            </tr>
+            <tr>
+              <td class="food-col">Hemp Seeds</td>
+              <td>Individual tolerance</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Easy add-in; usually gentle.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Pumpkin Seeds</td>
+              <td>Individual tolerance</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Raw or lightly roasted</td>
+              <td>Roast: 10–12 min</td>
+              <td class="notes-col">Rotate; watch freshness.</td>
+            </tr>
+
+            <tr>
+              <td class="food-col">Sunflower Seeds</td>
+              <td>Personal tolerance</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Listed as caution in your notes.</td>
+            </tr>
+
+            <tr>
+              <td class="food-col">Sesame Seeds</td>
+              <td>Personal trigger</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Raw or toasted</td>
+              <td>Toast: 3–5 min</td>
+              <td class="notes-col">Listed as avoid; treat as “test later.”</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 9: SPICES -->
+    <section class="section section-break" id="spices">
+      <h2>🧂 Spices (ranked best → worst)</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="food-col">Food</th>
+              <th>Primary Risk Factor</th>
+              <th>Risk Level</th>
+              <th>Raw OK?</th>
+              <th>Prep Method</th>
+              <th>Cook Time</th>
+              <th class="notes-col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="food-col">Turmeric</td>
+              <td>Inflammation support</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Use in food/tea</td>
+              <td></td>
+              <td class="notes-col">Often well tolerated; commonly used for inflammation support.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Ginger</td>
+              <td>Digestion support</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Fresh or dried</td>
+              <td></td>
+              <td class="notes-col">Often calming for digestion.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Cacao Nibs</td>
+              <td>Personal tolerance</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Raw</td>
+              <td></td>
+              <td class="notes-col">Listed as caution in your notes.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Cayenne</td>
+              <td>Nightshade</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Use in food</td>
+              <td></td>
+              <td class="notes-col">Listed as avoid; nightshade spice.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Chili Powder</td>
+              <td>Nightshade</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Use in food</td>
+              <td></td>
+              <td class="notes-col">Listed as avoid; nightshade blend.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Paprika</td>
+              <td>Nightshade</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Use in food</td>
+              <td></td>
+              <td class="notes-col">Listed as avoid; nightshade spice.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 10: TEA & DRINKS -->
+    <section class="section section-break" id="tea">
+      <h2>🍵 Tea &amp; Drinks (ranked best → worst)</h2>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th class="food-col">Food</th>
+              <th>Primary Risk Factor</th>
+              <th>Risk Level</th>
+              <th>Raw OK?</th>
+              <th>Prep Method</th>
+              <th>Cook Time</th>
+              <th class="notes-col">Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="food-col">Herbal Teas</td>
+              <td>Individual tolerance</td>
+              <td>🟢 Low</td>
+              <td>Yes</td>
+              <td>Steep</td>
+              <td>Steep: 5–10 min</td>
+              <td class="notes-col">Most herbal teas are a good baseline (listen to your body).</td>
+            </tr>
+            <tr>
+              <td class="food-col">Matcha</td>
+              <td>Caffeine / histamine</td>
+              <td>🟡 Moderate</td>
+              <td>Yes</td>
+              <td>Whisk with hot water</td>
+              <td></td>
+              <td class="notes-col">Listed as caution; caffeine can be activating for some people.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Kombucha</td>
+              <td>Sugar / histamine</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Drink cold</td>
+              <td></td>
+              <td class="notes-col">Listed as avoid; fermented + sugary drinks can be reactive for some.</td>
+            </tr>
+            <tr>
+              <td class="food-col">Smoked Teas</td>
+              <td>Personal trigger</td>
+              <td>🔴 High</td>
+              <td>Yes</td>
+              <td>Steep</td>
+              <td>Steep: 3–5 min</td>
+              <td class="notes-col">Listed as avoid; treat as “test later.”</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
   </main>
 
   <footer>
