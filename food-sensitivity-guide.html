@@ -18,7 +18,7 @@
       line-height: 1.6;
     }
 
-    /* Header + Nav (matches your other tabs) */
+    /* Header + Nav */
     header {
       position: sticky;
       top: 0;
@@ -66,7 +66,6 @@
       margin-bottom: 0;
     }
 
-    /* Intentional visual pause between sections (same system you’re using elsewhere) */
     .section-break { margin-top: 1.5rem; }
 
     h2 {
@@ -83,40 +82,12 @@
 
     a { color: #0a3d62; text-decoration: underline; }
 
-    /* Category pills (mirrors your “clean + scannable” style) */
-    .pill-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-      justify-content: center;
-      margin: 0.75rem 0 0;
+    .subtext {
+      margin: 0.5rem 0 0;
+      color: #444;
     }
 
-    .pill {
-      border: 1px solid #cfe5d7;
-      background: #f7fbf8;
-      color: #0a3d62;
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-weight: 600;
-      cursor: pointer;
-      user-select: none;
-      transition: all 0.2s ease;
-      font-size: 0.95rem;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    .pill:hover { background: #eaf4ee; }
-
-    .pill.active {
-      background: #0a3d62;
-      border-color: #0a3d62;
-      color: #fff;
-    }
-
-    /* Soft callout (like your Farmers + CTA vibe) */
+    /* Soft educational callout (matches Farmers/Home Goods style) */
     .note {
       background: #eaf4ee;
       border: 1px solid #cfe5d7;
@@ -125,9 +96,11 @@
       margin-top: 1rem;
     }
 
-    /* Table styling (clean + readable) */
+    /* Table wrapper */
     .table-wrap {
       overflow-x: auto;
+      overflow-y: auto;
+      max-height: 520px;
       margin-top: 1rem;
       border-radius: 12px;
       border: 1px solid #e5e5e5;
@@ -136,36 +109,35 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 860px; /* keeps columns readable on desktop */
+      min-width: 900px;
       background: #fff;
     }
 
     thead th {
+      position: sticky;
+      top: 0;
+      z-index: 2;
       background: #eaf4ee;
       color: #0a3d62;
       font-weight: 600;
       text-align: left;
-      padding: 12px 12px;
+      padding: 12px;
       border-bottom: 1px solid #d6eadf;
-      vertical-align: bottom;
       white-space: nowrap;
     }
 
     tbody td {
-      padding: 12px 12px;
+      padding: 12px;
       border-bottom: 1px solid #eee;
       vertical-align: top;
     }
 
     tbody tr:hover { background: #fafafa; }
 
-    /* Small helper text under headings */
-    .subtext {
-      margin: 0.5rem 0 0;
-      color: #444;
-    }
+    /* Column sizing for readability */
+    th.food-col, td.food-col { width: 14%; }
+    th.notes-col, td.notes-col { width: 32%; }
 
-    /* Footer */
     footer {
       text-align: center;
       background: #eaf4ee;
@@ -181,8 +153,6 @@
 <body>
   <header>
     <h1>🌿 Brandy’s Trusted Wellness Picks</h1>
-
-    <!-- MAIN SITE NAV -->
     <nav>
       <a href="index.html">Home</a>
       <a href="supplements.html">Supplements</a>
@@ -193,235 +163,126 @@
       <a href="oral-health.html">Oral Health</a>
       <a href="clothing.html">Clothing</a>
       <a href="vetting-log.html">🧾 Vetting Log</a>
-
-      <!-- NEW TOP-LEVEL TAB (add this link to your other pages later for consistency) -->
-      <a href="food-sensitivity-guide.html">Food Sensitivity Guide</a>
     </nav>
   </header>
 
   <main>
-    <!-- SECTION 1: Intro -->
+    <!-- INTRO -->
     <section class="section">
       <h2>🍃 Food Sensitivity Guide</h2>
 
       <p class="subtext">
-        A one-stop, quick-reference guide to help make food choices more autoimmune-friendly — built for real life.
-        This isn’t about perfection. It’s about reducing burden and choosing smarter prep methods when needed.
+        A quick-reference guide to help make food choices more autoimmune-friendly — without fear, perfection,
+        or unnecessary restriction.
       </p>
 
       <div class="note">
         <strong>How to use this:</strong><br />
-        Start with the “best → worst” ranking. If something you love is higher risk, check the
-        <strong>Prep Method</strong> and <strong>Cook Time</strong> columns — those are often the difference between “nope”
-        and “totally fine.”
-      </div>
-
-      <!-- CATEGORY PILLS (internal navigation for this page) -->
-      <div class="pill-row" aria-label="Food Sensitivity Guide Categories">
-        <a class="pill active" href="#greens">Greens</a>
-        <a class="pill" href="#legumes">Legumes (Coming Soon)</a>
-        <a class="pill" href="#grains">Grains (Coming Soon)</a>
-        <a class="pill" href="#fruits">Fruits (Coming Soon)</a>
-        <a class="pill" href="#nuts">Nuts &amp; Seeds (Later)</a>
+        Start with the foods ranked lowest risk. If something you enjoy is higher risk, check the
+        <strong>Prep Method</strong> and <strong>Cook Time</strong> — those details often make all the difference.
       </div>
     </section>
 
-    <!-- SECTION 2: GREENS -->
-    <section class="section section-break" id="greens">
+    <!-- GREENS -->
+    <section class="section section-break">
       <h2>🥬 Greens (ranked best → worst)</h2>
 
       <p class="subtext">
-        Primary risk factor here is <strong>Goitrogens</strong>. Some cruciferous greens are best avoided raw in large
-        amounts if thyroid is sensitive — but many become much more friendly with quick cooking.
+        Primary risk factor here is <strong>goitrogens</strong>.
       </p>
 
+      <!-- GOITROGEN EXPLAINER -->
+      <div class="note">
+        <strong>Why goitrogens matter:</strong><br />
+        Goitrogens are naturally occurring compounds found in certain plants (especially cruciferous vegetables)
+        that can interfere with iodine uptake in the thyroid. For people with a healthy thyroid, this usually
+        isn’t an issue. But for those with hypothyroidism or autoimmune thyroid conditions like Hashimoto’s,
+        large amounts of raw goitrogenic foods can place additional stress on an already sensitive system.
+        <br /><br />
+        The good news: goitrogens are <strong>heat-sensitive</strong>. Light cooking — even brief steaming —
+        significantly reduces their activity. This means many higher-risk greens don’t need to be avoided;
+        they simply need to be prepared thoughtfully.
+      </div>
+
+      <!-- TABLE -->
       <div class="table-wrap">
         <table>
           <thead>
             <tr>
-              <th>Food</th>
+              <th class="food-col">Food</th>
               <th>Primary Risk Factor</th>
               <th>Risk Level</th>
               <th>Raw OK?</th>
               <th>Prep Method</th>
               <th>Cook Time</th>
-              <th>Notes</th>
+              <th class="notes-col">Notes</th>
             </tr>
           </thead>
 
           <tbody>
-            <!-- LOW RISK (best) -->
             <tr>
-              <td>Romaine</td>
+              <td class="food-col">Romaine</td>
               <td>Goitrogens</td>
               <td>🟢 Low</td>
               <td>Yes</td>
-              <td>Raw (no special prep)</td>
+              <td>Raw</td>
               <td></td>
-              <td>Great base green for daily salads.</td>
+              <td class="notes-col">Excellent daily base green.</td>
             </tr>
 
             <tr>
-              <td>Butter Lettuce</td>
+              <td class="food-col">Butter Lettuce</td>
               <td>Goitrogens</td>
               <td>🟢 Low</td>
               <td>Yes</td>
-              <td>Raw (no special prep)</td>
+              <td>Raw</td>
               <td></td>
-              <td>Gentle, easy on digestion for many people.</td>
+              <td class="notes-col">Very gentle and easy to digest.</td>
             </tr>
 
             <tr>
-              <td>Green Leaf Lettuce</td>
+              <td class="food-col">Arugula</td>
               <td>Goitrogens</td>
               <td>🟢 Low</td>
               <td>Yes</td>
-              <td>Raw (no special prep)</td>
+              <td>Raw</td>
               <td></td>
-              <td>Solid daily base green.</td>
+              <td class="notes-col">Peppery; great rotation green.</td>
             </tr>
 
             <tr>
-              <td>Red Leaf Lettuce</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw (no special prep)</td>
-              <td></td>
-              <td>Another clean base option.</td>
-            </tr>
-
-            <tr>
-              <td>Little Gem</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw (no special prep)</td>
-              <td></td>
-              <td>Crisp + satisfying; easy to build salads around.</td>
-            </tr>
-
-            <tr>
-              <td>Arugula</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw (no special prep)</td>
-              <td></td>
-              <td>Peppery; good rotation green.</td>
-            </tr>
-
-            <tr>
-              <td>Radicchio</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw (no special prep)</td>
-              <td></td>
-              <td>Bitter; great for variety and digestion support.</td>
-            </tr>
-
-            <tr>
-              <td>Endive</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw (no special prep)</td>
-              <td></td>
-              <td>Crunchy + bitter; good salad “boat” green too.</td>
-            </tr>
-
-            <tr>
-              <td>Parsley (as a green)</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw (no special prep)</td>
-              <td></td>
-              <td>Use generously like a base or mix-in (not just garnish).</td>
-            </tr>
-
-            <tr>
-              <td>Cilantro (as a green)</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw (no special prep)</td>
-              <td></td>
-              <td>Great mix-in; rotate if you love it daily.</td>
-            </tr>
-
-            <tr>
-              <td>Basil (as a green)</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw (no special prep)</td>
-              <td></td>
-              <td>Lovely for salads and bowls; use fresh.</td>
-            </tr>
-
-            <!-- MODERATE RISK (crucifers: better cooked) -->
-            <tr>
-              <td>Kale</td>
+              <td class="food-col">Kale</td>
               <td>Goitrogens</td>
               <td>🟡 Moderate</td>
-              <td>No (unless prepped)</td>
-              <td>Steam then chill (quick steam + cold rinse/ice bath)</td>
+              <td>No</td>
+              <td>Steam then chill</td>
               <td>Steam: 45–75 sec</td>
-              <td>Quick cook helps reduce goitrogen activity while keeping texture usable for salads.</td>
+              <td class="notes-col">Quick steam dramatically improves tolerance.</td>
             </tr>
 
             <tr>
-              <td>Broccoli Leaf</td>
+              <td class="food-col">Broccoli Leaf</td>
               <td>Goitrogens</td>
               <td>🟡 Moderate</td>
-              <td>No (unless prepped)</td>
-              <td>Steam then chill (adjust by leaf maturity)</td>
+              <td>No</td>
+              <td>Steam then chill</td>
               <td>Steam: 45–90 sec</td>
-              <td>Older/tougher leaves may need the longer end.</td>
+              <td class="notes-col">Older leaves may need longer steam.</td>
             </tr>
 
             <tr>
-              <td>Collard Greens</td>
+              <td class="food-col">Collard Greens</td>
               <td>Goitrogens</td>
               <td>🟡 Moderate</td>
-              <td>No (unless prepped)</td>
-              <td>Steam then chill (soften more than kale)</td>
+              <td>No</td>
+              <td>Steam then chill</td>
               <td>Steam: 2–3 min</td>
-              <td>More robust leaf; a little extra cook tends to help tolerance.</td>
+              <td class="notes-col">More robust leaf; benefits from extra cooking.</td>
             </tr>
           </tbody>
         </table>
       </div>
-
-      <div class="note">
-        <strong>Quick reminder:</strong> This list is about being strategic, not fearful. If you want crucifer greens,
-        use the <strong>steam-then-chill</strong> method and pay attention to how you feel.
-      </div>
     </section>
-
-    <!-- PLACEHOLDER SECTIONS (so the pills have somewhere to land later) -->
-    <section class="section section-break" id="legumes">
-      <h2>🫘 Legumes (Coming Soon)</h2>
-      <p class="subtext">This section will include lectin load, soak recommendations, pressure-cook times, and best → worst ranking.</p>
-    </section>
-
-    <section class="section section-break" id="grains">
-      <h2>🍚 Grains (Coming Soon)</h2>
-      <p class="subtext">This section will include lectin load, digestibility notes, and prep methods that reduce burden.</p>
-    </section>
-
-    <section class="section section-break" id="fruits">
-      <h2>🍓 Fruits (Coming Soon)</h2>
-      <p class="subtext">This section will include lectin load and tolerance notes (cook time will be blank where not applicable).</p>
-    </section>
-
-    <section class="section section-break" id="nuts">
-      <h2>🥜 Nuts &amp; Seeds (Later)</h2>
-      <p class="subtext">Later expansion: mold risk, oxalates, and prep methods like soaking/sprouting where helpful.</p>
-    </section>
-
   </main>
 
   <footer>
