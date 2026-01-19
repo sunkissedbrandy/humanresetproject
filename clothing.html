@@ -5,23 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clothing | Human Reset Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
     html { scroll-behavior: smooth; }
-    body { font-family: 'Inter', sans-serif; background: #f4f4f4; color: #222; padding: 0; margin: 0; line-height: 1.6; }
-    header { position: sticky; top: 0; background: #ffffffcc; backdrop-filter: blur(6px); z-index: 1000; text-align: center; padding: 1rem 0.5rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    header h1 { font-size: 1.8rem; margin: 0.5rem 0; color: #0a3d62; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f4f4f4;
+      color: #222;
+      padding: 0;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    header {
+      position: sticky;
+      top: 0;
+      background: #ffffffcc;
+      backdrop-filter: blur(6px);
+      z-index: 1000;
+      text-align: center;
+      padding: 1rem 0.5rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin: 0.5rem 0;
+      color: #0a3d62;
+    }
+
     nav { margin-top: 0.5rem; }
-    nav a { color: #0a3d62; margin: 0 10px; font-weight: 600; text-decoration: none; padding: 4px 8px; border-radius: 6px; transition: background-color 0.3s ease, color 0.3s ease; display: inline-block; }
+
+    nav a {
+      color: #0a3d62;
+      margin: 0 10px;
+      font-weight: 600;
+      text-decoration: none;
+      padding: 4px 8px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      display: inline-block;
+    }
+
     nav a:hover { background-color: #eaf4ee; color: #063b4d; }
-    main { padding: 2rem 1rem 4rem; max-width: 800px; margin: 0 auto; }
-    .section { background: #fff; padding: 1.5rem; border-radius: 10px; box-shadow: 0 3px 8px rgba(0,0,0,0.05); margin-bottom: 2rem; }
-    h2 { margin-top: 0; font-size: 1.5rem; color: #0a3d62; }
+
+    /* Layout */
+    main {
+      padding: 2rem 1rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .section {
+      background: #fff;
+      padding: 1.75rem;
+      border-radius: 12px;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+      margin-bottom: 0;
+    }
+
+    /* Intentional pause between sections (consistent with your other updated tabs) */
+    .section-break { margin-top: 1.5rem; }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      color: #0a3d62;
+    }
+
     a { color: #0a3d62; text-decoration: underline; }
-    .cta { margin-top: 1rem; padding: 0.9rem 1rem; border-radius: 10px; background: #f7f7f7; border: 1px solid #e5e5e5; }
-    footer { text-align: center; background: #eaf4ee; padding: 1rem; font-size: 0.9rem; color: #444; }
+
+    /* Soft green callout (same visual language as Farmers / Food Sensitivity Guide) */
+    .note {
+      background: #eaf4ee;
+      border: 1px solid #cfe5d7;
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
+      margin-top: 1rem;
+    }
+
+    .cta {
+      margin-top: 1.25rem;
+      padding: 0.9rem 1rem;
+      border-radius: 12px;
+      background: #f7f7f7;
+      border: 1px solid #e5e5e5;
+    }
+
+    footer {
+      text-align: center;
+      background: #eaf4ee;
+      padding: 1rem;
+      font-size: 0.9rem;
+      color: #444;
+    }
+
     footer span { color: #0a3d62; }
   </style>
 </head>
+
 <body>
   <header>
     <h1>🌿 Human Reset Project</h1>
@@ -39,20 +123,41 @@
   </header>
 
   <main>
+    <!-- SECTION 1: Main Clothing Education (wording pulled directly from your factoids; no edits) -->
     <section class="section">
-      <h2>👕 Clothing</h2>
+      <h2>👕 Clothing: What Your Skin Lives In</h2>
 
       <p>
-        Clothing is one of the most overlooked daily exposures. Synthetic fabrics, harsh dyes, and chemical
-        finishes can contribute to skin irritation and increase overall chemical burden — especially for people
-        with sensitivities.
+        Clothing is one of the most overlooked daily exposures. Synthetic fabrics, harsh dyes, and chemical finishes can contribute to skin irritation and increase overall chemical burden — especially for people with sensitivities. Because clothing sits directly on the skin for hours at a time, what it’s made of matters far more than most of us were ever taught to consider.
       </p>
 
       <p>
-        The simplest upgrade is choosing more natural fibers (cotton, linen, hemp, wool, alpaca) and supporting
-        brands that are transparent about materials and manufacturing.
+        Today, the majority of modern clothing is made from plastic-based fibers like polyester, nylon, acrylic, and elastane. These materials don’t breathe, trap heat and moisture, and can create the perfect environment for odor-causing bacteria — which is why synthetic athletic wear often smells worse over time, even after washing. Many garments are also treated with chemical finishes to make them wrinkle-resistant, stain-resistant, or “performance-enhanced,” adding another layer of exposure right where absorption is highest.
       </p>
 
+      <p>
+        Natural fibers tell a different story. Fabrics like cotton, linen, hemp, wool, and alpaca are inherently breathable, temperature-regulating, and more compatible with human skin. They allow heat and moisture to move out of the body instead of trapping it against the skin, which can support comfort, reduce odor, and minimize irritation. For people dealing with eczema, rashes, hormone issues, or chemical sensitivities, this shift alone can be surprisingly impactful.
+      </p>
+
+      <p>
+        The goal isn’t to throw out your entire closet overnight. It’s awareness and gradual replacement. Start by prioritizing natural fibers for the pieces you wear closest to your body and for the longest periods of time — underwear, sleepwear, socks, and everyday basics. Over time, choosing well-made, thoughtfully sourced clothing made from natural materials supports not only your personal health, but also a more sustainable and transparent clothing industry.
+      </p>
+    </section>
+
+    <!-- SECTION 2: Start Here (Low-Stress Upgrades) (wording pulled directly from your factoids; no edits) -->
+    <section class="section section-break">
+      <h2>🌿 Start Here (Low-Stress Upgrades)</h2>
+
+      <!-- Kept as individual lines (not reworded) but styled as a soft callout for readability -->
+      <div class="note">
+        <p style="margin: 0 0 0.75rem 0;">Check labels — aim for higher percentages of natural fibers</p>
+        <p style="margin: 0 0 0.75rem 0;">Prioritize underwear, sleepwear, and workout alternatives first</p>
+        <p style="margin: 0 0 0.75rem 0;">Wash new clothes before wearing to reduce residual chemicals</p>
+        <p style="margin: 0 0 0.75rem 0;">Support brands that disclose materials and manufacturing practices</p>
+        <p style="margin: 0;">Clothing doesn’t have to be “perfect” to be supportive. Small, intentional shifts can reduce daily stress on the body and bring your wardrobe back into alignment with how your skin — and biology — actually function.</p>
+      </div>
+
+      <!-- CTA (kept from your current Clothing page) -->
       <div class="cta">
         <strong>Want the brands I personally use and trust?</strong><br />
         👉 Go to the <a href="vetting-log.html">Vetting Log</a> and use the dropdown filter to browse categories.
@@ -65,4 +170,3 @@
   </footer>
 </body>
 </html>
-
