@@ -40,6 +40,8 @@ Kitchen Appliances,Rice Cooker,Approved,"<a href=""https://cuchenusamall.com/pro
 Kitchen Appliances,Rice Cooker,Rejected,Zojirushi Neuro Fuzzy,"Excellent performance but not non-toxic"
 Oral Health,Floss,Approved,"<a href=""https://www.terraco.co"" target=""_blank"" rel=""noopener noreferrer"">Terra & Co Floss</a>","Clean oral care without synthetic fibers"
 Oral Health,Toothpaste,Approved,"<a href=""https://risewell.com"" target=""_blank"" rel=""noopener noreferrer"">RiseWell Toothpaste</a>","Supports remineralization without harsh ingredients"
+Oral Health,Toothpaste,Approved,"<a href=""https://yayzebra.com/products/the-toothpaste-mint?srsltid=AfmBOoo2lJ50fMag8IBz0Jlc9pTw2WqvfRhpewloORbXPG9tgsTG-PvF"" target=""_blank"" rel=""noopener noreferrer""> Yay Zebra Toothpaste</a>","Non-toxic, hydroxyapatite-free toothpaste formulated with xylitol and gentle mineral abrasives to support oral health and cavity prevention without synthetic foaming agents, fluoride, or undisclosed fragrance."
+Oral Health,Toothbrush,Approved,"<a href=""https://yayzebra.com/products/the-toothbrush?variant=44876943294640"" target=""_blank"" rel=""noopener noreferrer"">Yay Zebra's Boar Bristle Toothbrush</a>","Handcrafted toothbrush made with ethically sourced boar bristles and a sustainably sourced handle, offering a fully plastic-free brushing option that naturally softens with use while avoiding synthetic nylon bristles and microplastic exposure."
 Oral Health,Floss,Rejected,"<a href=""https://www.dentallace.com"" target=""_blank"" rel=""noopener noreferrer"">Dental Lace Synthetic Floss</a>","Contains synthetic plastic fibers (polyester)."
 Oral Health,Oil Pulling,Approved,"<a href=""https://www.simplyo3.com/products/ozone-pulling-solution"" target=""_blank"" rel=""noopener noreferrer"">Ozone Oil Pulling</a>","Ozonated oil blend to support oral detox and gum health."
 Pet Care,Raw Food,Approved,"<a href=""https://ocraw.com/product/rabbit-produce/"" target=""_blank"" rel=""noopener noreferrer"">OC Raw Rabbit & Produce (for Cats & Dogs)</a>","Base diet staple"
@@ -63,7 +65,8 @@ Skin Care,Lips,Approved,"<a href=""https://primallypure.com/products/lip-balm?va
 Skin Care,Sun,Approved,"<a href=""https://primallypure.com/collections/sunscreen"" target=""_blank"" rel=""noopener noreferrer"">Primally Pure Sunscreen</a>","Mineral-based sun protection without the common chemical-filter concerns."
 Skin Care,Outdoor,Approved,"<a href=""https://primallypure.com/products/nature-spray?_pos=1&_sid=e0ceaef46&_ss=r"" target=""_blank"" rel=""noopener noreferrer"">Primally Pure Bug Spray</a>","Plant-based bug defense that avoids conventional pesticide-heavy formulas."
 Skin Care,Body,Approved,"<a href=""https://primallypure.com/collections/body-oils"" target=""_blank"" rel=""noopener noreferrer"">Primally Pure Body Oil</a>","High quality carrier oils infused with organic essential oils leave skin radiant without leaving behind any oily residue."
-Skin Care,Body,Approved,"<a href=""https://underluna.com/collections/ul-hair-care"" target=""_blank"" rel=""noopener noreferrer"">Under Luna Shampoo & Conditioner</a>","Therapeutic, herbal hair care formulated with plant saponins, fermented preservation, and zero synthetic fragrance or polymers, prioritizing scalp health and biological compatibility over cosmetic shortcuts."
+Hair Care,Body,Approved,"<a href=""https://underluna.com/collections/ul-hair-care"" target=""_blank"" rel=""noopener noreferrer"">Under Luna Shampoo & Conditioner</a>","Therapeutic, herbal hair care formulated with plant saponins, fermented preservation, and zero synthetic fragrance or polymers, prioritizing scalp health and biological compatibility over cosmetic shortcuts."
+
 
 
 
