@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Pet Wellness | Human Reset Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+
   <style>
     html { scroll-behavior: smooth; }
+
     body {
       font-family: 'Inter', sans-serif;
       background: #f4f4f4;
@@ -15,6 +17,8 @@
       margin: 0;
       line-height: 1.6;
     }
+
+    /* Header */
     header {
       position: sticky;
       top: 0;
@@ -25,12 +29,15 @@
       padding: 1rem 0.5rem;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
     }
+
     header h1 {
       font-size: 1.8rem;
       margin: 0.5rem 0;
       color: #0a3d62;
     }
+
     nav { margin-top: 0.5rem; }
+
     nav a {
       color: #0a3d62;
       margin: 0 10px;
@@ -41,27 +48,53 @@
       transition: background-color 0.3s ease, color 0.3s ease;
       display: inline-block;
     }
+
     nav a:hover { background-color: #eaf4ee; color: #063b4d; }
 
+    /* Layout */
     main {
       padding: 2rem 1rem 4rem;
-      max-width: 800px;
+      max-width: 900px;
       margin: 0 auto;
     }
+
     .section {
       background: #fff;
-      padding: 1.5rem;
-      border-radius: 10px;
+      padding: 1.75rem;
+      border-radius: 12px;
       box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
-      margin-bottom: 2rem;
+      margin-bottom: 0;
     }
-    h2 { margin-top: 0; font-size: 1.5rem; color: #0a3d62; }
+
+    .section-break { margin-top: 1.5rem; }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+      color: #0a3d62;
+    }
+
+    h3 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      color: #0a3d62;
+    }
+
     a { color: #0a3d62; text-decoration: underline; }
 
-    .cta {
+    /* Soft green callout boxes */
+    .note {
+      background: #eaf4ee;
+      border: 1px solid #cfe5d7;
+      border-radius: 12px;
+      padding: 1rem 1.1rem;
       margin-top: 1rem;
+    }
+
+    .cta {
+      margin-top: 1.25rem;
       padding: 0.9rem 1rem;
-      border-radius: 10px;
+      border-radius: 12px;
       background: #f7f7f7;
       border: 1px solid #e5e5e5;
     }
@@ -73,6 +106,7 @@
       font-size: 0.9rem;
       color: #444;
     }
+
     footer span { color: #0a3d62; }
   </style>
 </head>
@@ -94,6 +128,7 @@
   </header>
 
   <main>
+    <!-- INTRO -->
     <section class="section">
       <h2>🐾 Pet Wellness</h2>
 
@@ -123,7 +158,109 @@
         alongside existing diets—can be a meaningful step toward improving a pet’s health without needing to be
         all-or-nothing.
       </p>
+    </section>
 
+    <!-- HUMAN-GRADE -->
+    <section class="section section-break">
+      <h3>🍖 Why “Human-Grade” Matters</h3>
+
+      <p>
+        According to holistic veterinarians like Dr. Karen Becker, a significant portion of conventional
+        commercial pet food is made using ingredients that were rejected from the human food supply and diverted
+        into pet food instead. These ingredients may still contain pesticide residues, mycotoxins (from
+        mold-contaminated grains), or degraded proteins — yet are legally permitted in pet food due to looser
+        regulatory standards.
+      </p>
+
+      <p>
+        Human-grade pet food is different. It means the ingredients are:
+      </p>
+
+      <ul>
+        <li>Sourced from suppliers approved for human consumption</li>
+        <li>Prepared in human food facilities</li>
+        <li>Held to higher standards for freshness, cleanliness, and traceability</li>
+      </ul>
+
+      <p>
+        Feeding human-grade or gently cooked/raw foods doesn’t require perfection — even partial upgrades can
+        significantly reduce a pet’s toxic and inflammatory burden over time.
+      </p>
+    </section>
+
+    <!-- ESSENTIAL OILS -->
+    <section class="section section-break">
+      <h3>🌿 Essential Oils & Pets: Safety First</h3>
+
+      <p>
+        Essential oils are powerful plant compounds — and while some can be supportive, many are unsafe or even
+        toxic for pets, especially cats. Cats lack certain liver enzymes needed to process concentrated plant
+        oils, making them particularly sensitive.
+      </p>
+
+      <p><strong>Generally considered safer options (when properly diluted and used cautiously):</strong></p>
+      <ul>
+        <li>Frankincense</li>
+        <li>Lavender (true lavender, not blends)</li>
+        <li>Copaiba</li>
+        <li>Helichrysum</li>
+      </ul>
+
+      <p><strong>Common oils to avoid around pets:</strong></p>
+      <ul>
+        <li>Tea tree (melaleuca)</li>
+        <li>Eucalyptus</li>
+        <li>Peppermint</li>
+        <li>Clove</li>
+        <li>Cinnamon</li>
+        <li>Citrus oils</li>
+      </ul>
+
+      <p>
+        Essential oils should never be applied directly to pets, diffused in enclosed spaces, or used without
+        proper education. Less is more — and when in doubt, skip them entirely.
+      </p>
+    </section>
+
+    <!-- 5 STEPS -->
+    <section class="section section-break">
+      <h3>🐶🐱 5 Simple Steps to Improve Your Pet’s Health</h3>
+
+      <ol>
+        <li><strong>Upgrade water quality</strong><br />
+          Provide filtered or spring water instead of tap to reduce chlorine, heavy metals, and chemical residues.
+        </li>
+        <li><strong>Add fresh food to the bowl</strong><br />
+          Even small additions — fresh meat, sardines, eggs, or gently cooked foods — improve nutrient density
+          and hydration.
+        </li>
+        <li><strong>Rotate proteins</strong><br />
+          Avoid feeding the same protein every day to reduce food sensitivities and support a more resilient
+          immune system.
+        </li>
+        <li><strong>Choose non-toxic cleaners & bedding</strong><br />
+          Pets live close to the floor and groom themselves — reducing chemical cleaners, fragrances, and treated
+          fabrics matters.
+        </li>
+        <li><strong>Support the body, not just symptoms</strong><br />
+          Focus on gut health, mineral balance, movement, sunlight, and emotional wellbeing — the foundations
+          that allow healing to happen.
+        </li>
+      </ol>
+    </section>
+
+    <!-- BIG PICTURE -->
+    <section class="section section-break">
+      <h3>🧡 The Big Picture</h3>
+
+      <p>
+        Pet wellness isn’t about chasing trends or achieving perfection — it’s about reducing unnecessary stress
+        on the body and supporting biology the way nature intended. When we clean up what our pets eat, drink,
+        breathe, and rest on, we often see improvements not just in lifespan, but in energy, behavior, digestion,
+        skin, and overall quality of life.
+      </p>
+
+      <!-- CTA (kept exactly as requested) -->
       <div class="cta">
         <strong>Want the exact foods, treats, and tools I personally use and trust?</strong><br />
         👉 Go to the <a href="vetting-log.html">Vetting Log</a> and use the dropdown filter to select <strong>Pet Care</strong>.
@@ -136,4 +273,3 @@
   </footer>
 </body>
 </html>
-
