@@ -1,12 +1,12 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Food Sensitivity Guide | Human Reset Project</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Food Sensitivity Guide | Human Reset Project</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&amp;display=swap" rel="stylesheet"/>
+<style>
     html { scroll-behavior: smooth; }
 
     body {
@@ -181,867 +181,1003 @@
     }
 
     footer span { color: #0a3d62; }
-  </style>
+  
+
+/* Sort + Filter enhancements (Food Sensitivity Guide tables) */
+table.data-table thead th.sortable {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* subtle sort chevrons */
+table.data-table thead th.sortable::after {
+  content: " ⇅";
+  font-weight: 400;
+  opacity: 0.35;
+}
+
+table.data-table thead th.sortable.sorted-asc::after {
+  content: " ↑";
+  opacity: 0.7;
+}
+
+table.data-table thead th.sortable.sorted-desc::after {
+  content: " ↓";
+  opacity: 0.7;
+}
+
+/* Filter row (stays “frozen” under the header row) */
+table.data-table thead tr.filter-row th {
+  position: sticky;
+  top: var(--header-row-height, 44px);
+  z-index: 2;
+  background: #f7fbf8;
+  border-bottom: 1px solid #d6eadf;
+  padding: 8px 12px;
+}
+
+table.data-table thead tr.filter-row input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  outline: none;
+}
+
+table.data-table thead tr.filter-row input:focus {
+  border-color: #0a3d62;
+  box-shadow: 0 0 0 2px rgba(10, 61, 98, 0.12);
+}
+</style>
 </head>
-
 <body>
-  <header>
-    <h1>🌿 Human Reset Project</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="supplements.html">Supplements</a>
-      <a href="food-sensitivity-guide.html">Food Sensitivity Guide</a>
-      <a href="the-farm.html">The Farm</a>
-      <a href="pet-wellness.html">Pet Wellness</a>
-      <a href="home-health.html">Home Health</a>
-      <a href="oral-health.html">Oral Health</a>
-      <a href="clothing.html">Clothing</a>
-      <a href="vetting-log.html">🧾 Vetting Log</a>
-    </nav>
-  </header>
-
-  <main>
-    <!-- SECTION 1: Intro -->
-    <section class="section">
-      <h2>🍃 Food Sensitivity Guide</h2>
-
-      <p class="subtext">
+<header>
+<h1>🌿 Human Reset Project</h1>
+<nav>
+<a href="index.html">Home</a>
+<a href="supplements.html">Supplements</a>
+<a href="food-sensitivity-guide.html">Food Sensitivity Guide</a>
+<a href="the-farm.html">The Farm</a>
+<a href="pet-wellness.html">Pet Wellness</a>
+<a href="home-health.html">Home Health</a>
+<a href="oral-health.html">Oral Health</a>
+<a href="clothing.html">Clothing</a>
+<a href="vetting-log.html">🧾 Vetting Log</a>
+</nav>
+</header>
+<main>
+<!-- SECTION 1: Intro -->
+<section class="section">
+<h2>🍃 Food Sensitivity Guide</h2>
+<p class="subtext">
         This is a quick-reference guide for people who want to reduce dietary stressors, improve digestion,
         lower inflammation, and support overall resilience — without fear, perfection, or unnecessary restriction.
         Some items here are especially relevant for thyroid-sensitive or autoimmune-prone folks, but the core idea
         applies broadly: <strong>tolerance often improves with smarter prep methods</strong>
-      </p>
-
-      <div class="note">
-        <strong>Common trigger foods (worth being aware of):</strong><br />
+</p>
+<div class="note">
+<strong>Common trigger foods (worth being aware of):</strong><br/>
         When people are troubleshooting symptoms (bloating, fatigue, skin flares, headaches, joint pain, congestion,
         mood swings, etc.), some of the most common “trial removals” include:
         <strong>gluten</strong>, <strong>dairy</strong>, <strong>soy</strong>, <strong>corn</strong>, <strong>alcohol</strong>,and often <strong>eggs</strong>
         or highly processed oils/additives. This guide doesn’t replace experimentation — it helps you make cleaner
         choices while you learn what your body loves.
       </div>
-
-      <div class="note">
-        <strong>How to use this:</strong><br />
+<div class="note">
+<strong>How to use this:</strong><br/>
         Start with the foods ranked lower risk. If something you love shows up as higher risk, check the
         <strong>Prep Method</strong> and <strong>Cook Time</strong> — those details often make the difference between
         “nope” and “totally fine.”
       </div>
-
-      <!-- QUICK NAV -->
-      <div class="pill-row" aria-label="Food Sensitivity Guide Sections">
-        <a class="pill active" href="#greens">Greens</a>
-        <a class="pill" href="#vegetables">Vegetables</a>
-        <a class="pill" href="#fruits">Fruits</a>
-        <a class="pill" href="#legumes">Legumes</a>
-        <a class="pill" href="#grains">Grains</a>
-        <a class="pill" href="#nuts">Nuts</a>
-        <a class="pill" href="#seeds">Seeds</a>
-        <a class="pill" href="#spices">Spices</a>
-        <a class="pill" href="#tea">Tea &amp; Drinks</a>
-      </div>
-    </section>
-
-    <!-- SECTION 2: GREENS -->
-    <section class="section section-break" id="greens">
-      <h2>🥬 Greens (ranked best → worst)</h2>
-
-      <p class="subtext">
+<!-- QUICK NAV -->
+<div aria-label="Food Sensitivity Guide Sections" class="pill-row">
+<a class="pill active" href="#greens">Greens</a>
+<a class="pill" href="#vegetables">Vegetables</a>
+<a class="pill" href="#fruits">Fruits</a>
+<a class="pill" href="#legumes">Legumes</a>
+<a class="pill" href="#grains">Grains</a>
+<a class="pill" href="#nuts">Nuts</a>
+<a class="pill" href="#seeds">Seeds</a>
+<a class="pill" href="#spices">Spices</a>
+<a class="pill" href="#tea">Tea &amp; Drinks</a>
+</div>
+</section>
+<!-- SECTION 2: GREENS -->
+<section class="section section-break" id="greens">
+<h2>🥬 Greens (ranked best → worst)</h2>
+<p class="subtext">
         Primary risk factor here is <strong>goitrogens</strong> (especially relevant for thyroid-sensitive people).
       </p>
-
-      <div class="note">
-        <strong>Why goitrogens matter:</strong><br />
+<div class="note">
+<strong>Why goitrogens matter:</strong><br/>
         Goitrogens are naturally occurring compounds found in certain plants (especially cruciferous vegetables)
         that can reduce iodine uptake in the thyroid. For many people, this isn’t a big deal. But if someone has
         thyroid sensitivity (or low iodine status), large amounts of raw goitrogenic foods can add extra strain.
-        <br /><br />
+        <br/><br/>
         The good news: goitrogens are <strong>heat-sensitive</strong>. Light cooking — even brief steaming —
         significantly reduces their activity. Many “higher-risk” greens don’t need to be avoided; they simply do
         better with thoughtful prep.
       </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th class="food-col">Food</th>
-              <th>Primary Risk Factor</th>
-              <th>Risk Level</th>
-              <th>Raw OK?</th>
-              <th>Prep Method</th>
-              <th>Cook Time</th>
-              <th class="notes-col">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="food-col">Romaine</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Excellent daily base green.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Butter Lettuce</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Very gentle and easy to digest for many people.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Green/Red Leaf Lettuce</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Great rotation base greens.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Arugula</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Peppery; Bitter greens stimulate digestion and bile flow, supporting gut health and nutrient absorption.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Endive / Radicchio</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Bitter greens can be very supportive for digestion.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Basil</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Use generously as greens (not just garnish). Naturally antimicrobial and calming, basil supports digestion and helps reduce oxidative stress.</td>
-            </tr>
-              <tr>
-              <td class="food-col">Cilantro</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Use generously as greens (not just garnish). Supports gentle detoxification and digestion, and may help bind certain environmental toxins.</td>
-            </tr>
-              <tr>
-              <td class="food-col">Parsley</td>
-              <td>Goitrogens</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Use generously as greens (not just garnish). Rich in chlorophyll and vitamin C, parsley supports detox pathways and freshens digestion.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Kale</td>
-              <td>Goitrogens</td>
-              <td>🟡 Moderate</td>
-              <td>No</td>
-              <td>Steam then chill</td>
-              <td>Steam: 45–75 sec</td>
-              <td class="notes-col">Light cooking improves mineral availability while preserving antioxidants that support cellular and immune health.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Broccoli Leaf</td>
-              <td>Goitrogens</td>
-              <td>🟡 Moderate</td>
-              <td>No</td>
-              <td>Steam then chill</td>
-              <td>Steam: 45–90 sec</td>
-              <td class="notes-col">When cooked, broccoli leaves provide fiber and sulfur compounds that support detoxification and gut health.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Collard Greens</td>
-              <td>Goitrogens</td>
-              <td>🟡 Moderate</td>
-              <td>No</td>
-              <td>Steam then chill</td>
-              <td>Steam: 2–3 min</td>
-              <td class="notes-col">Steaming softens fibers and enhances calcium and magnesium absorption for bone and muscle support.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Spinach</td>
-              <td>Goitrogens</td>
-              <td>🟡 Moderate</td>
-              <td>Sometimes</td>
-              <td>Light cook preferred</td>
-              <td>Steam/Sauté: 1–2 min</td>
-              <td class="notes-col">Cooking reduces oxalates and concentrates iron and folate for better absorption.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Cabbage</td>
-              <td>Goitrogens</td>
-              <td>🟡 Moderate</td>
-              <td>No</td>
-              <td>Cooked preferred</td>
-              <td>Steam/Sauté: 3–6 min</td>
-              <td class="notes-col">Gentle cooking makes cabbage easier to digest while supporting gut lining and immune function.</td>
-            </tr>
-              <tr>
-              <td class="food-col">Mustard Greens</td>
-              <td>Goitrogens</td>
-              <td>🟡 Moderate</td>
-              <td>No</td>
-              <td>Cooked preferred</td>
-              <td>Steam/Sauté: 3–6 min</td>
-              <td class="notes-col">Cooking tames pungency while retaining compounds that support circulation and liver detox pathways.</td>
-            </tr>
-              <tr>
-              <td class="food-col">Tatsoi</td>
-              <td>Goitrogens</td>
-              <td>🟡 Moderate</td>
-              <td>No</td>
-              <td>Cooked preferred</td>
-              <td>Steam/Sauté: 3–6 min</td>
-              <td class="notes-col">Light heat preserves antioxidants while improving digestibility and mineral uptake.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECTION 3: VEGETABLES -->
-    <section class="section section-break" id="vegetables">
-      <h2>🥕 Vegetables (ranked best → worst)</h2>
-
-      <p class="subtext">
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th class="food-col">Food</th>
+<th>Primary Risk Factor</th>
+<th>Risk Level</th>
+<th>Raw OK?</th>
+<th>Prep Method</th>
+<th>Cook Time</th>
+<th class="notes-col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="food-col">Romaine</td>
+<td>Goitrogens</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Excellent daily base green.</td>
+</tr>
+<tr>
+<td class="food-col">Butter Lettuce</td>
+<td>Goitrogens</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Very gentle and easy to digest for many people.</td>
+</tr>
+<tr>
+<td class="food-col">Green/Red Leaf Lettuce</td>
+<td>Goitrogens</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Great rotation base greens.</td>
+</tr>
+<tr>
+<td class="food-col">Arugula</td>
+<td>Goitrogens</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Peppery; Bitter greens stimulate digestion and bile flow, supporting gut health and nutrient absorption.</td>
+</tr>
+<tr>
+<td class="food-col">Endive / Radicchio</td>
+<td>Goitrogens</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Bitter greens can be very supportive for digestion.</td>
+</tr>
+<tr>
+<td class="food-col">Basil</td>
+<td>Goitrogens</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Use generously as greens (not just garnish). Naturally antimicrobial and calming, basil supports digestion and helps reduce oxidative stress.</td>
+</tr>
+<tr>
+<td class="food-col">Cilantro</td>
+<td>Goitrogens</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Use generously as greens (not just garnish). Supports gentle detoxification and digestion, and may help bind certain environmental toxins.</td>
+</tr>
+<tr>
+<td class="food-col">Parsley</td>
+<td>Goitrogens</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Use generously as greens (not just garnish). Rich in chlorophyll and vitamin C, parsley supports detox pathways and freshens digestion.</td>
+</tr>
+<tr>
+<td class="food-col">Kale</td>
+<td>Goitrogens</td>
+<td>🟡 Moderate</td>
+<td>No</td>
+<td>Steam then chill</td>
+<td>Steam: 45–75 sec</td>
+<td class="notes-col">Light cooking improves mineral availability while preserving antioxidants that support cellular and immune health.</td>
+</tr>
+<tr>
+<td class="food-col">Broccoli Leaf</td>
+<td>Goitrogens</td>
+<td>🟡 Moderate</td>
+<td>No</td>
+<td>Steam then chill</td>
+<td>Steam: 45–90 sec</td>
+<td class="notes-col">When cooked, broccoli leaves provide fiber and sulfur compounds that support detoxification and gut health.</td>
+</tr>
+<tr>
+<td class="food-col">Collard Greens</td>
+<td>Goitrogens</td>
+<td>🟡 Moderate</td>
+<td>No</td>
+<td>Steam then chill</td>
+<td>Steam: 2–3 min</td>
+<td class="notes-col">Steaming softens fibers and enhances calcium and magnesium absorption for bone and muscle support.</td>
+</tr>
+<tr>
+<td class="food-col">Spinach</td>
+<td>Goitrogens</td>
+<td>🟡 Moderate</td>
+<td>Sometimes</td>
+<td>Light cook preferred</td>
+<td>Steam/Sauté: 1–2 min</td>
+<td class="notes-col">Cooking reduces oxalates and concentrates iron and folate for better absorption.</td>
+</tr>
+<tr>
+<td class="food-col">Cabbage</td>
+<td>Goitrogens</td>
+<td>🟡 Moderate</td>
+<td>No</td>
+<td>Cooked preferred</td>
+<td>Steam/Sauté: 3–6 min</td>
+<td class="notes-col">Gentle cooking makes cabbage easier to digest while supporting gut lining and immune function.</td>
+</tr>
+<tr>
+<td class="food-col">Mustard Greens</td>
+<td>Goitrogens</td>
+<td>🟡 Moderate</td>
+<td>No</td>
+<td>Cooked preferred</td>
+<td>Steam/Sauté: 3–6 min</td>
+<td class="notes-col">Cooking tames pungency while retaining compounds that support circulation and liver detox pathways.</td>
+</tr>
+<tr>
+<td class="food-col">Tatsoi</td>
+<td>Goitrogens</td>
+<td>🟡 Moderate</td>
+<td>No</td>
+<td>Cooked preferred</td>
+<td>Steam/Sauté: 3–6 min</td>
+<td class="notes-col">Light heat preserves antioxidants while improving digestibility and mineral uptake.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- SECTION 3: VEGETABLES -->
+<section class="section section-break" id="vegetables">
+<h2>🥕 Vegetables (ranked best → worst)</h2>
+<p class="subtext">
         This category blends a few common sensitivity patterns: nightshades, soy-based items,
         and general “easy wins” that tend to be well tolerated. Nightshade sensitivity varies widely — some people tolerate cooked forms well, while others benefit from avoidance during periods of inflammation.
       </p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th class="food-col">Food</th>
-              <th>Primary Risk Factor</th>
-              <th>Risk Level</th>
-              <th>Raw OK?</th>
-              <th>Prep Method</th>
-              <th>Cook Time</th>
-              <th class="notes-col">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="food-col">Cucumbers</td>
-              <td>None</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">High water content supports hydration and digestion while being naturally low in irritants.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Carrots</td>
-              <td>None</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw or cooked</td>
-              <td>Roast/Steam: 8–20 min</td>
-              <td class="notes-col">Rich in beta-carotene and gentle fiber, carrots support gut health and skin without triggering inflammation.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Zucchini</td>
-              <td>None</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw or cooked</td>
-              <td>Sauté: 4–6 min</td>
-              <td class="notes-col">Soft fibers and high water content make zucchini easy to digest and supportive of gut healing.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Squash (most types)</td>
-              <td>None</td>
-              <td>🟢 Low</td>
-              <td>Usually</td>
-              <td>Cooked preferred</td>
-              <td>Roast: 25–45 min</td>
-              <td class="notes-col">Comfort food for the gut; great base carb for many.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Sweet Potato</td>
-              <td>Carb load</td>
-              <td>🟢 Low</td>
-              <td>No</td>
-              <td>Cooked</td>
-              <td>Bake: 45–60 min</td>
-              <td class="notes-col">Usually a strong “safe starch” for many people.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Hearts of Palm</td>
-              <td>Individual tolerance</td>
-              <td>🟡 Moderate</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">While generally low-reactive, hearts of palm are fibrous and can be difficult for sensitive digestion if eaten in large amounts or raw.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Purple Onions</td>
-              <td>Individual tolerance</td>
-              <td>🟡 Moderate</td>
-              <td>Yes</td>
-              <td>Raw or cooked</td>
-              <td>Sauté: 6–10 min</td>
-              <td class="notes-col">Contain fermentable carbohydrates (FODMAPs) that may cause bloating or discomfort in sensitive individuals, especially when raw.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Potatoes</td>
-              <td>Nightshade</td>
-              <td>🟡 Moderate</td>
-              <td>No</td>
-              <td>Cooked</td>
-              <td>Boil: 15–25 min OR Roast 425°F: 30-45 min</td>
-              <td class="notes-col">Often well tolerated when properly stored (away from sunlight), peeled, and fully cooked. Avoid green or sprouted potatoes. Provides clean carbohydrates and potassium; best eaten with fat and salt.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Tomato</td>
-              <td>Nightshade</td>
-              <td>🔴 High</td>
-              <td>Yes</td>
-              <td>Raw or cooked</td>
-              <td>Simmer: 15–45 min</td>
-              <td class="notes-col">As a nightshade, tomatoes contain alkaloids that may promote inflammation or immune reactivity in sensitive individuals; often worth avoiding during sensitivity “reset” phases.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Eggplant</td>
-              <td>Nightshade</td>
-              <td>🔴 High</td>
-              <td>No</td>
-              <td>Cooked</td>
-              <td>Roast: 25–40 min</td>
-              <td class="notes-col">Nightshade alkaloids and lectins in eggplant can aggravate inflammation and digestive discomfort for some people; often worth avoiding during sensitivity “reset” phases.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Bell Peppers</td>
-              <td>Nightshade</td>
-              <td>🔴 High</td>
-              <td>Yes</td>
-              <td>Cooked preferred</td>
-              <td>Roast/Sauté: 8–20 min</td>
-              <td class="notes-col">Even when sweet, bell peppers are nightshades and may trigger immune or inflammatory responses in sensitive individuals.; often worth avoiding during sensitivity “reset” phases.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Edamame / Soybeans</td>
-              <td>Soy sensitivity</td>
-              <td>🔴 High</td>
-              <td>No</td>
-              <td>Cooked</td>
-              <td>Boil: 5–8 min</td>
-              <td class="notes-col">Soy is a common trigger; can also interfere with thyroid hormone uptake for some people.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECTION 4: FRUITS -->
-    <section class="section section-break" id="fruits">
-      <h2>🍓 Fruits (ranked best → worst)</h2>
-
-      <p class="subtext">
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th class="food-col">Food</th>
+<th>Primary Risk Factor</th>
+<th>Risk Level</th>
+<th>Raw OK?</th>
+<th>Prep Method</th>
+<th>Cook Time</th>
+<th class="notes-col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="food-col">Cucumbers</td>
+<td>None</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">High water content supports hydration and digestion while being naturally low in irritants.</td>
+</tr>
+<tr>
+<td class="food-col">Carrots</td>
+<td>None</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw or cooked</td>
+<td>Roast/Steam: 8–20 min</td>
+<td class="notes-col">Rich in beta-carotene and gentle fiber, carrots support gut health and skin without triggering inflammation.</td>
+</tr>
+<tr>
+<td class="food-col">Zucchini</td>
+<td>None</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw or cooked</td>
+<td>Sauté: 4–6 min</td>
+<td class="notes-col">Soft fibers and high water content make zucchini easy to digest and supportive of gut healing.</td>
+</tr>
+<tr>
+<td class="food-col">Squash (most types)</td>
+<td>None</td>
+<td>🟢 Low</td>
+<td>Usually</td>
+<td>Cooked preferred</td>
+<td>Roast: 25–45 min</td>
+<td class="notes-col">Comfort food for the gut; great base carb for many.</td>
+</tr>
+<tr>
+<td class="food-col">Sweet Potato</td>
+<td>Carb load</td>
+<td>🟢 Low</td>
+<td>No</td>
+<td>Cooked</td>
+<td>Bake: 45–60 min</td>
+<td class="notes-col">Usually a strong “safe starch” for many people.</td>
+</tr>
+<tr>
+<td class="food-col">Hearts of Palm</td>
+<td>Individual tolerance</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">While generally low-reactive, hearts of palm are fibrous and can be difficult for sensitive digestion if eaten in large amounts or raw.</td>
+</tr>
+<tr>
+<td class="food-col">Purple Onions</td>
+<td>Individual tolerance</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>Raw or cooked</td>
+<td>Sauté: 6–10 min</td>
+<td class="notes-col">Contain fermentable carbohydrates (FODMAPs) that may cause bloating or discomfort in sensitive individuals, especially when raw.</td>
+</tr>
+<tr>
+<td class="food-col">Potatoes</td>
+<td>Nightshade</td>
+<td>🟡 Moderate</td>
+<td>No</td>
+<td>Cooked</td>
+<td>Boil: 15–25 min OR Roast 425°F: 30-45 min</td>
+<td class="notes-col">Often well tolerated when properly stored (away from sunlight), peeled, and fully cooked. Avoid green or sprouted potatoes. Provides clean carbohydrates and potassium; best eaten with fat and salt.</td>
+</tr>
+<tr>
+<td class="food-col">Tomato</td>
+<td>Nightshade</td>
+<td>🔴 High</td>
+<td>Yes</td>
+<td>Raw or cooked</td>
+<td>Simmer: 15–45 min</td>
+<td class="notes-col">As a nightshade, tomatoes contain alkaloids that may promote inflammation or immune reactivity in sensitive individuals; often worth avoiding during sensitivity “reset” phases.</td>
+</tr>
+<tr>
+<td class="food-col">Eggplant</td>
+<td>Nightshade</td>
+<td>🔴 High</td>
+<td>No</td>
+<td>Cooked</td>
+<td>Roast: 25–40 min</td>
+<td class="notes-col">Nightshade alkaloids and lectins in eggplant can aggravate inflammation and digestive discomfort for some people; often worth avoiding during sensitivity “reset” phases.</td>
+</tr>
+<tr>
+<td class="food-col">Bell Peppers</td>
+<td>Nightshade</td>
+<td>🔴 High</td>
+<td>Yes</td>
+<td>Cooked preferred</td>
+<td>Roast/Sauté: 8–20 min</td>
+<td class="notes-col">Even when sweet, bell peppers are nightshades and may trigger immune or inflammatory responses in sensitive individuals.; often worth avoiding during sensitivity “reset” phases.</td>
+</tr>
+<tr>
+<td class="food-col">Edamame / Soybeans</td>
+<td>Soy sensitivity</td>
+<td>🔴 High</td>
+<td>No</td>
+<td>Cooked</td>
+<td>Boil: 5–8 min</td>
+<td class="notes-col">Soy is a common trigger; can also interfere with thyroid hormone uptake for some people.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- SECTION 4: FRUITS -->
+<section class="section section-break" id="fruits">
+<h2>🍓 Fruits (ranked best → worst)</h2>
+<p class="subtext">
         Sensitivity patterns here are usually about <strong>sugar load</strong> and (for some people) <strong>lectin load</strong>.
       </p>
-
-      <div class="note">
-        <strong>Quick fruit note:</strong><br />
+<div class="note">
+<strong>Quick fruit note:</strong><br/>
         Fruit can be incredibly supportive — but higher sugar fruits can spike blood sugar and cortisol in some people,
         which can ripple into cravings, sleep disruption, and inflammation. If you’re feeling “off,” try starting with
         lower sugar fruits and see how you do.
       </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th class="food-col">Food</th>
-              <th>Primary Risk Factor</th>
-              <th>Risk Level</th>
-              <th>Raw OK?</th>
-              <th>Prep Method</th>
-              <th>Cook Time</th>
-              <th class="notes-col">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="food-col">Blueberries</td>
-              <td>None</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Low in sugar and rich in polyphenols, blueberries support gut health, brain function, and antioxidant defenses.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Blackberries</td>
-              <td>None</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Dense in antioxidants and fiber, blackberries support metabolic health and inflammation balance.</td>
-            </tr>
-              <tr>
-              <td class="food-col">Raspberries</td>
-              <td>None</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">High fiber and low sugar help stabilize blood sugar while supporting digestion and gut bacteria.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Strawberries</td>
-              <td>None</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Low glycemic and rich in vitamin C, strawberries support skin, immune health, and blood sugar control.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Cranberries (unsweetened)</td>
-              <td>None</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Tart + low sugar; often used more like a “functional” fruit.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Bananas</td>
-              <td>High sugar</td>
-              <td>🟡 Moderate</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Higher sugar; may spike cortisol for some people.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Grapes</td>
-              <td>High sugar</td>
-              <td>🟡 Moderate</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Easy to overdo; treat like a “dessert fruit.”</td>
-            </tr>
-            <tr>
-              <td class="food-col">Mango</td>
-              <td>High sugar</td>
-              <td>🟡 Moderate</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Higher natural sugar can spike blood sugar and cortisol in sensitive individuals, especially when eaten alone or in large portions.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Plantains</td>
-              <td>Carb load</td>
-              <td>🟡 Moderate</td>
-              <td>No</td>
-              <td>Cooked</td>
-              <td>Bake/Fry: 10–25 min</td>
-              <td class="notes-col">High in starch and carbohydrates, plantains can raise blood sugar significantly and may feel heavy on digestion outside of active or well-balanced meals.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Jackfruit</td>
-              <td>Carb load</td>
-              <td>🟡 Moderate</td>
-              <td>Yes</td>
-              <td>Cooked preferred</td>
-              <td>Simmer: 20–40 min</td>
-              <td class="notes-col">Very high in carbohydrates and natural sugars, jackfruit can overwhelm blood sugar regulation and digestion for some people when eaten frequently or in large portions.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Goji Berries</td>
-              <td>Nightshade</td>
-              <td>🔴 High</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Goji berries belong to the nightshade family and can be immune-stimulating, making them problematic for people with autoimmune or inflammatory sensitivities.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECTION 5: LEGUMES (UPDATED columns to match Soaking/Sprouting Guide) -->
-    <section class="section section-break" id="legumes">
-      <h2>🫘 Legumes (ranked best → worst)</h2>
-
-      <p class="subtext">
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th class="food-col">Food</th>
+<th>Primary Risk Factor</th>
+<th>Risk Level</th>
+<th>Raw OK?</th>
+<th>Prep Method</th>
+<th>Cook Time</th>
+<th class="notes-col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="food-col">Blueberries</td>
+<td>None</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Low in sugar and rich in polyphenols, blueberries support gut health, brain function, and antioxidant defenses.</td>
+</tr>
+<tr>
+<td class="food-col">Blackberries</td>
+<td>None</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Dense in antioxidants and fiber, blackberries support metabolic health and inflammation balance.</td>
+</tr>
+<tr>
+<td class="food-col">Raspberries</td>
+<td>None</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">High fiber and low sugar help stabilize blood sugar while supporting digestion and gut bacteria.</td>
+</tr>
+<tr>
+<td class="food-col">Strawberries</td>
+<td>None</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Low glycemic and rich in vitamin C, strawberries support skin, immune health, and blood sugar control.</td>
+</tr>
+<tr>
+<td class="food-col">Cranberries (unsweetened)</td>
+<td>None</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Tart + low sugar; often used more like a “functional” fruit.</td>
+</tr>
+<tr>
+<td class="food-col">Bananas</td>
+<td>High sugar</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Higher sugar; may spike cortisol for some people.</td>
+</tr>
+<tr>
+<td class="food-col">Grapes</td>
+<td>High sugar</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Easy to overdo; treat like a “dessert fruit.”</td>
+</tr>
+<tr>
+<td class="food-col">Mango</td>
+<td>High sugar</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Higher natural sugar can spike blood sugar and cortisol in sensitive individuals, especially when eaten alone or in large portions.</td>
+</tr>
+<tr>
+<td class="food-col">Plantains</td>
+<td>Carb load</td>
+<td>🟡 Moderate</td>
+<td>No</td>
+<td>Cooked</td>
+<td>Bake/Fry: 10–25 min</td>
+<td class="notes-col">High in starch and carbohydrates, plantains can raise blood sugar significantly and may feel heavy on digestion outside of active or well-balanced meals.</td>
+</tr>
+<tr>
+<td class="food-col">Jackfruit</td>
+<td>Carb load</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>Cooked preferred</td>
+<td>Simmer: 20–40 min</td>
+<td class="notes-col">Very high in carbohydrates and natural sugars, jackfruit can overwhelm blood sugar regulation and digestion for some people when eaten frequently or in large portions.</td>
+</tr>
+<tr>
+<td class="food-col">Goji Berries</td>
+<td>Nightshade</td>
+<td>🔴 High</td>
+<td>Yes</td>
+<td>Raw</td>
+<td></td>
+<td class="notes-col">Goji berries belong to the nightshade family and can be immune-stimulating, making them problematic for people with autoimmune or inflammatory sensitivities.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- SECTION 5: LEGUMES (UPDATED columns to match Soaking/Sprouting Guide) -->
+<section class="section section-break" id="legumes">
+<h2>🫘 Legumes (ranked best → worst)</h2>
+<p class="subtext">
         Primary risk factor here is usually <strong>lectins</strong> (and overall digestibility).
       </p>
-
-      <div class="note">
-        <strong>Why lectins matter:</strong><br />
+<div class="note">
+<strong>Why lectins matter:</strong><br/>
         Lectins are proteins found in many plants (especially legumes and some grains) that can irritate the gut in
         sensitive people when foods are under-prepared. Many people tolerate lectins just fine — but if digestion is
         fragile, symptoms can show up as bloating, gas, fatigue, skin flares, or a general “inflammation-y” feeling.
-        <br /><br />
+        <br/><br/>
         The good news: lectins are highly responsive to <strong>prep</strong>. Soaking + rinsing + pressure cooking is
         one of the best “low-effort / high-impact” upgrades you can make.
       </div>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th class="food-col">Food</th>
-              <th>Primary Risk Factor</th>
-              <th>Risk Level</th>
-              <th>Soak Time</th>
-              <th>Sprout Time</th>
-              <th>Cook Time</th>
-              <th class="notes-col">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="food-col">Red Lentils</td><td>Lectins</td><td>Low</td><td>Optional 2–4 hrs</td><td>12–24 hrs</td><td>8–12 min (unsprouted) / 5–7 min (sprouted)</td><td class="notes-col">Lowest-risk lentil; Naturally lower in lectins and quick to cook, red lentils are one of the easiest legumes to digest and a great entry point for sensitive systems.</td></tr>
-            <tr><td class="food-col">Mung Beans</td><td>Lectins</td><td>Low</td><td>8-12 hrs</td><td>24-48 hrs</td><td>30-40 min (unsprouted) / 15-20 min (sprouted)</td><td class="notes-col">One of the easiest legumes to digest; sprouting significantly reduces lectins and gas-forming compounds. Excellent for sensitive guts.</td></tr>
-            <tr><td class="food-col">Beluga Lentils</td><td>Lectins + phytic acid</td><td>Moderate</td><td>8–12 hrs</td><td>24–36 hrs</td><td>25–30 min (unsprouted) / 10–15 min (sprouted)</td><td class="notes-col">Higher lectin and fiber content means beluga lentils benefit greatly from soaking and thorough cooking to improve tolerance and digestion.</td></tr>
-            <tr><td class="food-col">Adzuki Beans</td><td>Lectins</td><td>Moderate</td><td>12 hrs</td><td>24–48 hrs</td><td>45–60 min (unsprouted) / 30–40 min (sprouted)</td><td class="notes-col">One of the most gut-friendly beans.</td></tr>
-            <tr><td class="food-col">Quinoa</td><td>Saponins + phytic acid</td><td>Moderate</td><td>6–8 hrs</td><td>12–24 hrs</td><td>12–15 min (unsprouted) / 8–10 min (sprouted)</td><td class="notes-col">Though technically a seed, quinoa contains saponins and lectin-like compounds that can irritate digestion unless well rinsed, soaked, and cooked; Rinse well even after soaking.</td></tr>
-            <tr><td class="food-col">Chickpeas</td><td>Lectins + oligosaccharides</td><td>Higher</td><td>12–24 hrs</td><td>24–48 hrs</td><td>60–90 min (unsprouted) / 40–60 min (sprouted)</td><td class="notes-col">Dense in lectins and fermentable carbohydrates, chickpeas often require extended soaking and pressure cooking to reduce bloating and digestive stress.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECTION 6: GRAINS (UPDATED columns to match Soaking/Sprouting Guide) -->
-    <section class="section section-break" id="grains">
-      <h2>🍚 Grains (ranked best → worst)</h2>
-
-      <p class="subtext">
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th class="food-col">Food</th>
+<th>Primary Risk Factor</th>
+<th>Risk Level</th>
+<th>Soak Time</th>
+<th>Sprout Time</th>
+<th>Cook Time</th>
+<th class="notes-col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="food-col">Red Lentils</td><td>Lectins</td><td>Low</td><td>Optional 2–4 hrs</td><td>12–24 hrs</td><td>8–12 min (unsprouted) / 5–7 min (sprouted)</td><td class="notes-col">Lowest-risk lentil; Naturally lower in lectins and quick to cook, red lentils are one of the easiest legumes to digest and a great entry point for sensitive systems.</td></tr>
+<tr><td class="food-col">Mung Beans</td><td>Lectins</td><td>Low</td><td>8-12 hrs</td><td>24-48 hrs</td><td>30-40 min (unsprouted) / 15-20 min (sprouted)</td><td class="notes-col">One of the easiest legumes to digest; sprouting significantly reduces lectins and gas-forming compounds. Excellent for sensitive guts.</td></tr>
+<tr><td class="food-col">Beluga Lentils</td><td>Lectins + phytic acid</td><td>Moderate</td><td>8–12 hrs</td><td>24–36 hrs</td><td>25–30 min (unsprouted) / 10–15 min (sprouted)</td><td class="notes-col">Higher lectin and fiber content means beluga lentils benefit greatly from soaking and thorough cooking to improve tolerance and digestion.</td></tr>
+<tr><td class="food-col">Adzuki Beans</td><td>Lectins</td><td>Moderate</td><td>12 hrs</td><td>24–48 hrs</td><td>45–60 min (unsprouted) / 30–40 min (sprouted)</td><td class="notes-col">One of the most gut-friendly beans.</td></tr>
+<tr><td class="food-col">Quinoa</td><td>Saponins + phytic acid</td><td>Moderate</td><td>6–8 hrs</td><td>12–24 hrs</td><td>12–15 min (unsprouted) / 8–10 min (sprouted)</td><td class="notes-col">Though technically a seed, quinoa contains saponins and lectin-like compounds that can irritate digestion unless well rinsed, soaked, and cooked; Rinse well even after soaking.</td></tr>
+<tr><td class="food-col">Chickpeas</td><td>Lectins + oligosaccharides</td><td>Higher</td><td>12–24 hrs</td><td>24–48 hrs</td><td>60–90 min (unsprouted) / 40–60 min (sprouted)</td><td class="notes-col">Dense in lectins and fermentable carbohydrates, chickpeas often require extended soaking and pressure cooking to reduce bloating and digestive stress.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- SECTION 6: GRAINS (UPDATED columns to match Soaking/Sprouting Guide) -->
+<section class="section section-break" id="grains">
+<h2>🍚 Grains (ranked best → worst)</h2>
+<p class="subtext">
 Not all grains are problematic — choosing lower-lectin, gluten-free options and using soaking or sprouting can dramatically improve tolerance.
       </p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th class="food-col">Food</th>
-              <th>Primary Risk Factor</th>
-              <th>Risk Level</th>
-              <th>Soak Time</th>
-              <th>Sprout Time</th>
-              <th>Cook Time</th>
-              <th class="notes-col">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="food-col">White Rice</td><td>Minimal</td><td>Low</td><td>Optional 2–4 hrs</td><td></td><td>15–20 min</td><td class="notes-col">Lowest anti-nutrient load; very gut friendly.</td></tr>
-            <tr><td class="food-col">Basmati Rice</td><td>Minimal</td><td>Low</td><td>4–6 hrs</td><td>12–24 hrs (optional)</td><td>12–15 min (unsprouted) / 10–12 min (sprouted)</td><td class="notes-col">Naturally lower in arsenic and higher in amylose, basmati rice supports stable blood sugar and gentle digestion, especially when soaked or sprouted.</td></tr>
-            <tr><td class="food-col">White Jasmine Rice</td><td>Minimal</td><td>Low</td><td>Optional</td><td></td><td>15–18 min</td><td class="notes-col">Low in anti-nutrients and easy to digest, jasmine rice provides quick energy with minimal digestive burden.</td></tr>
-            <tr><td class="food-col">Brown Rice</td><td>Phytic acid + Lectins</td><td>Moderate</td><td>8–12 hrs</td><td>24–48 hrs</td><td>35–45 min</td><td class="notes-col">The intact bran contains higher lectins and phytic acid, making brown rice more demanding on digestion unless properly soaked and sprouted.</td></tr>
-            <tr><td class="food-col">Wild Rice</td><td>Fiber + resistant starch</td><td>Moderate</td><td>Optional 4 hrs</td><td></td><td>45–60 min</td><td class="notes-col">Not really a rice - this is a grass seed; more robust digestion required.</td></tr>
-            <tr><td class="food-col">Couscous</td><td>Gluten + Lectins</td><td>High</td><td>Optional 2–4 hrs</td><td></td><td>15–20 min</td><td class="notes-col">Couscous (wheat-based) – Contains gluten and wheat lectins that may trigger inflammation, digestive distress, or immune activation in sensitive individuals.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- SECTION 7: NUTS (UPDATED columns to match Soaking/Sprouting Guide) -->
-    <section class="section section-break" id="nuts">
-      <h2>🥜 Nuts (ranked best → worst)</h2>
-
-      <p class="subtext">
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th class="food-col">Food</th>
+<th>Primary Risk Factor</th>
+<th>Risk Level</th>
+<th>Soak Time</th>
+<th>Sprout Time</th>
+<th>Cook Time</th>
+<th class="notes-col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="food-col">White Rice</td><td>Minimal</td><td>Low</td><td>Optional 2–4 hrs</td><td></td><td>15–20 min</td><td class="notes-col">Lowest anti-nutrient load; very gut friendly.</td></tr>
+<tr><td class="food-col">Basmati Rice</td><td>Minimal</td><td>Low</td><td>4–6 hrs</td><td>12–24 hrs (optional)</td><td>12–15 min (unsprouted) / 10–12 min (sprouted)</td><td class="notes-col">Naturally lower in arsenic and higher in amylose, basmati rice supports stable blood sugar and gentle digestion, especially when soaked or sprouted.</td></tr>
+<tr><td class="food-col">White Jasmine Rice</td><td>Minimal</td><td>Low</td><td>Optional</td><td></td><td>15–18 min</td><td class="notes-col">Low in anti-nutrients and easy to digest, jasmine rice provides quick energy with minimal digestive burden.</td></tr>
+<tr><td class="food-col">Brown Rice</td><td>Phytic acid + Lectins</td><td>Moderate</td><td>8–12 hrs</td><td>24–48 hrs</td><td>35–45 min</td><td class="notes-col">The intact bran contains higher lectins and phytic acid, making brown rice more demanding on digestion unless properly soaked and sprouted.</td></tr>
+<tr><td class="food-col">Wild Rice</td><td>Fiber + resistant starch</td><td>Moderate</td><td>Optional 4 hrs</td><td></td><td>45–60 min</td><td class="notes-col">Not really a rice - this is a grass seed; more robust digestion required.</td></tr>
+<tr><td class="food-col">Couscous</td><td>Gluten + Lectins</td><td>High</td><td>Optional 2–4 hrs</td><td></td><td>15–20 min</td><td class="notes-col">Couscous (wheat-based) – Contains gluten and wheat lectins that may trigger inflammation, digestive distress, or immune activation in sensitive individuals.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- SECTION 7: NUTS (UPDATED columns to match Soaking/Sprouting Guide) -->
+<section class="section section-break" id="nuts">
+<h2>🥜 Nuts (ranked best → worst)</h2>
+<p class="subtext">
         Sensitivity patterns vary here (mold, histamine, omega balance, personal tolerance). Even well-prepared nuts can be reactive for some people — rotation and portion size matter as much as preparation.
       </p>
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th class="food-col">Food</th>
+<th>Primary Risk Factor</th>
+<th>Risk Level</th>
+<th>Soak Time</th>
+<th>Sprout Time</th>
 
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th class="food-col">Food</th>
-              <th>Primary Risk Factor</th>
-              <th>Risk Level</th>
-              <th>Soak Time</th>
-              <th>Sprout Time</th>
-              <th>Cook Time</th>
-              <th class="notes-col">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td class="food-col">Pecans</td><td>Phytic acid (low–moderate)</td><td>Moderate</td><td>6–8 hrs</td><td>12–24 hrs</td><td></td><td class="notes-col">Lower in phytic acid than many nuts but still fibrous, pecans benefit from soaking to improve digestibility and reduce digestive load.</td></tr>
-            <tr><td class="food-col">Walnuts</td><td>Phytic acid + oxidation</td><td>Moderate</td><td>6–8 hrs</td><td>12–24 hrs</td><td></td><td class="notes-col">Rich in omega-3s but prone to oxidation and mold, walnuts digest best when soaked, sprouted, and consumed fresh.</td></tr>
-            <tr><td class="food-col">Brazil Nuts</td><td>Selenium</td><td>Moderate</td><td>6–8 hrs</td><td>12–24 hrs</td><td></td><td class="notes-col">Limit to 1–2/day due to selenium load; Soaking helps digestion.</td></tr>
-            <tr><td class="food-col">Almonds</td><td>Phytic acid + enzyme inhibitors</td><td>High</td><td>8–12 hrs</td><td>24 hrs</td><td></td><td class="notes-col">Best blanched (skins removed); High levels of phytic acid and enzyme inhibitors can make almonds difficult to digest for sensitive individuals, even with soaking.</td></tr>
-            <tr><td class="food-col">Pistachios</td><td>Phytic acid + lectins</td><td>High</td><td>8–12 hrs</td><td>24–36 hrs</td><td></td><td class="notes-col">More prone to mold and higher in lectins, pistachios can trigger digestive or inflammatory reactions despite preparation.</td></tr>
-            <tr><td class="food-col">Cashews</td><td>Lectins + mold risk</td><td>High</td><td></td><td></td><td></td><td class="notes-col">Naturally high in lectins and belonging to the Anacardiaceae family (the same family as poison ivy), cashews can provoke immune or inflammatory responses in sensitive individuals.Commercial 'raw' cashews are steam-treated; commonly problematic.</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
+<th class="notes-col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr><td class="food-col">Pecans</td><td>Phytic acid (low–moderate)</td><td>Moderate</td><td>6–8 hrs</td><td>12–24 hrs</td><td class="notes-col">Lower in phytic acid than many nuts but still fibrous, pecans benefit from soaking to improve digestibility and reduce digestive load.</td></tr>
+<tr><td class="food-col">Walnuts</td><td>Phytic acid + oxidation</td><td>Moderate</td><td>6–8 hrs</td><td>12–24 hrs</td><td class="notes-col">Rich in omega-3s but prone to oxidation and mold, walnuts digest best when soaked, sprouted, and consumed fresh.</td></tr>
+<tr><td class="food-col">Brazil Nuts</td><td>Selenium</td><td>Moderate</td><td>6–8 hrs</td><td>12–24 hrs</td><td class="notes-col">Limit to 1–2/day due to selenium load; Soaking helps digestion.</td></tr>
+<tr><td class="food-col">Almonds</td><td>Phytic acid + enzyme inhibitors</td><td>High</td><td>8–12 hrs</td><td>24 hrs</td><td class="notes-col">Best blanched (skins removed); High levels of phytic acid and enzyme inhibitors can make almonds difficult to digest for sensitive individuals, even with soaking.</td></tr>
+<tr><td class="food-col">Pistachios</td><td>Phytic acid + lectins</td><td>High</td><td>8–12 hrs</td><td>24–36 hrs</td><td class="notes-col">More prone to mold and higher in lectins, pistachios can trigger digestive or inflammatory reactions despite preparation.</td></tr>
+<tr><td class="food-col">Cashews</td><td>Lectins + mold risk</td><td>High</td><td></td><td></td><td class="notes-col">Naturally high in lectins and belonging to the Anacardiaceae family (the same family as poison ivy), cashews can provoke immune or inflammatory responses in sensitive individuals.Commercial 'raw' cashews are steam-treated; commonly problematic.</td></tr>
+</tbody>
+</table>
+</div>
+</section>
 <!-- SECTION: SEEDS -->
 <section class="section section-break" id="seeds">
-  <h2>🌻 Seeds (ranked best → worst)</h2>
-
-  <p class="subtext">
+<h2>🌻 Seeds (ranked best → worst)</h2>
+<p class="subtext">
     Seeds are naturally protected by anti-nutrients that help them survive until sprouting conditions are right.
     Soaking (and sprouting where appropriate) helps neutralize these compounds, improving digestion and mineral availability.
   </p>
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th class="food-col">Food</th>
+<th>Primary Risk Factor</th>
+<th>Risk Level</th>
+<th>Soak Time</th>
+<th>Sprout Time</th>
 
-  <div class="table-wrap">
-    <table>
-      <thead>
-        <tr>
-          <th class="food-col">Food</th>
-          <th>Primary Risk Factor</th>
-          <th>Risk Level</th>
-          <th>Soak Time</th>
-          <th>Sprout Time</th>
-          <th>Prep Method</th>
-          <th class="notes-col">Notes</th>
-        </tr>
-      </thead>
+<th class="notes-col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="food-col">Chia Seeds</td>
+<td>Minimal</td>
+<td>🟢 Low</td>
+<td>10–30 min</td>
+<td>N/A</td>
 
-      <tbody>
-        <tr>
-          <td class="food-col">Chia Seeds</td>
-          <td>Minimal</td>
-          <td>🟢 Low</td>
-          <td>10–30 min</td>
-          <td>N/A</td>
-          <td>Soak in water or milk alternative</td>
-          <td class="notes-col">
+<td class="notes-col">
             When hydrated, chia seeds provide gentle soluble fiber and omega-3s that support gut health and blood sugar stability.
           </td>
-        </tr>
+</tr>
+<tr>
+<td class="food-col">Flax Seeds</td>
+<td>Minimal</td>
+<td>🟢 Low</td>
+<td>10–30 min (or grind fresh)</td>
+<td>N/A</td>
 
-        <tr>
-          <td class="food-col">Flax Seeds</td>
-          <td>Minimal</td>
-          <td>🟢 Low</td>
-          <td>10–30 min (or grind fresh)</td>
-          <td>N/A</td>
-          <td>Soak or grind immediately before use</td>
-          <td class="notes-col">
+<td class="notes-col">
             Grinding improves nutrient absorption; soaking can help if digestion is sensitive.
           </td>
-        </tr>
+</tr>
+<tr>
+<td class="food-col">Hemp Seeds</td>
+<td>Minimal</td>
+<td>🟢 Low</td>
+<td>Optional (2–4 hrs)</td>
+<td>N/A</td>
 
-        <tr>
-          <td class="food-col">Hemp Seeds</td>
-          <td>Minimal</td>
-          <td>🟢 Low</td>
-          <td>Optional (2–4 hrs)</td>
-          <td>N/A</td>
-          <td>Raw or lightly soaked</td>
-          <td class="notes-col">
+<td class="notes-col">
             Naturally low in anti-nutrients and rich in balanced omega fats, hemp seeds are easy to digest and supportive of hormonal and inflammatory balance.
           </td>
-        </tr>
+</tr>
+<tr>
+<td class="food-col">Pumpkin Seeds</td>
+<td>Phytic acid</td>
+<td>🟡 Moderate</td>
+<td>8–12 hrs</td>
+<td>1–2 days (optional)</td>
 
-        <tr>
-          <td class="food-col">Pumpkin Seeds</td>
-          <td>Phytic acid</td>
-          <td>🟡 Moderate</td>
-          <td>8–12 hrs</td>
-          <td>1–2 days (optional)</td>
-          <td>Soak, then dry or lightly roast</td>
-          <td class="notes-col">
+<td class="notes-col">
             Higher phytic acid content means pumpkin seeds digest best when soaked and sprouted, which improves mineral absorption and tolerance.
           </td>
-        </tr>
+</tr>
+<tr>
+<td class="food-col">Sunflower Seeds</td>
+<td>Omega-6 dominance + phytic acid</td>
+<td>🟡 Moderate</td>
+<td>8–12 hrs</td>
+<td>1–2 days (optional)</td>
 
-        <tr>
-          <td class="food-col">Sunflower Seeds</td>
-          <td>Omega-6 dominance + phytic acid</td>
-          <td>🟡 Moderate</td>
-          <td>8–12 hrs</td>
-          <td>1–2 days (optional)</td>
-          <td>Soak, rinse, then dry or roast</td>
-          <td class="notes-col">
+<td class="notes-col">
             High omega-6 content and phytic acid mean sunflower seeds can promote inflammation if eaten frequently, but soaking and rotation improve tolerance.
           </td>
-        </tr>
+</tr>
+<tr>
+<td class="food-col">Sesame Seeds</td>
+<td>Strong allergenic potential + phytic acid</td>
+<td>🔴 High</td>
+<td>8–12 hrs</td>
+<td>1–2 days</td>
 
-        <tr>
-          <td class="food-col">Sesame Seeds</td>
-          <td>Strong allergenic potential + phytic acid</td>
-          <td>🔴 High</td>
-          <td>8–12 hrs</td>
-          <td>1–2 days</td>
-          <td>Soak and sprout; use sparingly</td>
-          <td class="notes-col">
+<td class="notes-col">
             Sesame is a common allergen and naturally high in phytic acid, making it more likely to trigger immune or digestive reactions in sensitive individuals.; often best avoided during reset phases.
           </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
-
-    <!-- SECTION 9: SPICES -->
-    <section class="section section-break" id="spices">
-      <h2>🧂 Spices (ranked best → worst)</h2>
- 
-      <p class="subtext">
+<!-- SECTION 9: SPICES -->
+<section class="section section-break" id="spices">
+<h2>🧂 Spices (ranked best → worst)</h2>
+<p class="subtext">
 Spices can be powerful allies — the key is matching intensity to your body’s current capacity.
   </p>
-      
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th class="food-col">Food</th>
-              <th>Primary Risk Factor</th>
-              <th>Risk Level</th>
-              <th>Raw OK?</th>
-              <th>Prep Method</th>
-              <th>Cook Time</th>
-              <th class="notes-col">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="food-col">Turmeric</td>
-              <td>Minimal (high doses may irritate sensitive digestion)</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Use in food/tea</td>
-              <td></td>
-              <td class="notes-col">Potent anti-inflammatory and antioxidant compounds support joint, gut, and immune health, especially when paired with gentle heat or fat.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Ginger</td>
-              <td>Minimal (can be stimulating in very large amounts)</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Fresh or dried</td>
-              <td></td>
-              <td class="notes-col">Supports digestion, circulation, and nausea relief while providing warmth without triggering nightshade-related inflammation.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Cacao Nibs</td>
-              <td>Stimulants (theobromine) + histamine potential</td>
-              <td>🟡 Moderate</td>
-              <td>Yes</td>
-              <td>Raw</td>
-              <td></td>
-              <td class="notes-col">Rich in antioxidants but mildly stimulating, cacao nibs can affect sleep, cortisol, or histamine balance in sensitive individuals when overused.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Cayenne Pepper</td>
-              <td>Capsaicin (potent stimulant to nerves and digestion)</td>
-              <td>🟡 Moderate</td>
-              <td>Yes</td>
-              <td>Use in food</td>
-              <td></td>
-              <td class="notes-col">Capsaicin can enhance circulation, digestion, and metabolic signaling; therapeutic in small, intentional doses, especially for circulation and digestion, but it is best approached mindfully in autoimmune or inflammatory contexts.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Chili Powder</td>
-              <td>Nightshade alkaloids + capsaicin</td>
-              <td>🔴 High</td>
-              <td>Yes</td>
-              <td>Use in food</td>
-              <td></td>
-              <td class="notes-col">Contains nightshade compounds that may promote inflammation or immune reactivity in sensitive individuals, particularly when consumed frequently.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Paprika</td>
-              <td>Nightshade alkaloids</td>
-              <td>🔴 High</td>
-              <td>Yes</td>
-              <td>Use in food</td>
-              <td></td>
-              <td class="notes-col">Though milder in heat, paprika is still a nightshade and may contribute to inflammation or sensitivity in people reacting to this plant family.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th class="food-col">Food</th>
+<th>Primary Risk Factor</th>
+<th>Risk Level</th>
 
-    <!-- SECTION 10: TEA & DRINKS -->
-    <section class="section section-break" id="tea">
-      <h2>🍵 Tea &amp; Drinks (ranked best → worst)</h2>
-      
-  <p class="subtext">
+
+
+<th class="notes-col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="food-col">Turmeric</td>
+<td>Minimal (high doses may irritate sensitive digestion)</td>
+<td>🟢 Low</td>
+
+
+
+<td class="notes-col">Potent anti-inflammatory and antioxidant compounds support joint, gut, and immune health, especially when paired with gentle heat or fat.</td>
+</tr>
+<tr>
+<td class="food-col">Ginger</td>
+<td>Minimal (can be stimulating in very large amounts)</td>
+<td>🟢 Low</td>
+
+
+
+<td class="notes-col">Supports digestion, circulation, and nausea relief while providing warmth without triggering nightshade-related inflammation.</td>
+</tr>
+<tr>
+<td class="food-col">Cacao Nibs</td>
+<td>Stimulants (theobromine) + histamine potential</td>
+<td>🟡 Moderate</td>
+
+
+
+<td class="notes-col">Rich in antioxidants but mildly stimulating, cacao nibs can affect sleep, cortisol, or histamine balance in sensitive individuals when overused.</td>
+</tr>
+<tr>
+<td class="food-col">Cayenne Pepper</td>
+<td>Capsaicin (potent stimulant to nerves and digestion)</td>
+<td>🟡 Moderate</td>
+
+
+
+<td class="notes-col">Capsaicin can enhance circulation, digestion, and metabolic signaling; therapeutic in small, intentional doses, especially for circulation and digestion, but it is best approached mindfully in autoimmune or inflammatory contexts.</td>
+</tr>
+<tr>
+<td class="food-col">Chili Powder</td>
+<td>Nightshade alkaloids + capsaicin</td>
+<td>🔴 High</td>
+
+
+
+<td class="notes-col">Contains nightshade compounds that may promote inflammation or immune reactivity in sensitive individuals, particularly when consumed frequently.</td>
+</tr>
+<tr>
+<td class="food-col">Paprika</td>
+<td>Nightshade alkaloids</td>
+<td>🔴 High</td>
+
+
+
+<td class="notes-col">Though milder in heat, paprika is still a nightshade and may contribute to inflammation or sensitivity in people reacting to this plant family.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<!-- SECTION 10: TEA & DRINKS -->
+<section class="section section-break" id="tea">
+<h2>🍵 Tea &amp; Drinks (ranked best → worst)</h2>
+<p class="subtext">
 Even healthy beverages can become stressful when they overstimulate the nervous system or immune response.
   </p>
-
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th class="food-col">Food</th>
-              <th>Primary Risk Factor</th>
-              <th>Risk Level</th>
-              <th>Raw OK?</th>
-              <th>Prep Method</th>
-              <th>Cook Time</th>
-              <th class="notes-col">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="food-col">Herbal Teas</td>
-              <td>Minimal</td>
-              <td>🟢 Low</td>
-              <td>Yes</td>
-              <td>Steep: 5–10 min</td>
-              <td>Steep: 5–10 min</td>
-              <td class="notes-col">Naturally caffeine-free, herbal teas support hydration and gentle therapeutic effects without overstimulating the nervous or immune systems.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Matcha</td>
-              <td>Caffeine + concentrated catechins</td>
-              <td>🟡 Moderate</td>
-              <td>Yes</td>
-              <td>Whisk with hot water</td>
-              <td></td>
-              <td class="notes-col">Highly concentrated green tea compounds and caffeine can overstimulate cortisol and the nervous system in sensitive individuals, especially when consumed daily or on an empty stomach.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Kombucha</td>
-              <td>Fermentation byproducts (histamine), sugar, and yeast</td>
-              <td>🔴 High</td>
-              <td>Yes</td>
-              <td></td>
-              <td></td>
-              <td class="notes-col">Fermentation, residual sugars, and yeast make kombucha a common trigger for histamine reactions, gut imbalance, and immune flares in sensitive people.</td>
-            </tr>
-            <tr>
-              <td class="food-col">Smoked Teas</td>
-              <td>Polycyclic aromatic hydrocarbons (PAHs) from smoking process</td>
-              <td>🔴 High</td>
-              <td>Yes</td>
-              <td>Steep: 3–5 min</td>
-              <td>Steep: 3–5 min</td>
-              <td class="notes-col">Smoke exposure introduces compounds that can increase oxidative stress and inflammation, making smoked teas more taxing for sensitive or detox-focused systems.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-  </main>
-
-  <footer>
+<div class="table-wrap">
+<table class="data-table">
+<thead>
+<tr>
+<th class="food-col">Food</th>
+<th>Primary Risk Factor</th>
+<th>Risk Level</th>
+<th>Raw OK?</th>
+<th>Prep Method</th>
+<th>Cook Time</th>
+<th class="notes-col">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="food-col">Herbal Teas</td>
+<td>Minimal</td>
+<td>🟢 Low</td>
+<td>Yes</td>
+<td>Steep: 5–10 min</td>
+<td>Steep: 5–10 min</td>
+<td class="notes-col">Naturally caffeine-free, herbal teas support hydration and gentle therapeutic effects without overstimulating the nervous or immune systems.</td>
+</tr>
+<tr>
+<td class="food-col">Matcha</td>
+<td>Caffeine + concentrated catechins</td>
+<td>🟡 Moderate</td>
+<td>Yes</td>
+<td>Whisk with hot water</td>
+<td></td>
+<td class="notes-col">Highly concentrated green tea compounds and caffeine can overstimulate cortisol and the nervous system in sensitive individuals, especially when consumed daily or on an empty stomach.</td>
+</tr>
+<tr>
+<td class="food-col">Kombucha</td>
+<td>Fermentation byproducts (histamine), sugar, and yeast</td>
+<td>🔴 High</td>
+<td>Yes</td>
+<td></td>
+<td></td>
+<td class="notes-col">Fermentation, residual sugars, and yeast make kombucha a common trigger for histamine reactions, gut imbalance, and immune flares in sensitive people.</td>
+</tr>
+<tr>
+<td class="food-col">Smoked Teas</td>
+<td>Polycyclic aromatic hydrocarbons (PAHs) from smoking process</td>
+<td>🔴 High</td>
+<td>Yes</td>
+<td>Steep: 3–5 min</td>
+<td>Steep: 3–5 min</td>
+<td class="notes-col">Smoke exposure introduces compounds that can increase oxidative stress and inflammation, making smoked teas more taxing for sensitive or detox-focused systems.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</main>
+<footer>
     Created with <span>💚</span> by Brandy — <span>Human Reset Project</span>
-  </footer>
-</body>
-</html>
+</footer>
+<script>
+// Food Sensitivity Guide: per-table sorting + filtering (default sort = Risk Level low → high)
+(function () {
+  function riskScore(text) {
+    const t = (text || "").toLowerCase();
+    if (t.includes("🟢") || t.includes("low")) return 1;
+    if (t.includes("🟡") || t.includes("moderate")) return 2;
+    if (t.includes("🔴") || t.includes("high")) return 3;
+    return 99;
+  }
 
+  function getCellText(row, colIndex) {
+    const cell = row.cells[colIndex];
+    return cell ? cell.textContent.trim() : "";
+  }
+
+  function setHeaderRowHeightVar(table) {
+    const thead = table.tHead;
+    if (!thead || !thead.rows.length) return;
+    const headerRow = thead.rows[0];
+    const h = headerRow.getBoundingClientRect().height;
+    table.style.setProperty("--header-row-height", h + "px");
+  }
+
+  function clearSortClasses(table) {
+    const thead = table.tHead;
+    if (!thead) return;
+    const headerCells = Array.from(thead.rows[0].cells);
+    headerCells.forEach(th => th.classList.remove("sorted-asc", "sorted-desc"));
+  }
+
+  function applyFilters(table) {
+    const thead = table.tHead;
+    const tbody = table.tBodies[0];
+    if (!thead || !tbody) return;
+
+    const filterRow = thead.querySelector("tr.filter-row");
+    if (!filterRow) return;
+
+    const filters = Array.from(filterRow.querySelectorAll("input"))
+      .map(i => (i.value || "").trim().toLowerCase());
+
+    Array.from(tbody.rows).forEach(row => {
+      let show = true;
+      filters.forEach((f, idx) => {
+        if (!f) return;
+        const cellText = getCellText(row, idx).toLowerCase();
+        if (!cellText.includes(f)) show = false;
+      });
+      row.style.display = show ? "" : "none";
+    });
+  }
+
+  function sortByColumn(table, colIndex, ascending) {
+    const tbody = table.tBodies[0];
+    const thead = table.tHead;
+    if (!tbody || !thead) return;
+
+    const headerCells = Array.from(thead.rows[0].cells);
+    const header = headerCells[colIndex];
+    const dirAsc = ascending;
+
+    const isRisk = header.textContent.trim() === "Risk Level";
+    const rows = Array.from(tbody.rows);
+
+    rows.sort((a, b) => {
+      const aText = getCellText(a, colIndex);
+      const bText = getCellText(b, colIndex);
+
+      if (isRisk) return (riskScore(aText) - riskScore(bText)) * (dirAsc ? 1 : -1);
+
+      const aNum = parseFloat(aText);
+      const bNum = parseFloat(bText);
+      const aIsNum = !isNaN(aNum) && /^[0-9]/.test(aText);
+      const bIsNum = !isNaN(bNum) && /^[0-9]/.test(bText);
+
+      if (aIsNum && bIsNum) return (aNum - bNum) * (dirAsc ? 1 : -1);
+
+      return aText.localeCompare(bText, undefined, { numeric: true, sensitivity: "base" }) * (dirAsc ? 1 : -1);
+    });
+
+    rows.forEach(r => tbody.appendChild(r));
+
+    clearSortClasses(table);
+    header.classList.add(dirAsc ? "sorted-asc" : "sorted-desc");
+
+    applyFilters(table);
+  }
+
+  function initTable(table) {
+    const thead = table.tHead;
+    const tbody = table.tBodies && table.tBodies[0];
+    if (!thead || !tbody) return;
+
+    const headerCells = Array.from(thead.rows[0].cells);
+
+    // Make headers clickable for sorting
+    headerCells.forEach((th, i) => {
+      th.classList.add("sortable");
+      th.addEventListener("click", () => {
+        const isAsc = th.classList.contains("sorted-asc");
+        sortByColumn(table, i, !isAsc);
+      });
+    });
+
+    // Build filter row (one input per column)
+    const filterRow = document.createElement("tr");
+    filterRow.className = "filter-row";
+    headerCells.forEach((th) => {
+      const filterTh = document.createElement("th");
+      const input = document.createElement("input");
+      input.type = "text";
+      input.setAttribute("aria-label", "Filter " + th.textContent.trim());
+      input.addEventListener("input", () => applyFilters(table));
+      filterTh.appendChild(input);
+      filterRow.appendChild(filterTh);
+    });
+    thead.appendChild(filterRow);
+
+    // Default sort by Risk Level (low → high)
+    const riskIndex = headerCells.findIndex(th => th.textContent.trim() === "Risk Level");
+    if (riskIndex >= 0) sortByColumn(table, riskIndex, true);
+
+    // Ensure sticky filter row sits under header row
+    setHeaderRowHeightVar(table);
+    window.addEventListener("resize", () => setHeaderRowHeightVar(table));
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll("table.data-table").forEach(initTable);
+  });
+})();
+</script></body>
+</html>
